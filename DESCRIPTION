@@ -1,0 +1,20 @@
+Package: AcceptReject
+Title: What the Package Does (One Line, Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person("Pedro Rafael", "D. Marinho", , "pedro.rafael.marinho@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1591-8300")),
+    person("Vera Lucia Damasceno", "Tomazella", , "vera@ufscar.br", role = c("aut"),
+           comment = c(ORCID = "0000-0002-6780-2089"))
+  )
+Description: What the package does (one paragraph).
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    lbfgs,
+    numDeriv,
+    pbmcapply,
+    purrr,
+    rlang
