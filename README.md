@@ -78,12 +78,12 @@ The package is being versioned on GitHub. You can install the
 development version of
 [AcceptReject](https://github.com/prdm0/AcceptReject), and to do this,
 you must first install the
-[remotes](https://cran.r-project.org/web/packages/remotes/index.html)
-package and then run the following command:
+[remotes](https://CRAN.R-project.org/package=remotes) package and then
+run the following command:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("prdm0/AcceptReject", force = TRUE)
+# or remotes::install_github("prdm0/AcceptReject", force = TRUE)
 library(AcceptReject)
 ```
 
@@ -98,7 +98,7 @@ Please note the examples below on how to use the
 observations of discrete and continuous random variables. For further
 details, refer to the function’s documentation
 [**Reference**](reference/index.html) and the
-[**Vignette**](articles/accept_reject.htmll).
+[**Vignette**](articles/accept_reject.html).
 
 ### Generating discrete observations
 

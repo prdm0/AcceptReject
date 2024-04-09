@@ -7,16 +7,20 @@ Authors@R: c(
     person("Vera Lucia Damasceno", "Tomazella", , "vera@ufscar.br", role = c("aut"),
            comment = c(ORCID = "0000-0002-6780-2089"))
   )
-Description: The package provides a function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The function is optimized to work in parallel on Unix-based operating systems (Linux and MacOS) and performs well on Windows systems. The acceptance-rejection method implemented optimizes the probability of generating observations from the desired random variable, by simply providing the probability function or probability density function, in the discrete and continuous cases, respectively.
+Description: Provides a function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The function is optimized to work in parallel on Unix-based operating systems and performs well on Windows systems. The acceptance-rejection method implemented optimizes the probability of generating observations from the desired random variable, by simply providing the probability function or probability density function, in the discrete and continuous cases, respectively.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-URL: https://prdm0.github.io/AcceptReject
-BugReports: https://github.com/prdm0/AcceptReject/issues
+URL: https://prdm0.github.io/AcceptReject/
+BugReports: https://github.com/prdm0/AcceptReject/issues/
 RoxygenNote: 7.2.3
+VignetteBuilder: knitr
 Imports: 
     lbfgs,
     numDeriv,
     pbmcapply,
     purrr,
     rlang
+Suggests: 
+    knitr,
+    rmarkdown

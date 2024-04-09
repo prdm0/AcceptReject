@@ -114,6 +114,13 @@ hist(
 )
 
 }
+\references{
+CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.
+
+NEAL, Radford M. Slice sampling. The annals of statistics, v. 31, n. 3, p. 705-767, 2003.
+
+BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
+}
 \seealso{
 \code{\link[parallel:mclapply]{parallel::mclapply()}} and \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}.
 }

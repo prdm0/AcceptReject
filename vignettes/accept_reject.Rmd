@@ -78,7 +78,7 @@ The `AcceptReject` package is available on CRAN and can be installed using the f
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("prdm0/AcceptReject", force = TRUE)
+# or remotes::install_github("prdm0/AcceptReject", force = TRUE)
 library(AcceptReject)
 ```
 
@@ -142,7 +142,7 @@ data <- AcceptReject::accept_reject(
   continuous = FALSE,
   args_pdf = list(lambda = 0.7),
   xlim = c(0, 20),
-  parallel = TRUE
+  parallel = FALSE
 )
 
 # Calculating the true probability function for each observed value
@@ -180,7 +180,7 @@ data <- AcceptReject::accept_reject(
   continuous = FALSE,
   args_pdf = list(size = 5, prob = 0.5),
   xlim = c(0, 20),
-  parallel = TRUE
+  parallel = FALSE
 )
 
 # Calculating the true probability function for each observed value
@@ -218,7 +218,7 @@ data <- AcceptReject::accept_reject(
   continuous = TRUE,
   args_pdf = list(mean = 0, sd = 1),
   xlim = c(-4, 4),
-  parallel = TRUE
+  parallel = FALSE
 )
 
 hist(

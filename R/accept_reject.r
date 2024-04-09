@@ -55,6 +55,10 @@
 #'
 #' @seealso [parallel::mclapply()] and [lbfgs::lbfgs()].
 #'
+#' @references CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.
+#' @references NEAL, Radford M. Slice sampling. The annals of statistics, v. 31, n. 3, p. 705-767, 2003.
+#' @references BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
+#'
 #' @examples
 #' set.seed(0) # setting a seed for reproducibility
 #'

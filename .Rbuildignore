@@ -7,3 +7,7 @@
 ^img$
 ^logo\.png$
 ^pkgdown$
+^doc$
+^Meta$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
