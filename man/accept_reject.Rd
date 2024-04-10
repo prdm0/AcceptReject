@@ -8,7 +8,7 @@ accept_reject(
   n = 1L,
   continuous = TRUE,
   f = dweibull,
-  args_pdf = list(shape = 1, scale = 1),
+  args_f = list(shape = 1, scale = 1),
   xlim = c(0, 100),
   c = NULL,
   linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
@@ -26,7 +26,7 @@ accept_reject(
 
 \item{f}{The probability density function (\code{continuous = TRUE}), in the continuous case or the probability mass function, in the discrete case (\code{continuous = FALSE}).}
 
-\item{args_pdf}{A list of arguments to be passed to the pdf function.}
+\item{args_f}{A list of arguments to be passed to the pdf function.}
 
 \item{xlim}{A vector specifying the range of values for the random numbers in the form \code{c(min, max)}. Default is \code{c(0, 100)}.}
 
@@ -94,7 +94,7 @@ accept_reject(
  n = 2000L,
  f = dbinom,
  continuous = FALSE,
- args_pdf = list(size = 5, prob = 0.5),
+ args_f = list(size = 5, prob = 0.5),
  xlim = c(0, 10)
 ) |>
 table() |>
@@ -104,7 +104,7 @@ accept_reject(
  n = 1000L,
  f = dnorm,
  continuous = TRUE,
- args_pdf = list(mean = 0, sd = 1),
+ args_f = list(mean = 0, sd = 1),
  xlim = c(-4, 4)
 ) |>
 hist(

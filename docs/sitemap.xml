@@ -24,4 +24,10 @@
   <url>
     <loc>/reference/index.html</loc>
   </url>
+  <url>
+    <loc>/reference/plot.accept_reject.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.accept_reject.html</loc>
+  </url>
 </urlset>

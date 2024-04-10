@@ -91,7 +91,7 @@ accept_reject(
   n = 1L,
   continuous = TRUE,
   f = dweibull,
-  args_pdf = list(shape = 1, scale = 1),
+  args_f = list(shape = 1, scale = 1),
   xlim = c(0, 100),
   c = NULL,
   linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
@@ -103,7 +103,7 @@ accept_reject(
 )
 ```
 
-Many of the arguments the user will not need to change, as the `AcceptReject::accept_reject()` function already has default values for them. However, it is important to note that the f argument is the probability density function (pdf) or probability function (pf) of the random variable $X$ from which observations are desired to be generated. The args_pdf argument is a list of arguments that will be passed to the f function. The `c` argument is the value of the constant `c` that will be used in the acceptance-rejection method. If the user does not provide a value for `c`, the `AcceptReject::accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$.
+Many of the arguments the user will not need to change, as the `AcceptReject::accept_reject()` function already has default values for them. However, it is important to note that the f argument is the probability density function (pdf) or probability function (pf) of the random variable $X$ from which observations are desired to be generated. The `args_f` argument is a list of arguments that will be passed to the f function. The `c` argument is the value of the constant `c` that will be used in the acceptance-rejection method. If the user does not provide a value for `c`, the `AcceptReject::accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$.
 
 **Note**:
 
@@ -140,10 +140,13 @@ data <- AcceptReject::accept_reject(
   n = 1000L,
   f = dpois,
   continuous = FALSE,
-  args_pdf = list(lambda = 0.7),
+  args_f = list(lambda = 0.7),
   xlim = c(0, 20),
   parallel = FALSE
 )
+
+# Viewing organized output with useful information
+print(data)
 
 # Calculating the true probability function for each observed value
 values <- unique(data)
@@ -178,10 +181,13 @@ data <- AcceptReject::accept_reject(
   n = 2000L,
   f = dbinom,
   continuous = FALSE,
-  args_pdf = list(size = 5, prob = 0.5),
+  args_f = list(size = 5, prob = 0.5),
   xlim = c(0, 20),
   parallel = FALSE
 )
+
+# Viewing organized output with useful information
+print(data)
 
 # Calculating the true probability function for each observed value
 values <- unique(data)
@@ -216,10 +222,13 @@ data <- AcceptReject::accept_reject(
   n = 2000L,
   f = dnorm,
   continuous = TRUE,
-  args_pdf = list(mean = 0, sd = 1),
+  args_f = list(mean = 0, sd = 1),
   xlim = c(-4, 4),
   parallel = FALSE
 )
+
+# Viewing organized output with useful information
+print(data)
 
 hist(
   data,
@@ -235,3 +244,60 @@ lines(x, y, col = "red", lwd = 2)
 legend("topright", legend = "True density", col = "red", lwd = 2)
 ```
 
+In the examples above, the graphs were built without using the `AcceptReject::plot()` function. This is just to show that you can manipulate the returning object using the `AcceptReject::accept_reject()` function, that is, the class object
+`accept_reject`.
+
+However, the `AcceptReject::plot()` function can be used to generate graphs in a simpler way. Below, an example of how to use the `AcceptReject::plot()` function to generate the probability density plot of the normal distribution. However, note that the `AcceptReject::plot()` function makes the plotting task simpler and more direct. See the following example:
+
+```{r}
+library(AcceptReject)
+library(patchwork) # install.packages("pacthwork")
+
+# Ensuring reproducibility
+set.seed(0) 
+
+simulation <- function(n){
+  AcceptReject::accept_reject(
+    n = n,
+    f = dnorm,
+    continuous = TRUE,
+    args_f = list(mean = 0, sd = 1),
+    xlim = c(-4, 4),
+    parallel = FALSE
+  )
+}
+# Inspecting
+p1 <- simulation(n = 250L) |> plot()
+p2 <- simulation(n = 2500L) |> plot()
+p3 <- simulation(n = 25000L) |> plot()
+p4 <- simulation(n = 250000L) |> plot()
+
+p1 + p2 + p3 + p4
+```
+
+Veja um outro exemplo, no caso discreto:
+
+```{r}
+library(AcceptReject)
+library(patchwork) # install.packages("patchwork")
+# Ensuring Reproducibility
+set.seed(0) 
+
+simulation <- function(n){
+  AcceptReject::accept_reject(
+    n = 1000L,
+    f = dpois,
+    continuous = FALSE,
+    args_f = list(lambda = 0.7),
+    xlim = c(0, 20),
+    parallel = FALSE
+  )
+}
+
+p1 <- simulation(25L) |> plot()
+p2 <- simulation(250L) |> plot()
+p3 <- simulation(2500L) |> plot()
+p4 <- simulation(25000L) |> plot()
+
+p1 + p2 + p3 + p4
+```

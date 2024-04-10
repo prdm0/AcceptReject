@@ -188,7 +188,7 @@ following signature:</p>
 <span>  n <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
-<span>  args_pdf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>,</span>
 <span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  linesearch_algorithm <span class="op">=</span> <span class="st">"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"</span>,</span>
@@ -203,11 +203,11 @@ following signature:</p>
 values for them. However, it is important to note that the f argument is
 the probability density function (pdf) or probability function (pf) of
 the random variable <span class="math inline">\(X\)</span> from which
-observations are desired to be generated. The args_pdf argument is a
-list of arguments that will be passed to the f function. The
-<code>c</code> argument is the value of the constant <code>c</code> that
-will be used in the acceptance-rejection method. If the user does not
-provide a value for <code>c</code>, the
+observations are desired to be generated. The <code>args_f</code>
+argument is a list of arguments that will be passed to the f function.
+The <code>c</code> argument is the value of the constant <code>c</code>
+that will be used in the acceptance-rejection method. If the user does
+not provide a value for <code>c</code>, the
 <code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function will calculate the
 value of <code>c</code> that maximizes the probability of accepting
 observations from <span class="math inline">\(Y\)</span> as observations
@@ -293,10 +293,22 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span>  n <span class="op">=</span> <span class="fl">1000L</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dpois</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  args_pdf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Viewing organized output with useful information</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 1000</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 10.4282913773332</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0958929860910474</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 0 0 0 1 0 0 2 1 2...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
 <span><span class="co"># Calculating the true probability function for each observed value</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -334,10 +346,22 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span>  n <span class="op">=</span> <span class="fl">2000L</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dbinom</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  args_pdf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Viewing organized output with useful information</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 6.56249999733451</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.152380952442845</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 3 4 4 2 3 1 2 4 2 2...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
 <span><span class="co"># Calculating the true probability function for each observed value</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -379,10 +403,22 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span>  n <span class="op">=</span> <span class="fl">2000L</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dnorm</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  args_pdf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Viewing organized output with useful information</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.19153824335755</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.313328534314533</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -1.023 -0.0184 -0.9111 0.7965 0.4243 2.3148 -0.1822 -2.0416 0.1491 2.1305...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
@@ -397,6 +433,67 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="st">"True density"</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>In the examples above, the graphs were built without using the
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function. This is just to show that
+you can manipulate the returning object using the
+<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function, that is, the class
+object <code>accept_reject</code>.</p>
+<p>However, the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function can be used
+to generate graphs in a simpler way. Below, an example of how to use the
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function to generate the probability
+density plot of the normal distribution. However, note that the
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function makes the plotting task
+simpler and more direct. See the following example:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span> <span class="co"># install.packages("pacthwork")</span></span>
+<span></span>
+<span><span class="co"># Ensuring reproducibility</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="va">n</span>,</span>
+<span>    f <span class="op">=</span> <span class="va">dnorm</span>,</span>
+<span>    continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># Inspecting</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span></span></code></pre></div>
+<p><img src="accept_reject_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>Veja um outro exemplo, no caso discreto:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span> <span class="co"># install.packages("patchwork")</span></span>
+<span><span class="co"># Ensuring Reproducibility</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fl">1000L</span>,</span>
+<span>    f <span class="op">=</span> <span class="va">dpois</span>,</span>
+<span>    continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
+<span>    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>,</span>
+<span>    parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span></span></code></pre></div>
+<p><img src="accept_reject_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

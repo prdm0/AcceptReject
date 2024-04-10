@@ -16,11 +16,16 @@ BugReports: https://github.com/prdm0/AcceptReject/issues/
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Imports: 
+    cli,
+    ggplot2,
+    glue,
     lbfgs,
     numDeriv,
     pbmcapply,
     purrr,
-    rlang
+    rlang,
+    scales
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    patchwork

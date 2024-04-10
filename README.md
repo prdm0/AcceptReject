@@ -112,36 +112,27 @@ very close to zero. In this case, we choose `xlim = c(0, 20)`, where
 
 ``` r
 library(AcceptReject)
-
+library(patchwork) # install.packages("patchwork")
 # Ensuring Reproducibility
 set.seed(0) 
 
-# Generating observations
-data <- AcceptReject::accept_reject(
-  n = 1000L,
-  f = dpois,
-  continuous = FALSE,
-  args_pdf = list(lambda = 0.7),
-  xlim = c(0, 20),
-  parallel = TRUE
-)
+simulation <- function(n){
+  AcceptReject::accept_reject(
+    n = 1000L,
+    f = dpois,
+    continuous = FALSE,
+    args_f = list(lambda = 0.7),
+    xlim = c(0, 20),
+    parallel = TRUE
+  )
+}
 
-# Calculating the true probability function for each observed value
-values <- unique(data)
-true_prob <- dpois(values, lambda = 0.7)
+p1 <- simulation(25L) |> plot()
+p2 <- simulation(250L) |> plot()
+p3 <- simulation(2500L) |> plot()
+p4 <- simulation(25000L) |> plot()
 
-# Calculating the observed probability for each value in the observations vector
-obs_prob <- table(data) / length(data)
-
-# Plotting the probabilities and observations
-plot(values, true_prob, type = "p", pch = 16, col = "blue",
-     xlab = "x", ylab = "Probability", main = "Probability Function")
-
-# Adding the observed probabilities
-points(as.numeric(names(obs_prob)), obs_prob, pch = 16L, col = "red")
-legend("topright", legend = c("True probability", "Observed probability"), 
-       col = c("blue", "red"), pch = 16L, cex = 0.8)
-grid()
+p1 + p2 + p3 + p4
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
@@ -159,32 +150,28 @@ observations using the acceptance-rejection method. Note that
 
 ``` r
 library(AcceptReject)
+library(patchwork)
 
 # Ensuring reproducibility
 set.seed(0) 
 
-# Generating observations
-data <- AcceptReject::accept_reject(
-  n = 2000L,
-  f = dnorm,
-  continuous = TRUE,
-  args_pdf = list(mean = 0, sd = 1),
-  xlim = c(-4, 4),
-  parallel = TRUE
-)
+simulation <- function(n){
+  AcceptReject::accept_reject(
+    n = n,
+    f = dnorm,
+    continuous = TRUE,
+    args_f = list(mean = 0, sd = 1),
+    xlim = c(-4, 4),
+    parallel = TRUE
+  )
+}
+# Inspecting
+p1 <- simulation(n = 250L) |> plot()
+p2 <- simulation(n = 2500L) |> plot()
+p3 <- simulation(n = 25000L) |> plot()
+p4 <- simulation(n = 250000L) |> plot()
 
-hist(
-  data,
-  main = "Generating Gaussian observations",
-  xlab = "x",
-  probability = TRUE,
-  ylim = c(0, 0.45)
-)
-
-x <- seq(-4, 4, length.out = 500L)
-y <- dnorm(x, mean = 0, sd = 1)
-lines(x, y, col = "red", lwd = 2)
-legend("topright", legend = "True density", col = "red", lwd = 2)
+p1 + p2 + p3 + p4
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />

@@ -5,7 +5,7 @@
 #' @param n The number of random numbers to generate.
 #' @param continuous A logical value indicating whether the pdf is continuous or discrete. Default is \code{TRUE}.
 #' @param f The probability density function (`continuous = TRUE`), in the continuous case or the probability mass function, in the discrete case (`continuous = FALSE`).
-#' @param args_pdf A list of arguments to be passed to the pdf function.
+#' @param args_f A list of arguments to be passed to the pdf function.
 #' @param xlim A vector specifying the range of values for the random numbers in the form `c(min, max)`. Default is \code{c(0, 100)}.
 #' @param c A constant value used in the acceptance-rejection method. If \code{NULL}, it will be estimated using the [lbfgs::lbfgs()] optimization algorithm. Default is \code{NULL}.
 #' @param linesearch_algorithm The linesearch algorithm to be used in the [lbfgs::lbfgs()] optimization. Default is \code{"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"}.
@@ -66,7 +66,7 @@
 #'  n = 2000L,
 #'  f = dbinom,
 #'  continuous = FALSE,
-#'  args_pdf = list(size = 5, prob = 0.5),
+#'  args_f = list(size = 5, prob = 0.5),
 #'  xlim = c(0, 10)
 #' ) |>
 #' table() |>
@@ -76,7 +76,7 @@
 #'  n = 1000L,
 #'  f = dnorm,
 #'  continuous = TRUE,
-#'  args_pdf = list(mean = 0, sd = 1),
+#'  args_f = list(mean = 0, sd = 1),
 #'  xlim = c(-4, 4)
 #' ) |>
 #' hist(
@@ -100,7 +100,7 @@ accept_reject <-
       n = 1L,
       continuous = TRUE,
       f = dweibull,
-      args_pdf = list(shape = 1, scale = 1),
+      args_f = list(shape = 1, scale = 1),
       xlim = c(0, 100),
       c = NULL,
       linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
@@ -110,7 +110,7 @@ accept_reject <-
       parallel = FALSE,
       ...) {
 
-    pdf <- purrr::partial(.f = f, !!!args_pdf)
+    pdf <- purrr::partial(.f = f, !!!args_f)
     if(xlim[1L] == 0 && continuous) xlim[1L] <- .Machine$double.xmin
 
     if (continuous) {
@@ -184,8 +184,13 @@ accept_reject <-
             mc.cores = parallel::detectCores()
           ) |> unlist()
       )
-      return(r)
     } else {
-      return(purrr::map_dbl(1L:n, ~one_step(i = .)))
+      r <- purrr::map_dbl(1L:n, ~one_step(i = .))
     }
+    class(r) <- "accept_reject"
+    attr(r, "f") <- f
+    attr(r, "args_f") <- args_f
+    attr(r, "c") <- c
+    attr(r, "continuous") <- continuous
+    return(r)
   }
