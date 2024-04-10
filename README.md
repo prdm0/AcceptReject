@@ -97,8 +97,8 @@ Please note the examples below on how to use the
 `AcceptReject::accept_reject()` function to generate pseudo-random
 observations of discrete and continuous random variables. For further
 details, refer to the function’s documentation
-[**Reference**](reference/index.html) and the
-[**Vignette**](articles/accept_reject.html).
+[**Reference**](https://prdm0.github.io/AcceptReject/reference/) and the
+[**Vignette**](https://prdm0.github.io/AcceptReject/articles/accept_reject.html).
 
 ### Generating discrete observations
 

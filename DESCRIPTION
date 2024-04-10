@@ -7,7 +7,7 @@ Authors@R: c(
     person("Vera Lucia Damasceno", "Tomazella", , "vera@ufscar.br", role = c("aut"),
            comment = c(ORCID = "0000-0002-6780-2089"))
   )
-Description: Provides a function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The function is optimized to work in parallel on Unix-based operating systems and performs well on Windows systems. The acceptance-rejection method implemented optimizes the probability of generating observations from the desired random variable, by simply providing the probability function or probability density function, in the discrete and continuous cases, respectively.
+Description: Provides a function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The function is optimized to work in parallel on Unix-based operating systems and performs well on Windows systems. The acceptance-rejection method implemented optimizes the probability of generating observations from the desired random variable, by simply providing the probability function or probability density function, in the discrete and continuous cases, respectively. Implementation is based on references CASELLA, George at al. (2004) <https://www.jstor.org/stable/4356322>,  NEAL, Radford M. (2003) <https://www.jstor.org/stable/3448413> and Bishop, Christopher M. (2006, ISBN: 978-0387310732). 
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
