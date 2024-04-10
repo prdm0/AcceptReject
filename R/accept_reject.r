@@ -68,9 +68,7 @@
 #'  continuous = FALSE,
 #'  args_f = list(size = 5, prob = 0.5),
 #'  xlim = c(0, 10)
-#' ) |>
-#' table() |>
-#' barplot(main = "Generating Binomial observations")
+#' ) |> plot()
 #'
 #' accept_reject(
 #'  n = 1000L,
@@ -78,12 +76,7 @@
 #'  continuous = TRUE,
 #'  args_f = list(mean = 0, sd = 1),
 #'  xlim = c(-4, 4)
-#' ) |>
-#' hist(
-#'   main = "Generating Gaussian observations",
-#'   xlab = "x",
-#'   probability = TRUE
-#' )
+#' ) |> plot()
 #'
 #' @import rlang
 #' @importFrom lbfgs lbfgs
