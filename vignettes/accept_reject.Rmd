@@ -275,7 +275,7 @@ p4 <- simulation(n = 250000L) |> plot()
 p1 + p2 + p3 + p4
 ```
 
-Veja um outro exemplo, no caso discreto:
+See another example, in the discrete case:
 
 ```{r}
 library(AcceptReject)
@@ -300,4 +300,74 @@ p3 <- simulation(2500L) |> plot()
 p4 <- simulation(25000L) |> plot()
 
 p1 + p2 + p3 + p4
+```
+
+## Accessing metadata
+
+The `AcceptReject::accept_reject()` function returns an object of class `accept_reject`. When executing the `print()` function on an object of this class, an organized output will be shown. However, you can operate on this instance of the `accept_reject` class as any atomic vector. In the example below, notice that you can obtain a histogram with the `hist()` function or check the size of the vector of observations generated using the `length()` function.
+
+```{r}
+library(AcceptReject)
+
+data <- accept_reject(
+  n = 1000L,
+  f = dnorm,
+  continuous = TRUE,
+  args_f = list(mean = 0, sd = 1),
+  xlim = c(-4, 4)
+)
+
+# Creating a histogram
+hist(data)
+
+# Checking the size of the vector of observations
+length(x)
+```
+
+If you want to access some metadata, use the `attr()` function. Check the list of attributes by doing:
+
+
+```{r}
+library(AcceptReject)
+
+data <- accept_reject(
+  n = 100L,
+  f = dnorm,
+  continuous = TRUE,
+  args_f = list(mean = 0, sd = 1),
+  xlim = c(-4, 4)
+)
+attributes(data)
+
+# Accessing the value c
+attr(data, "c")
+```
+
+In any case, it is important to highlight that, in general, you will not need to access
+these attributes. The greatest interest will be in having access to the vector of observations generated. If you want to access the observation values directly in an atomic vector in R without attributes, without an organized printout, simply coerce the object using the `as.vector()` function, as shown in the following example:
+
+```{r}
+library(AcceptReject)
+
+data <- accept_reject(
+  n = 100L,
+  f = dnorm,
+  continuous = TRUE,
+  args_f = list(mean = 0, sd = 1),
+  xlim = c(-4, 4)
+)
+class(data)
+print(data)
+
+# Coercing the object into an atomic vector without attributes
+data <- as.vector(data)
+print(data)
+```
+
+**Important**:
+
+```{block2, type='rmdnote'}
+You will not need to coerce the object of the `accept_reject` class into an atomic vector with no attributes unless you have a specific reason to do so. The object of the `accept_reject` class is an atomic vector with attributes, and you can operate on it like any atomic vector. Everything you can do with an atomic vector, you can do with an object of the `accept_reject` class.
+
+**Using unnecessary coercion may impose a certain computational cost, depending on the size of the vector of observations generated, for example, in a simulation study.**
 ```
