@@ -79,7 +79,9 @@
 </h1>
 </div>
 <!-- badges: start -->
-<!-- badges: end -->
+<!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/purrr)](https://cran.r-project.org/package=purrr) -->
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
+
 <p>Generating pseudo-random observations from a probability distribution is a common task in statistics. Being able to generate pseudo-random observations from a probability distribution is useful for simulating scenarios, in <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" class="external-link">Monte-Carlo</a> methods, which are useful for evaluating various statistical models.</p>
 <p>The inversion method is a common way to do this, but it is not always possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable <span class="math inline"><em>X</em></span>, that is, <span class="math inline"><em>q</em>(<em>u</em>) = <em>F</em><sup>−1</sup>(<em>u</em>) = <em>x</em></span> (quantile function), where <span class="math inline"><em>F</em></span> is the cumulative distribution function of <span class="math inline"><em>X</em></span> and <span class="math inline"><em>u</em></span> is a uniformly distributed random variable in the interval <span class="math inline">(0,1)</span>.</p>
 <p>Whenever possible, it is preferable to use the inversion method to generate pseudo-random observations from a probability distribution. However, when it is not possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable, it is necessary to resort to other methods. One way to do this is through the <a href="https://en.wikipedia.org/wiki/Rejection_sampling" class="external-link">acceptance-rejection method</a>, which is a Monte-Carlo procedure. This package aims to provide a function that implements the Acceptance and Rejection method for generating pseudo-random observations from probability distributions that are difficult to sample directly.</p>
@@ -195,7 +197,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

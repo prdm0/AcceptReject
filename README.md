@@ -4,6 +4,10 @@
 # AcceptReject <img src="logo.png" align="right" />
 
 <!-- badges: start -->
+<!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/purrr)](https://cran.r-project.org/package=purrr) -->
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
+
+[![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Generating pseudo-random observations from a probability distribution is
