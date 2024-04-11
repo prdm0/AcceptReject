@@ -3,7 +3,30 @@
 #' @param x An accept_reject object
 #' @param n_min Minimum number of observations to print
 #' @param ... Additional arguments
-#' @return NULL
+#'
+#' @details
+#' The function [print.accept_reject()] is responsible for printing an object of
+#' class `accept_reject` in a formatted manner, providing some information
+#' about the `accept_reject` object, including the number of observations, the
+#' value of the constant \eqn{c} that maximizes acceptance, and the acceptance
+#' probability \eqn{1/c}. Additionally, it prints the first generated
+#' observations. The function [print.accept_reject()] delivers formatted output
+#' when executing an object of class `accept_reject` in the console or when
+#' executing the function [print()] on an object of class `accept_reject`,
+#' returned by the function [accept_reject()].
+
+#' @return
+#' An object of class `character`, providing a formatted output with some
+#' information about the `accept_reject` object, including the number of
+#' observations, the value of the constant \eqn{c} that maximizes acceptance, and
+#' the acceptance probability \eqn{1/c}. Additionally, it prints the first
+#' generated observations. The function [print.accept_reject()] enables
+#' formatting when executing an object of class 'accept_reject' in the console
+#' or when executing the function [print()] on an object of class
+#' `accept_reject`, returned by the function [accept_reject()].
+#'
+#' @seealso [accept_reject()] and [plot.accept_reject().
+#'
 #' @importFrom cli cli_h1 cli_alert_success
 #' @importFrom glue glue
 #' @examples

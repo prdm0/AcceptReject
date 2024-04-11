@@ -13,8 +13,29 @@
 
 \item{...}{Additional arguments}
 }
+\value{
+An object of class \code{character}, providing a formatted output with some
+information about the \code{accept_reject} object, including the number of
+observations, the value of the constant \eqn{c} that maximizes acceptance, and
+the acceptance probability \eqn{1/c}. Additionally, it prints the first
+generated observations. The function \code{\link[=print.accept_reject]{print.accept_reject()}} enables
+formatting when executing an object of class 'accept_reject' in the console
+or when executing the function \code{\link[=print]{print()}} on an object of class
+\code{accept_reject}, returned by the function \code{\link[=accept_reject]{accept_reject()}}.
+}
 \description{
 Print method for accept_reject objects
+}
+\details{
+The function \code{\link[=print.accept_reject]{print.accept_reject()}} is responsible for printing an object of
+class \code{accept_reject} in a formatted manner, providing some information
+about the \code{accept_reject} object, including the number of observations, the
+value of the constant \eqn{c} that maximizes acceptance, and the acceptance
+probability \eqn{1/c}. Additionally, it prints the first generated
+observations. The function \code{\link[=print.accept_reject]{print.accept_reject()}} delivers formatted output
+when executing an object of class \code{accept_reject} in the console or when
+executing the function \code{\link[=print]{print()}} on an object of class \code{accept_reject},
+returned by the function \code{\link[=accept_reject]{accept_reject()}}.
 }
 \examples{
 set.seed(0) # setting a seed for reproducibility
@@ -25,4 +46,7 @@ accept_reject(
    args_f = list(size = 5, prob = 0.5),
    xlim = c(0, 10)
 ) |> print()
+}
+\seealso{
+\code{\link[=accept_reject]{accept_reject()}} and [plot.accept_reject().
 }

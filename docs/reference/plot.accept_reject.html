@@ -29,6 +29,9 @@
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -60,11 +63,11 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for accept_reject</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  color_observed_density <span class="op">=</span> <span class="st">"blue"</span>,</span>
-<span>  color_true_density <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>  color_bar <span class="op">=</span> <span class="st">"blue"</span>,</span>
-<span>  color_observable_point <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>  color_real_point <span class="op">=</span> <span class="st">"green"</span>,</span>
+<span>  color_observed_density <span class="op">=</span> <span class="st">"#FBBA78"</span>,</span>
+<span>  color_true_density <span class="op">=</span> <span class="st">"#1D7DA5"</span>,</span>
+<span>  color_bar <span class="op">=</span> <span class="st">"#FCEFC3"</span>,</span>
+<span>  color_observable_point <span class="op">=</span> <span class="st">"#7BBDB3"</span>,</span>
+<span>  color_real_point <span class="op">=</span> <span class="st">"#FE4F0E"</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -77,7 +80,7 @@
 
 
 <dt>color_observed_density</dt>
-<dd><p>Observed density color (continuous case)</p></dd>
+<dd><p>Observed density color (continuous case).</p></dd>
 
 
 <dt>color_true_density</dt>
@@ -97,18 +100,41 @@
 
 
 <dt>alpha</dt>
-<dd><p>Bar chart transparency (discrete case)</p></dd>
+<dd><p>Bar chart transparency (discrete case) and observed density
+(continuous case)</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Additional arguments</p></dd>
+<dd><p>Additional arguments.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>An object of class <code>gg</code> and <code>ggplot</code> from the package <span class="pkg">ggplot2</span>.
+The function <code>plot.accept_reject()</code> expects an object of class
+<code>accept_reject</code> as an argument.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The function <code>plot.accept_reject()</code> is responsible for plotting the
+probability function (in the discrete case) or the probability density (in
+the continuous case), comparing the theoretical case with the observed one.
+It is useful, therefore, for inspecting the quality of the samples generated
+by the acceptance-rejection method. The returned plot is an object of classes
+<code>gg</code> and <code>ggplot</code>. Easily, you can further customize the plot.</p>
+<p>The function <code>plot.accept_reject()</code>, or simply <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, constructs the plot
+for inspection and expects an object of class <code>accept_reject</code> as an argument.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="accept_reject.html">accept_reject()</a></code> and <code><a href="print.accept_reject.html">print.accept_reject()</a></code>.</p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="accept_reject.html">accept_reject</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="accept_reject.html">accept_reject</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>   n <span class="op">=</span> <span class="fl">2000L</span>,</span></span>
 <span class="r-in"><span>   f <span class="op">=</span> <span class="va">dbinom</span>,</span></span>
 <span class="r-in"><span>   continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>

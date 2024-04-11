@@ -6,11 +6,11 @@
 \usage{
 \method{plot}{accept_reject}(
   x,
-  color_observed_density = "blue",
-  color_true_density = "black",
-  color_bar = "blue",
-  color_observable_point = "red",
-  color_real_point = "green",
+  color_observed_density = "#FBBA78",
+  color_true_density = "#1D7DA5",
+  color_bar = "#FCEFC3",
+  color_observable_point = "#7BBDB3",
+  color_real_point = "#FE4F0E",
   alpha = 0.3,
   ...
 )
@@ -18,7 +18,7 @@
 \arguments{
 \item{x}{An object of class \verb{accept reject}}
 
-\item{color_observed_density}{Observed density color (continuous case)}
+\item{color_observed_density}{Observed density color (continuous case).}
 
 \item{color_true_density}{True density color (continuous case)}
 
@@ -28,16 +28,32 @@
 
 \item{color_real_point}{Color of real probability points (discrete case)}
 
-\item{alpha}{Bar chart transparency (discrete case)}
+\item{alpha}{Bar chart transparency (discrete case) and observed density
+(continuous case)}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
+}
+\value{
+An object of class \code{gg} and \code{ggplot} from the package \pkg{ggplot2}.
+The function \code{\link[=plot.accept_reject]{plot.accept_reject()}} expects an object of class
+\code{accept_reject} as an argument.
 }
 \description{
 Inspects the probability function (discrete case) or probability density
 (continuous case) by comparing the theoretical case with the observed one.
 }
-\examples{
+\details{
+The function \code{\link[=plot.accept_reject]{plot.accept_reject()}} is responsible for plotting the
+probability function (in the discrete case) or the probability density (in
+the continuous case), comparing the theoretical case with the observed one.
+It is useful, therefore, for inspecting the quality of the samples generated
+by the acceptance-rejection method. The returned plot is an object of classes
+\code{gg} and \code{ggplot}. Easily, you can further customize the plot.
 
+The function \code{\link[=plot.accept_reject]{plot.accept_reject()}}, or simply \code{\link[=plot]{plot()}}, constructs the plot
+for inspection and expects an object of class \code{accept_reject} as an argument.
+}
+\examples{
 accept_reject(
    n = 2000L,
    f = dbinom,
@@ -54,4 +70,7 @@ accept_reject(
   xlim = c(-4, 4)
 ) |> plot()
 
+}
+\seealso{
+\code{\link[=accept_reject]{accept_reject()}} and \code{\link[=print.accept_reject]{print.accept_reject()}}.
 }
