@@ -6,9 +6,9 @@
 \usage{
 \method{plot}{accept_reject}(
   x,
-  color_observed_density = "#FBBA78",
-  color_true_density = "#1D7DA5",
-  color_bar = "#FCEFC3",
+  color_observed_density = "#BB9FC9",
+  color_true_density = "#E9796D",
+  color_bar = "#BB9FC9",
   color_observable_point = "#7BBDB3",
   color_real_point = "#FE4F0E",
   alpha = 0.3,
@@ -20,7 +20,7 @@
 
 \item{color_observed_density}{Observed density color (continuous case).}
 
-\item{color_true_density}{True density color (continuous case)}
+\item{color_true_density}{True histogram density color (continuous case)}
 
 \item{color_bar}{Bar chart fill color (discrete case)}
 
@@ -55,7 +55,7 @@ for inspection and expects an object of class \code{accept_reject} as an argumen
 }
 \examples{
 accept_reject(
-   n = 2000L,
+   n = 1000L,
    f = dbinom,
    continuous = FALSE,
    args_f = list(size = 5, prob = 0.5),
@@ -63,7 +63,7 @@ accept_reject(
 ) |> plot()
 
 accept_reject(
-  n = 1000L,
+  n = 500L,
   f = dnorm,
   continuous = TRUE,
   args_f = list(mean = 0, sd = 1),

@@ -185,5 +185,6 @@ accept_reject <-
     attr(r, "args_f") <- args_f
     attr(r, "c") <- c
     attr(r, "continuous") <- continuous
+    attr(r, "xlim") <- xlim
     return(r)
   }
