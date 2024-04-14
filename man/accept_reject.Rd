@@ -119,21 +119,23 @@ has shown good performance for the discrete case.
 \examples{
 set.seed(0) # setting a seed for reproducibility
 
-accept_reject(
+x = accept_reject(
  n = 2000L,
  f = dbinom,
  continuous = FALSE,
  args_f = list(size = 5, prob = 0.5),
  xlim = c(0, 10)
-) |> plot()
+)
+plot(x)
 
-accept_reject(
- n = 1000L,
- f = dnorm,
- continuous = TRUE,
- args_f = list(mean = 0, sd = 1),
- xlim = c(-4, 4)
-) |> plot()
+y = accept_reject(
+  n = 1000L,
+  f = dnorm,
+  continuous = TRUE,
+  args_f = list(mean = 0, sd = 1),
+  xlim = c(-4, 4)
+)
+plot(y)
 
 }
 \references{

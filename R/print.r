@@ -31,13 +31,14 @@
 #' @importFrom glue glue
 #' @examples
 #' set.seed(0) # setting a seed for reproducibility
-#' accept_reject(
+#' x = accept_reject(
 #'    n = 2000L,
 #'    f = dbinom,
 #'    continuous = FALSE,
 #'    args_f = list(size = 5, prob = 0.5),
 #'    xlim = c(0, 10)
-#' ) |> print()
+#' )
+#' print(x)
 #' @export
 print.accept_reject <- function(x, n_min = 10L, ...) {
   cli::cli_h1("Accept-Reject Samples")

@@ -84,21 +84,23 @@
 #' @examples
 #' set.seed(0) # setting a seed for reproducibility
 #'
-#' accept_reject(
+#' x = accept_reject(
 #'  n = 2000L,
 #'  f = dbinom,
 #'  continuous = FALSE,
 #'  args_f = list(size = 5, prob = 0.5),
 #'  xlim = c(0, 10)
-#' ) |> plot()
+#' )
+#' plot(x)
 #'
-#' accept_reject(
-#'  n = 1000L,
-#'  f = dnorm,
-#'  continuous = TRUE,
-#'  args_f = list(mean = 0, sd = 1),
-#'  xlim = c(-4, 4)
-#' ) |> plot()
+#' y = accept_reject(
+#'   n = 1000L,
+#'   f = dnorm,
+#'   continuous = TRUE,
+#'   args_f = list(mean = 0, sd = 1),
+#'   xlim = c(-4, 4)
+#' )
+#' plot(y)
 #'
 #' @import rlang
 #' @importFrom lbfgs lbfgs
@@ -236,11 +238,11 @@ accept_reject <-
     if (parallel && Sys.info()["sysname"] %in% c("Linux", "Darwin")) {
       capture.output(
         r <-
-          pbmcapply::pbmclapply(
+          unlist(pbmcapply::pbmclapply(
             X = 1L:n,
             FUN = one_step,
             mc.cores = parallel::detectCores()
-          ) |> unlist()
+          ))
       )
     } else {
       r <- purrr::map_dbl(1L:n, ~one_step(i = .))

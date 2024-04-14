@@ -49,21 +49,23 @@
 #' @import rlang
 #'
 #' @examples
-#' accept_reject(
+#' x = accept_reject(
 #'    n = 1000L,
 #'    f = dbinom,
 #'    continuous = FALSE,
 #'    args_f = list(size = 5, prob = 0.5),
 #'    xlim = c(0, 10)
-#' ) |> plot()
+#' )
+#' plot(x)
 #'
-#' accept_reject(
+#' y = accept_reject(
 #'   n = 500L,
 #'   f = dnorm,
 #'   continuous = TRUE,
 #'   args_f = list(mean = 0, sd = 1),
 #'   xlim = c(-4, 4)
-#' ) |> plot()
+#' )
+#' plot(y)
 #'
 #' @export
 plot.accept_reject <-

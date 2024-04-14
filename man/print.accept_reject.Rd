@@ -39,13 +39,14 @@ returned by the function \code{\link[=accept_reject]{accept_reject()}}.
 }
 \examples{
 set.seed(0) # setting a seed for reproducibility
-accept_reject(
+x = accept_reject(
    n = 2000L,
    f = dbinom,
    continuous = FALSE,
    args_f = list(size = 5, prob = 0.5),
    xlim = c(0, 10)
-) |> print()
+)
+print(x)
 }
 \seealso{
 \code{\link[=accept_reject]{accept_reject()}} and \code{\link[=plot.accept_reject]{plot.accept_reject()}}.
