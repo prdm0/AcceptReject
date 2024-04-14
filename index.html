@@ -81,6 +81,10 @@
 </div>
 <!-- badges: start -->
 
+
+
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
+<!-- badges: end -->
 <p>Generating pseudo-random observations from a probability distribution is a common task in statistics. Being able to generate pseudo-random observations from a probability distribution is useful for simulating scenarios, in <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" class="external-link">Monte-Carlo</a> methods, which are useful for evaluating various statistical models.</p>
 <p>The inversion method is a common way to do this, but it is not always possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable <span class="math inline"><em>X</em></span>, that is, <span class="math inline"><em>q</em>(<em>u</em>) = <em>F</em><sup>−1</sup>(<em>u</em>) = <em>x</em></span> (quantile function), where <span class="math inline"><em>F</em></span> is the cumulative distribution function of <span class="math inline"><em>X</em></span> and <span class="math inline"><em>u</em></span> is a uniformly distributed random variable in the interval <span class="math inline">(0,1)</span>.</p>
 <p>Whenever possible, it is preferable to use the inversion method to generate pseudo-random observations from a probability distribution. However, when it is not possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable, it is necessary to resort to other methods. One way to do this is through the <a href="https://en.wikipedia.org/wiki/Rejection_sampling" class="external-link">acceptance-rejection method</a>, which is a Monte-Carlo procedure. This package aims to provide a function that implements the Acceptance and Rejection method for generating pseudo-random observations from probability distributions that are difficult to sample directly.</p>
@@ -230,7 +234,7 @@
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 5.439 sec elapsed</span></span>
+<span><span class="co">#&gt; 6.838 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Specifying the base probability density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -246,7 +250,7 @@
 <span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2.586 sec elapsed</span></span>
+<span><span class="co">#&gt; 2.581 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Visualizing the results</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">case_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -295,6 +299,7 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=AcceptReject" class="external-link"><img src="https://www.r-pkg.org/badges/version/AcceptReject" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></li>
 </ul>
 </div>
 
