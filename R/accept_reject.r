@@ -5,7 +5,15 @@
 #' @param n The number of random numbers to generate.
 #' @param continuous A logical value indicating whether the pdf is continuous or discrete. Default is \code{TRUE}.
 #' @param f The probability density function (`continuous = TRUE`), in the continuous case or the probability mass function, in the discrete case (`continuous = FALSE`).
-#' @param args_f A list of arguments to be passed to the pdf function.
+#' @param args_f A list of arguments to be passed to the `f` function. It refers to the list of arguments of the target distribution.
+#' @param f_base Base probability density function (for continuous case).If `f_base = NULL`,
+#' a uniform distribution will be used. In the discrete case, this argument is ignored,
+#' and a uniform probability mass function will be used as the base.
+#' @param random_base Random number generation function for the base distribution passed as an argument to `f_base`.
+#' If `random_base = NULL` (default), the uniform generator will be used. In the discrete case, this argument is
+#' disregarded, and the uniform random number generator function will be used.
+#' @param args_f_base A list of arguments for the base distribution. This refers to the list of arguments that will be passed to the function `f_base`.
+#' It will be disregarded in the discrete case.
 #' @param xlim A vector specifying the range of values for the random numbers in the form `c(min, max)`. Default is \code{c(0, 100)}.
 #' @param c A constant value used in the acceptance-rejection method. If \code{NULL}, it will be estimated using the [lbfgs::lbfgs()] optimization algorithm. Default is \code{NULL}.
 #' @param linesearch_algorithm The linesearch algorithm to be used in the [lbfgs::lbfgs()] optimization. Default is \code{"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"}.
@@ -13,9 +21,12 @@
 #' @param epsilon The convergence criterion for the [lbfgs::lbfgs()] optimization. Default is \code{1e-6}.
 #' @param start_c The initial value for the constant \code{c} in the [lbfgs::lbfgs()] optimization. Default is \code{25}.
 #' @param parallel A logical value indicating whether to use parallel processing for generating random numbers. Default is \code{FALSE}.
+#' @param warning A logical value indicating whether to show warnings. Default is \code{TRUE}.
 #' @param ... Additional arguments to be passed to the [lbfgs::lbfgs()] optimization algorithm. For details, see [lbfgs::lbfgs()].
 #'
 #' @return A vector of random numbers generated using the acceptance-rejection method.
+#' The return is an object of `class accept_reject`, but it can be treated as an atomic vector.
+#'
 #' @details
 #' In situations where we cannot use the inversion method (situations where it is not possible to obtain the quantile function) and we do not know a transformation that involves a random variable from which we can generate observations, we can use the acceptance and rejection method.
 #' Suppose that \eqn{X} and \eqn{Y} are random variables with probability density function (pdf) or probability function (pf) \eqn{f} and \eqn{g}, respectively. In addition, suppose that there is a constant \eqn{c} such that
@@ -51,7 +62,18 @@
 #'
 #' In Unix-based operating systems, the function [accept_reject()] can be executed in parallel. To do this, simply set the argument `parallel = TRUE`.
 #' The function [accept_reject()] utilizes the [parallel::mclapply()] function to execute the acceptance and rejection method in parallel.
-#' On Windows operating systems, the code will be seral even if `parallel = TRUE` is set.
+#' On Windows operating systems, the code will not be parallelized even if `parallel = TRUE` is set.
+#'
+#' For the continuous case, a base density function can be used, where the arguments
+#' `f_base`, `random_base` and `args_f_base` need to be passed. If at least one of
+#' them is `NULL`, the function will assume a uniform density function over the
+#' interval `xlim`.
+#'
+#' For the discrete case, the arguments `f_base`, `random_base` and `args_f_base`
+#' should be `NULL`, and if they are passed, they will be disregarded, as for
+#' the discrete case, the discrete uniform distribution will always be
+#' considered as the base. Sampling from the discrete uniform distribution
+#' has shown good performance for the discrete case.
 #'
 #' @seealso [parallel::mclapply()] and [lbfgs::lbfgs()].
 #'
@@ -86,46 +108,89 @@
 #' @importFrom parallel detectCores
 #' @importFrom stats dunif runif dweibull
 #' @importFrom utils capture.output
-#'
+#' @importFrom assertthat assert_that
+#' @importFrom cli cli_alert_danger cli_alert_warning
+#' @importFrom glue glue
 #' @export
 accept_reject <-
   function(
       n = 1L,
       continuous = TRUE,
-      f = dweibull,
-      args_f = list(shape = 1, scale = 1),
-      xlim = c(0, 100),
+      f = NULL,
+      args_f = NULL,
+      f_base = NULL,
+      random_base = NULL,
+      args_f_base = NULL,
+      xlim = NULL,
       c = NULL,
       linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
       max_iterations = 1000L,
       epsilon = 1e-6,
       start_c = 25,
       parallel = FALSE,
+      warning = TRUE,
       ...) {
 
-    pdf <- purrr::partial(.f = f, !!!args_f)
-    if(xlim[1L] == 0 && continuous) xlim[1L] <- .Machine$double.xmin
+    assertthat::assert_that(
+      !is.null(f),
+      msg = cli::cli_alert_danger("You need to pass the argument f referring to the probability density or mass function that you want to generate observations.")
+    )
 
-    if (continuous) {
-      step <- 1e-5
-      pdf_base <- purrr::partial(.f = dunif, min = xlim[1L], max = xlim[2L])
-      base_generator <- purrr::partial(.f = runif, min = xlim[1L], max = xlim[2L])
-    } else {
+    assertthat::assert_that(
+      !is.null(args_f),
+      msg = cli::cli_alert_danger("You need to pass args_f with the parameters that index f.")
+    )
+
+    assertthat::assert_that(
+      !is.null(xlim),
+      msg = cli::cli_alert_danger("You must provide the vector xlim argument (generation support).")
+    )
+
+    f <- purrr::partial(.f = f, !!!args_f)
+
+    if(warning && f(xlim[2L]) > 0.01) {
+      cli::cli_alert_warning(
+        glue::glue("Warning: xlim[2L] is {f(xlim[2L])}. Trying a better upper limit might be better.")
+      )
+    }
+
+    if(warning && xlim[1L] < 0 && f(xlim[1L]) > 0.01) {
+      cli::cli_alert_warning(
+        glue::glue("Warning: xlim[1L] is {f(xlim[1L])}. Trying a lower limit might be better.")
+      )
+    }
+
+    # Uniform distribution will be used if not all information from the base
+    # distribution is provided.
+    any_null <- any(is.null(c(f_base, random_base, args_f_base)))
+    if(continuous && any_null) {
+      step <- 1e-3
+      f_base <- purrr::partial(.f = dunif, min = xlim[1L], max = xlim[2L])
+      random_base <- purrr::partial(.f = runif, min = xlim[1L], max = xlim[2L])
+    }
+
+    # Is it a discrete random variable?
+    if(!continuous){
       step <- 1L
-      pdf_base <- \(x) 1/ (xlim[2L] - xlim[1L] + 1)
-      base_generator <- \(n) sample(x = xlim[1L]:xlim[2L], size = n, replace = TRUE)
+      f_base <- function(x) 1/ (xlim[2L] - xlim[1L] + 1)
+      random_base <- function(n) sample(x = xlim[1L]:xlim[2L], size = n, replace = TRUE)
+    } else if(continuous && !any_null) {
+      step <- 1e-3
+      if(xlim[1L] == 0) xlim[1L] <- .Machine$double.xmin
+      f_base <- purrr::partial(.f = f_base, !!!args_f_base)
+      random_base <- purrr::partial(.f = random_base, !!!args_f_base)
     }
 
     x <- seq(from = xlim[1L], to = xlim[2L], by = step)
 
-    a <- purrr::map_dbl(.x = x, .f = pdf)
-    b <- purrr::map_dbl(.x = x, .f = pdf_base)
+    a <- purrr::map_dbl(.x = x, .f = f)
+    b <- purrr::map_dbl(.x = x, .f = f_base)
 
     x_max <- x[which.max((a/b)[!is.infinite(a/b)])]
 
     objective_c <- function(c) {
       differences <-
-      (pdf(x_max) - c * pdf_base(x_max))^2
+      (f(x_max) - c * f_base(x_max))^2
 
       if(is.infinite(differences)) return(.Machine$double.xmax)
       else return(differences)
@@ -160,9 +225,9 @@ accept_reject <-
     }
     one_step <- function(i) {
       repeat{
-        x <- base_generator(n = 1L)
+        x <- random_base(n = 1L)
         u <- runif(n = 1L)
-        if (u <= pdf(x = x) / (c * pdf_base(x = x))) {
+        if (u <= f(x = x) / (c * f_base(x = x))) {
           return(x)
         }
       }

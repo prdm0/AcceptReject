@@ -16,6 +16,7 @@ BugReports: https://github.com/prdm0/AcceptReject/issues/
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Imports: 
+    assertthat,
     cli,
     ggplot2,
     glue,
@@ -28,4 +29,4 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    patchwork
+    cowplot

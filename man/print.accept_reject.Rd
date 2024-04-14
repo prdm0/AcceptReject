@@ -48,5 +48,5 @@ accept_reject(
 ) |> print()
 }
 \seealso{
-\code{\link[=accept_reject]{accept_reject()}} and [plot.accept_reject().
+\code{\link[=accept_reject]{accept_reject()}} and \code{\link[=plot.accept_reject]{plot.accept_reject()}}.
 }

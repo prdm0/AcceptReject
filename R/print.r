@@ -25,7 +25,7 @@
 #' or when executing the function [print()] on an object of class
 #' `accept_reject`, returned by the function [accept_reject()].
 #'
-#' @seealso [accept_reject()] and [plot.accept_reject().
+#' @seealso [accept_reject()] and [plot.accept_reject()].
 #'
 #' @importFrom cli cli_h1 cli_alert_success
 #' @importFrom glue glue
@@ -45,13 +45,23 @@ print.accept_reject <- function(x, n_min = 10L, ...) {
   cli::cli_alert_info("It's not necessary, but if you want to extract the observations, use as.vector().")
   cat('\n')
   n <- length(x)
+
+  case <- if (attr(x, "continuous")) "continuous" else "discrete"
+
+  cli_alert_success(glue("Case: {case}"))
   cli_alert_success(glue("Number of observations: {n}"))
-  cli_alert_success(glue("c: {attr(x, 'c')}"))
-  cli_alert_success(glue("Probability of acceptance (1/c): {1/attr(x, 'c')}"))
+  cli_alert_success(glue("c: {round(attr(x, 'c'), digits = 4L)}"))
+  cli_alert_success(glue("Probability of acceptance (1/c): {round(1/attr(x, 'c'), digits = 4L)}"))
   if (n <= n_min) {
-    cli_alert_success(glue("Observations: {paste(round(x[1L:n], 4L), collapse = ' '))}"))
+    cli_alert_success(glue("Observations: {paste(round(x[1L:n], 4L), collapse = ' ')}"))
   } else {
     cli_alert_success(glue("Observations: {paste(round(x[1L:n_min], 4L), collapse = ' ')}..."))
   }
+
+  limits <- attr(x, "xlim")
+
+  if(limits[1L] >= 0 && limits[1L] < 1e-10) limits[1L] <- 0
+
+  cli_alert_success(glue("xlim = {paste(limits, collapse = ' ')}"))
   cli_h1("")
 }

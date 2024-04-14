@@ -7,15 +7,19 @@
 accept_reject(
   n = 1L,
   continuous = TRUE,
-  f = dweibull,
-  args_f = list(shape = 1, scale = 1),
-  xlim = c(0, 100),
+  f = NULL,
+  args_f = NULL,
+  f_base = NULL,
+  random_base = NULL,
+  args_f_base = NULL,
+  xlim = NULL,
   c = NULL,
   linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
   max_iterations = 1000L,
   epsilon = 1e-06,
   start_c = 25,
   parallel = FALSE,
+  warning = TRUE,
   ...
 )
 }
@@ -26,7 +30,18 @@ accept_reject(
 
 \item{f}{The probability density function (\code{continuous = TRUE}), in the continuous case or the probability mass function, in the discrete case (\code{continuous = FALSE}).}
 
-\item{args_f}{A list of arguments to be passed to the pdf function.}
+\item{args_f}{A list of arguments to be passed to the \code{f} function. It refers to the list of arguments of the target distribution.}
+
+\item{f_base}{Base probability density function (for continuous case).If \code{f_base = NULL},
+a uniform distribution will be used. In the discrete case, this argument is ignored,
+and a uniform probability mass function will be used as the base.}
+
+\item{random_base}{Random number generation function for the base distribution passed as an argument to \code{f_base}.
+If \code{random_base = NULL} (default), the uniform generator will be used. In the discrete case, this argument is
+disregarded, and the uniform random number generator function will be used.}
+
+\item{args_f_base}{A list of arguments for the base distribution. This refers to the list of arguments that will be passed to the function \code{f_base}.
+It will be disregarded in the discrete case.}
 
 \item{xlim}{A vector specifying the range of values for the random numbers in the form \code{c(min, max)}. Default is \code{c(0, 100)}.}
 
@@ -42,10 +57,13 @@ accept_reject(
 
 \item{parallel}{A logical value indicating whether to use parallel processing for generating random numbers. Default is \code{FALSE}.}
 
+\item{warning}{A logical value indicating whether to show warnings. Default is \code{TRUE}.}
+
 \item{...}{Additional arguments to be passed to the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization algorithm. For details, see \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}.}
 }
 \value{
 A vector of random numbers generated using the acceptance-rejection method.
+The return is an object of \verb{class accept_reject}, but it can be treated as an atomic vector.
 }
 \description{
 This function implements the acceptance-rejection method for generating random numbers from a given probability density function (pdf).
@@ -85,7 +103,18 @@ If a value of \code{c} is provided, the function \code{\link[=accept_reject]{acc
 
 In Unix-based operating systems, the function \code{\link[=accept_reject]{accept_reject()}} can be executed in parallel. To do this, simply set the argument \code{parallel = TRUE}.
 The function \code{\link[=accept_reject]{accept_reject()}} utilizes the \code{\link[parallel:mclapply]{parallel::mclapply()}} function to execute the acceptance and rejection method in parallel.
-On Windows operating systems, the code will be seral even if \code{parallel = TRUE} is set.
+On Windows operating systems, the code will not be parallelized even if \code{parallel = TRUE} is set.
+
+For the continuous case, a base density function can be used, where the arguments
+\code{f_base}, \code{random_base} and \code{args_f_base} need to be passed. If at least one of
+them is \code{NULL}, the function will assume a uniform density function over the
+interval \code{xlim}.
+
+For the discrete case, the arguments \code{f_base}, \code{random_base} and \code{args_f_base}
+should be \code{NULL}, and if they are passed, they will be disregarded, as for
+the discrete case, the discrete uniform distribution will always be
+considered as the base. Sampling from the discrete uniform distribution
+has shown good performance for the discrete case.
 }
 \examples{
 set.seed(0) # setting a seed for reproducibility

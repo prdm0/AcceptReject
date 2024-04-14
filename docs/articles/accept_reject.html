@@ -176,8 +176,14 @@ distribution might be a good alternative.</p>
 <p>The <code>AcceptReject</code> package is available on CRAN and can be
 installed using the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="co"># or remotes::install_github("prdm0/AcceptReject", force = TRUE)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"AcceptReject"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># or</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"prdm0/AcceptReject"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="using-the-accept_reject-function">Using the <code>accept_reject</code> Function<a class="anchor" aria-label="anchor" href="#using-the-accept_reject-function"></a>
@@ -289,7 +295,7 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Ensuring Reproducibility</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating observations</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
@@ -306,10 +312,12 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 1000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 10.4282913773332</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0958929860910474</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 10.4283</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0959</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 0 0 0 1 0 0 2 1 2...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
@@ -326,7 +334,7 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span></span>
 <span><span class="co"># Adding the observed probabilities</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">obs_prob</span><span class="op">)</span><span class="op">)</span>, <span class="va">obs_prob</span>, pch <span class="op">=</span> <span class="fl">16L</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"True probability"</span>, <span class="st">"Observed probability"</span><span class="op">)</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"True probability"</span>, <span class="st">"Observed probability"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16L</span>, cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -342,7 +350,7 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Ensuring reproducibility</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating observations</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
@@ -359,10 +367,12 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 6.56249999733451</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.152380952442845</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 6.5625</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.1524</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 3 4 4 2 3 1 2 4 2 2...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
@@ -379,7 +389,7 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span></span>
 <span><span class="co"># Adding the observed probabilities</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">obs_prob</span><span class="op">)</span><span class="op">)</span>, <span class="va">obs_prob</span>, pch <span class="op">=</span> <span class="fl">16L</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"True probability"</span>, <span class="st">"Observed probability"</span><span class="op">)</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"True probability"</span>, <span class="st">"Observed probability"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16L</span>, cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -399,7 +409,7 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Ensuring reproducibility</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating observations</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
@@ -416,10 +426,12 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.19153824335755</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.313328534314533</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -1.023 -0.0184 -0.9111 0.7965 0.4243 2.3148 -0.1822 -2.0416 0.1491 2.1305...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
@@ -449,10 +461,10 @@ density plot of the normal distribution. However, note that the
 simpler and more direct. See the following example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span> <span class="co"># install.packages("pacthwork")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
 <span></span>
 <span><span class="co"># Ensuring reproducibility</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
@@ -465,23 +477,23 @@ simpler and more direct. See the following example:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co"># Inspecting</span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span></span></code></pre></div>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>See another example, in the discrete case:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span> <span class="co"># install.packages("patchwork")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
 <span><span class="co"># Ensuring Reproducibility</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">simulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu">AcceptReject</span><span class="fu">::</span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
-<span>    n <span class="op">=</span> <span class="fl">1000L</span>,</span>
+<span>    n <span class="op">=</span> <span class="va">n</span>,</span>
 <span>    f <span class="op">=</span> <span class="va">dpois</span>,</span>
 <span>    continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
@@ -490,12 +502,12 @@ simpler and more direct. See the following example:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span></span></code></pre></div>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -545,10 +557,10 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; [1] "accept_reject"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $f</span></span>
-<span><span class="co">#&gt; function (x, mean = 0, sd = 1, log = FALSE) </span></span>
-<span><span class="co">#&gt; .Call(C_dnorm, x, mean, sd, log)</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x62bbe7a0b150&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: namespace:stats&gt;</span></span>
+<span><span class="co">#&gt; &lt;partialised&gt;</span></span>
+<span><span class="co">#&gt; function (...) </span></span>
+<span><span class="co">#&gt; f(mean = 0, sd = 1, ...)</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x64cbe9fd01f0&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $args_f</span></span>
 <span><span class="co">#&gt; $args_f$mean</span></span>
@@ -593,33 +605,35 @@ example:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Accept-Reject Samples</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 100</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.19153824335755</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.313328534314533</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -1.5387 0.3894 -1.1376 -1.1119 0.9404 1.0471 -0.617 0.1396 -0.6566 1.9164...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 1.1986 0.8434 1.6122 0.9627 0.483 1.2683 0.6995 1.4595 0.5429 0.8081...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span></span>
 <span><span class="co"># Coercing the object into an atomic vector without attributes</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   [1] -1.53870467  0.38939574 -1.13758586 -1.11193044  0.94041345  1.04709638</span></span>
-<span><span class="co">#&gt;   [7] -0.61698095  0.13963057 -0.65663915  1.91636525 -0.12336472 -0.49628675</span></span>
-<span><span class="co">#&gt;  [13]  0.31267925 -0.56685336  0.78333928 -1.65211592 -1.57053891  2.70437769</span></span>
-<span><span class="co">#&gt;  [19] -0.88338146 -1.25963761 -1.76581944 -0.26738425 -0.51704984  0.19508744</span></span>
-<span><span class="co">#&gt;  [25]  1.16429157 -0.65323033  0.42140778 -1.58613284  1.05725540  1.71607799</span></span>
-<span><span class="co">#&gt;  [31]  1.56007421  1.24794785 -0.52846813  1.09929632 -0.03209583 -0.31734041</span></span>
-<span><span class="co">#&gt;  [37] -0.26176246  0.05915411 -1.36006397  0.57914058 -1.14458484  0.13927373</span></span>
-<span><span class="co">#&gt;  [43]  1.11677352  1.05017015 -1.92517745 -1.47765510  0.19147936  0.31150732</span></span>
-<span><span class="co">#&gt;  [49] -0.32513807  0.50762851 -0.13175768  0.49965012 -0.79175195  0.12672810</span></span>
-<span><span class="co">#&gt;  [55]  0.14944701  0.03548614 -0.29588091 -1.18112264  1.49476458  0.84075588</span></span>
-<span><span class="co">#&gt;  [61]  0.49501813  0.98546915  1.06355776  0.90327224 -0.97355275 -0.54394192</span></span>
-<span><span class="co">#&gt;  [67]  1.36181954 -1.54269020 -0.59670195 -0.56469662 -1.83341560 -0.57205664</span></span>
-<span><span class="co">#&gt;  [73]  0.10227137  0.01935146 -0.55981698 -1.19642650  0.94177106  0.21643013</span></span>
-<span><span class="co">#&gt;  [79] -0.59901242  0.65251458  0.21879227  1.25072688  1.27202878 -1.30618769</span></span>
-<span><span class="co">#&gt;  [85] -0.76321989  1.12885593  1.01499283 -0.81376197  0.59667628 -0.34872457</span></span>
-<span><span class="co">#&gt;  [91]  0.85112555  1.33809701 -0.51935011  0.92024392  0.20225682 -1.29229795</span></span>
-<span><span class="co">#&gt;  [97]  0.28451799  0.51134847  0.37151868 -0.05340494</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1]  1.19856946  0.84342916  1.61221805  0.96268001  0.48296668  1.26828653</span></span>
+<span><span class="co">#&gt;   [7]  0.69952349  1.45947906  0.54285330  0.80811024  0.34980874  3.03404737</span></span>
+<span><span class="co">#&gt;  [13]  1.53450573  0.07969595  0.98659633  0.19551801 -2.39995709 -0.73930714</span></span>
+<span><span class="co">#&gt;  [19] -0.45169049  0.27908599 -1.38712366  0.59789778  0.38773125 -0.76091245</span></span>
+<span><span class="co">#&gt;  [25] -0.83777745 -0.21687730  1.76546820  0.84543538  0.47730063  1.67949544</span></span>
+<span><span class="co">#&gt;  [31]  0.83409873  0.11242943 -0.35713891  0.13385091 -0.93912183  0.45671829</span></span>
+<span><span class="co">#&gt;  [37] -0.11898418  1.13955729 -1.63337213  1.41893629  0.89826170  1.14031791</span></span>
+<span><span class="co">#&gt;  [43]  0.98258457 -2.06302836  1.33966538  0.99294567  0.58774585 -0.36827332</span></span>
+<span><span class="co">#&gt;  [49]  2.07628195  0.10226811  0.07992830 -0.95965569  0.69208666  0.02776028</span></span>
+<span><span class="co">#&gt;  [55] -0.09327624 -0.57722276 -0.71948121  0.37787130 -0.15020296  1.51568333</span></span>
+<span><span class="co">#&gt;  [61]  0.48249844 -0.51122185  0.41861797  0.62771358  1.40242426  0.38781096</span></span>
+<span><span class="co">#&gt;  [67] -1.35766005 -1.89217155 -0.03316264 -0.22891004  1.82575525  0.92554506</span></span>
+<span><span class="co">#&gt;  [73] -0.89517932 -0.22310955 -1.40037660  0.36149849  1.36847690  1.58007266</span></span>
+<span><span class="co">#&gt;  [79]  1.53656821 -0.27642912 -0.36499533 -0.11187265 -0.13744650 -1.34694266</span></span>
+<span><span class="co">#&gt;  [85] -1.09254304 -0.57894820  1.26067684  0.58545514  0.34850591 -1.19321153</span></span>
+<span><span class="co">#&gt;  [91] -0.73624498  0.29537788 -0.57793364 -0.24579298 -0.80460693  0.10248959</span></span>
+<span><span class="co">#&gt;  [97] -1.58953346  1.10764538 -0.61851919 -0.24498389</span></span></code></pre></div>
 <p><strong>Important</strong>:</p>
 
 <div class="rmdnote">

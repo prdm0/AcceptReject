@@ -15,6 +15,10 @@
 #' @param color_real_point Color of real probability points (discrete case)
 #' @param alpha Bar chart transparency (discrete case) and observed density
 #' (continuous case)
+#' @param hist If TRUE, a histogram will be plotted in the continuous case,
+#' comparing the theoretical density with the observed one. If FALSE,
+#' [ggplot2::geom_density()] will be used instead of the histogram.
+#'
 #' @param ... Additional arguments.
 #'
 #' @details
@@ -66,61 +70,56 @@ plot.accept_reject <-
   function(
     x,
     color_observed_density = "#BB9FC9", #"#E65A65", # "#FBBA78",
-    color_true_density = "#E9796D",
+    color_true_density = "#FE4F0E",
     color_bar = "#BB9FC9", #"#E65A65", #"#FCEFC3",
     color_observable_point = "#7BBDB3",
     color_real_point = "#FE4F0E",
     alpha = .3,
+    hist = TRUE,
     ...
   ){
 
-  y <-
-    do.call(
-      attr(x, "f"),
-      rlang::list2(
-        as.vector(x),
-        !!!attr(x, "args_f")
-      )
-    )
-
+  y <- do.call(attr(x, "f"), list(as.vector(x)))
   data <- data.frame(x = as.vector(x), y = y)
 
   graphic <- function(x){
-    p <- ggplot2::ggplot(data, ggplot2::aes(x = x))
     if(attr(x, "continuous")){
-      capture.output(
+      if(hist){
         p <-
-          p +
-          ggplot2::geom_histogram(aes(y = after_stat(density), color = "Observed density"), fill = color_observed_density, alpha = alpha, breaks = hist(data$x, plot = FALSE)$breaks) +
-          #ggplot2::geom_density(aes(y = after_stat(density), color = "Observed density"), position = "stack", fill = color_observed_density, alpha = alpha) +
-          ggplot2::geom_line(aes(y = y, color = "True density")) +
-          ggplot2::scale_color_manual(values = c("True density" = color_true_density, "Observed density" = color_observed_density)) +
-          ggplot2::labs(
-            x = "x",
-            y = "f(x)",
-            title = "Probability density function",
-            subtitle = "True x Observed",
-            color = "Legend"
-          )
-      )
+          ggplot2::ggplot(data, ggplot2::aes(x = x)) +
+          ggplot2::geom_histogram(ggplot2::aes(y = after_stat(density), color = "Observed density"), fill = color_observed_density, alpha = alpha, breaks = hist(data$x, plot = FALSE)$breaks)
+      } else {
+        p <- ggplot2::ggplot(data, ggplot2::aes(x = x)) +
+          ggplot2::geom_density(ggplot2::aes(y = after_stat(density), color = "Observed density"), position = "stack", fill = color_observed_density, alpha = alpha)
+      }
+      p <-
+        p +
+        # ggplot2::ggplot(data, ggplot2::aes(x = x)) +
+        ggplot2::geom_line(aes(y = y, color = "True density")) +
+        ggplot2::scale_color_manual(values = c("True density" = color_true_density, "Observed density" = color_observed_density)) +
+        ggplot2::labs(
+          x = "x",
+          y = "f(x)",
+          title = "Probability density function",
+          subtitle = "True x Observed",
+          color = "Legend"
+        )
     } else {
-      capture.output(
-        p <-
-          p +
-          ggplot2::geom_bar(aes(y = after_stat(prop), group = 1L), fill = color_bar, alpha = alpha) +
-          ggplot2::geom_line(aes(y = y), linetype = "dotted") +
-          ggplot2::geom_point(aes(y = y, color = "Observable Probability")) +
-          ggplot2::geom_point(aes(y = after_stat(prop), group = 1L, color = "Real Probability"), stat = "count") +
-          ggplot2::scale_color_manual(values = c("Observable Probability" = color_observable_point, "Real Probability" = color_real_point)) +
-          ggplot2::scale_y_continuous(labels = scales::percent) +
-          ggplot2::labs(
-            x = "x",
-            y = "P(X = x)",
-            title = "Probability Function",
-            subtitle = "True x Observed",
-            color = "Legend"
-          )
-      )
+      p <-
+        ggplot2::ggplot(data, ggplot2::aes(x = x)) +
+        ggplot2::geom_bar(aes(y = after_stat(prop), group = 1L), fill = color_bar, alpha = alpha) +
+        ggplot2::geom_line(aes(y = y), linetype = "dotted") +
+        ggplot2::geom_point(aes(y = y, color = "Observable Probability")) +
+        ggplot2::geom_point(aes(y = after_stat(prop), group = 1L, color = "True Probability"), stat = "count") +
+        ggplot2::scale_color_manual(values = c("Observable Probability" = color_observable_point, "True Probability" = color_real_point)) +
+        ggplot2::scale_y_continuous(labels = scales::percent) +
+        ggplot2::labs(
+          x = "x",
+          y = "P(X = x)",
+          title = "Probability Function",
+          subtitle = "True x Observed",
+          color = "Legend"
+        )
     }
     p <- p +
       ggplot2::theme(

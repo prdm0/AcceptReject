@@ -116,13 +116,13 @@ very close to zero. In this case, we choose `xlim = c(0, 20)`, where
 
 ``` r
 library(AcceptReject)
-library(patchwork) # install.packages("patchwork")
+library(cowplot) # install.packages("cowplot")
 # Ensuring Reproducibility
 set.seed(0) 
 
 simulation <- function(n){
   AcceptReject::accept_reject(
-    n = 1000L,
+    n = n,
     f = dpois,
     continuous = FALSE,
     args_f = list(lambda = 0.7),
@@ -131,12 +131,12 @@ simulation <- function(n){
   )
 }
 
-p1 <- simulation(25L) |> plot()
-p2 <- simulation(250L) |> plot()
-p3 <- simulation(2500L) |> plot()
-p4 <- simulation(25000L) |> plot()
+a <- simulation(25L) |> plot()
+b <- simulation(250L) |> plot()
+c <- simulation(2500L) |> plot()
+d <- simulation(25000L) |> plot()
 
-p1 + p2 + p3 + p4
+plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
@@ -154,7 +154,7 @@ observations using the acceptance-rejection method. Note that
 
 ``` r
 library(AcceptReject)
-library(patchwork)
+library(cowplot) # install.packages("cowplot")
 
 # Ensuring reproducibility
 set.seed(0) 
@@ -170,12 +170,12 @@ simulation <- function(n){
   )
 }
 # Inspecting
-p1 <- simulation(n = 250L) |> plot()
-p2 <- simulation(n = 2500L) |> plot()
-p3 <- simulation(n = 25000L) |> plot()
-p4 <- simulation(n = 250000L) |> plot()
+a <- simulation(n = 250L) |> plot()
+b <- simulation(n = 2500L) |> plot()
+c <- simulation(n = 25000L) |> plot()
+d <- simulation(n = 250000L) |> plot()
 
-p1 + p2 + p3 + p4
+plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
