@@ -6,8 +6,12 @@
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
-<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
+
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
+
+[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 <!-- badges: end -->
 
 Generating pseudo-random observations from a probability distribution is
@@ -285,7 +289,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 5.439 sec elapsed
+#> 6.838 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -301,7 +305,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 2.586 sec elapsed
+#> 2.581 sec elapsed
 
 # Visualizing the results
 p1 <- case_1 |> plot()
