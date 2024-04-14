@@ -1,6 +1,6 @@
 Package: AcceptReject
 Title: Acceptance-Rejection Method for Generating Pseudo-Random Observations
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Pedro Rafael", "D. Marinho", , "pedro.rafael.marinho@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1591-8300")),

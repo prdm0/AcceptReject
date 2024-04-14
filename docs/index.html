@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">AcceptReject</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +49,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/accept_reject.html">Acceptance and rejection method</a>
+    <a class="dropdown-item" href="articles/inspect.html">Specifying a base probability density function</a>
   </div>
 </li>
 <li class="nav-item">
@@ -163,6 +164,100 @@
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<p>The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function supports, <strong>for the continuous case</strong>, specifying a base probability density function if you don’t want to use the continuous uniform distribution as the default base.</p>
+<p>When choosing to specify another probability density function different from the uniform one, it’s necessary to specify the following arguments:</p>
+<ul>
+<li>
+<code>f_base</code>: base probability density function;</li>
+<li>
+<code>random_base</code>: sampling from the base probability density function;</li>
+<li>
+<code>args_f_base</code>: list with the parameters of the base density.</li>
+</ul>
+<p>By default, all of them are <code>NULL</code>, and the continuous uniform distribution in <code>xlim</code> is used as the base. If at least one of these arguments is not specified, no error will occur, and the continuous uniform distribution in <code>xlim</code> will still be used as the base.</p>
+<p>For the discrete case, if the user mistakenly specifies any of these arguments, i.e., when <code>continuous = FALSE</code>, the <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function will ignore these arguments and use the discrete uniform distribution as the base.</p>
+<p>Caso opte em especificar uma densidade base é conveniente inspecionar, comparando a função densidade base com a função densidade de probabilidade teórica. A função facilitará esse trabalho. A função <code>[inspect()](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) irá plotar a função densidade de probabilidade base e a função densidade de probabilidade teórica, irá achurar a intersecção entre as densidades e irá informar no gráfico o valor da área de intersecação. São informações importantes para decidir se a função densidade de probabilidade base são nos argumentos informados à</code>args_f_base<code>e o valor de</code>c` (padrão é 1) são adequados.</p>
+<p>If you choose to specify a base density, it’s convenient to inspect it by comparing the base density function with the theoretical probability density function. The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>inspect()</code></a> function facilitates this task. The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>inspect()</code></a> function will plot the base probability density function and the theoretical probability density function, find the intersection between the densities, and display the value of the intersection area on the plot. These are important pieces of information to decide if the base probability density function specified in the <code>args_f_base</code> argument and the value of <code>c</code> (default is 1) are appropriate.</p>
+</div>
+<div class="section level2">
+<h2 id="example-of-inspection">Example of inspection<a class="anchor" aria-label="anchor" href="#example-of-inspection"></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
+<span></span>
+<span><span class="co"># Ensuring reproducibility</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Inspecting</span></span>
+<span><span class="co"># Case a</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inspect.html">inspect</a></span><span class="op">(</span></span>
+<span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
+<span>  f_base <span class="op">=</span> <span class="va">dgamma</span>,</span>
+<span>  args_f_base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.8</span>, rate <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Inspecting</span></span>
+<span><span class="co"># Case b</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/inspect.html">inspect</a></span><span class="op">(</span></span>
+<span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
+<span>  f_base <span class="op">=</span> <span class="va">dgamma</span>,</span>
+<span>  args_f_base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.9</span>, rate <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">1.4</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p>Notice that considering the distribution in scenario “a” in the code above is more convenient. Note that the area is approximately 1, the base probability density function with parameters <code>shape = 2.8</code> and <code>rate = 1.2</code> provides a shape close to the theoretical distribution, and <code>c = 1.2</code> ensures that the base density function upper bounds the theoretical probability density function. Therefore, considering <code>f_base</code> with <span class="math inline"><em>Γ</em>(<em>α</em>=2.8,<em>β</em>=1.2)</span> and <code>c = 1.2</code> is a reasonable choice for a base distribution.</p>
+<p>Therefore, passing arguments to <code>f_base = dgamma</code>, <code>args_f_base = list(shape = 2.8, rate = 1.2)</code>, and <code>c = 1.2</code> to the <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function will lead us to an even more efficient code.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jabiru/tictoc" class="external-link">tictoc</a></span><span class="op">)</span> <span class="co"># install.packages("tictoc")</span></span>
+<span></span>
+<span><span class="co"># Ensuring reproducibility</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Não especificando a função densidade de probabilidade base</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">case_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 5.615 sec elapsed</span></span>
+<span></span>
+<span><span class="co"># Specifying the base probability density function</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">case_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
+<span>  f_base <span class="op">=</span> <span class="va">dgamma</span>,</span>
+<span>  random_base <span class="op">=</span> <span class="va">rgamma</span>,</span>
+<span>  args_f_base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.8</span>, rate <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 1.376 sec elapsed</span></span>
+<span></span>
+<span><span class="co"># Visualizing the results</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">case_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">case_2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+<p>Notice that the results were very close in a graphical analysis. However, the execution time specifying a convenient base density was lower for a very large sample.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
