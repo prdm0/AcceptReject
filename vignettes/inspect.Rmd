@@ -112,8 +112,8 @@ case_2 <- accept_reject(
 toc()
 
 # Visualizing the results
-p1 <- case_1 |> plot()
-p2 <- case_2 |> plot()
+p1 <- plot(case_1)
+p2 <- plot(case_2)
 
 plot_grid(p1, p2, nrow = 2L)
 ```

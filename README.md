@@ -135,10 +135,10 @@ simulation <- function(n){
   )
 }
 
-a <- simulation(25L) |> plot()
-b <- simulation(250L) |> plot()
-c <- simulation(2500L) |> plot()
-d <- simulation(25000L) |> plot()
+a <- plot(simulation(25L))
+b <- plot(simulation(250L))
+c <- plot(simulation(2500L))
+d <- plot(simulation(25000L))
 
 plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
@@ -174,10 +174,10 @@ simulation <- function(n){
   )
 }
 # Inspecting
-a <- simulation(n = 250L) |> plot()
-b <- simulation(n = 2500L) |> plot()
-c <- simulation(n = 25000L) |> plot()
-d <- simulation(n = 250000L) |> plot()
+a <- plot(simulation(n = 250L))
+b <- plot(simulation(n = 2500L))
+c <- plot(simulation(n = 25000L))
+d <- plot(simulation(n = 250000L))
 
 plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
@@ -289,7 +289,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 6.838 sec elapsed
+#> 7.294 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -305,11 +305,11 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 2.581 sec elapsed
+#> 2.633 sec elapsed
 
 # Visualizing the results
-p1 <- case_1 |> plot()
-p2 <- case_2 |> plot()
+p1 <- plot(case_1)
+p2 <- plot(case_2)
 
 plot_grid(p1, p2, nrow = 2L)
 ```

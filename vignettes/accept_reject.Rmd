@@ -273,10 +273,10 @@ simulation <- function(n){
   )
 }
 # Inspecting
-a <- simulation(n = 250L) |> plot()
-b <- simulation(n = 2500L) |> plot()
-c <- simulation(n = 25000L) |> plot()
-d <- simulation(n = 250000L) |> plot()
+a <- plot(simulation(n = 250L))
+b <- plot(simulation(n = 2500L))
+c <- plot(simulation(n = 25000L))
+d <- plot(simulation(n = 250000L))
 
 plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
@@ -300,10 +300,10 @@ simulation <- function(n){
   )
 }
 
-a <- simulation(25L) |> plot()
-b <- simulation(250L) |> plot()
-c <- simulation(2500L) |> plot()
-d <- simulation(25000L) |> plot()
+a <- plot(simulation(25L))
+b <- plot(simulation(250L))
+c <- plot(simulation(2500L))
+d <- plot(simulation(25000L))
 
 plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
