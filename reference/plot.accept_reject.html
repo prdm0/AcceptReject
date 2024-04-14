@@ -64,11 +64,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  color_observed_density <span class="op">=</span> <span class="st">"#BB9FC9"</span>,</span>
-<span>  color_true_density <span class="op">=</span> <span class="st">"#E9796D"</span>,</span>
+<span>  color_true_density <span class="op">=</span> <span class="st">"#FE4F0E"</span>,</span>
 <span>  color_bar <span class="op">=</span> <span class="st">"#BB9FC9"</span>,</span>
 <span>  color_observable_point <span class="op">=</span> <span class="st">"#7BBDB3"</span>,</span>
 <span>  color_real_point <span class="op">=</span> <span class="st">"#FE4F0E"</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  hist <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -102,6 +103,12 @@
 <dt>alpha</dt>
 <dd><p>Bar chart transparency (discrete case) and observed density
 (continuous case)</p></dd>
+
+
+<dt>hist</dt>
+<dd><p>If TRUE, a histogram will be plotted in the continuous case,
+comparing the theoretical density with the observed one. If FALSE,
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code> will be used instead of the histogram.</p></dd>
 
 
 <dt>...</dt>
