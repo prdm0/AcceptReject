@@ -89,6 +89,7 @@ inspect(
    args_f_base = list(shape = 2.1, rate = 2),
    c = 1
 )
+
 # Considering c = 1.35.
 inspect(
    f = dweibull,

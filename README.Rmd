@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # AcceptReject <img src="logo.png" align="right" />
 
 <!-- badges: start -->
-<!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/purrr)](https://cran.r-project.org/package=purrr) -->
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 <!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
@@ -114,7 +114,6 @@ plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 
 ```
 
-
 The [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function supports, **for the continuous case**, specifying a base probability density function if you don't want to use the continuous uniform distribution as the default base.
 
 When choosing to specify another probability density function different from the uniform one, it's necessary to specify the following arguments:
@@ -165,7 +164,6 @@ plot_grid(a, b, nrow = 2L, labels = c("a", "b"))
 
 Notice that considering the distribution in scenario "a" in the code above is more convenient. Note that the area is approximately 1, the base probability density function with parameters `shape = 2.8` and `rate = 1.2` provides a shape close to the theoretical distribution, and `c = 1.2` ensures that the base density function upper bounds the theoretical probability density function. Therefore, considering `f_base` with $\Gamma(\alpha = 2.8, \beta = 1.2)$ and `c = 1.2` is a reasonable choice for a base distribution.
 
-
 Therefore, passing arguments to `f_base = dgamma`, `args_f_base = list(shape = 2.8, rate = 1.2)`, and `c = 1.2` to the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function will lead us to an even more efficient code.
 
 ```{r}
@@ -210,4 +208,3 @@ plot_grid(p1, p2, nrow = 2L)
 ```
 
 Notice that the results were very close in a graphical analysis. However, the execution time specifying a convenient base density was lower for a very large sample.
-

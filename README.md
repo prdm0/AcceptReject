@@ -4,9 +4,9 @@
 # AcceptReject <img src="logo.png" align="right" />
 
 <!-- badges: start -->
-<!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/purrr)](https://cran.r-project.org/package=purrr) -->
-<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -204,12 +204,6 @@ arguments, i.e., when `continuous = FALSE`, the
 function will ignore these arguments and use the discrete uniform
 distribution as the base.
 
-Caso opte em especificar uma densidade base é conveniente inspecionar,
-comparando a função densidade base com a função densidade de
-probabilidade teórica. A função facilitará esse trabalho. A função
-`[inspect()](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) irá plotar a função densidade de probabilidade base e a função densidade de probabilidade teórica, irá achurar a intersecção entre as densidades e irá informar no gráfico o valor da área de intersecação. São informações importantes para decidir se a função densidade de probabilidade base são nos argumentos informados à`args_f_base`e o valor de`c\`
-(padrão é 1) são adequados.
-
 If you choose to specify a base density, it’s convenient to inspect it
 by comparing the base density function with the theoretical probability
 density function. The
@@ -291,7 +285,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 5.615 sec elapsed
+#> 5.439 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -307,7 +301,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 1.376 sec elapsed
+#> 2.586 sec elapsed
 
 # Visualizing the results
 p1 <- case_1 |> plot()

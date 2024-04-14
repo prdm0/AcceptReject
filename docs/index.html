@@ -80,8 +80,6 @@
 </h1>
 </div>
 <!-- badges: start -->
-<!-- [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/purrr)](https://cran.r-project.org/package=purrr) -->
-<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 
 <p>Generating pseudo-random observations from a probability distribution is a common task in statistics. Being able to generate pseudo-random observations from a probability distribution is useful for simulating scenarios, in <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" class="external-link">Monte-Carlo</a> methods, which are useful for evaluating various statistical models.</p>
 <p>The inversion method is a common way to do this, but it is not always possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable <span class="math inline"><em>X</em></span>, that is, <span class="math inline"><em>q</em>(<em>u</em>) = <em>F</em><sup>−1</sup>(<em>u</em>) = <em>x</em></span> (quantile function), where <span class="math inline"><em>F</em></span> is the cumulative distribution function of <span class="math inline"><em>X</em></span> and <span class="math inline"><em>u</em></span> is a uniformly distributed random variable in the interval <span class="math inline">(0,1)</span>.</p>
@@ -176,7 +174,6 @@
 </ul>
 <p>By default, all of them are <code>NULL</code>, and the continuous uniform distribution in <code>xlim</code> is used as the base. If at least one of these arguments is not specified, no error will occur, and the continuous uniform distribution in <code>xlim</code> will still be used as the base.</p>
 <p>For the discrete case, if the user mistakenly specifies any of these arguments, i.e., when <code>continuous = FALSE</code>, the <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function will ignore these arguments and use the discrete uniform distribution as the base.</p>
-<p>Caso opte em especificar uma densidade base é conveniente inspecionar, comparando a função densidade base com a função densidade de probabilidade teórica. A função facilitará esse trabalho. A função <code>[inspect()](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) irá plotar a função densidade de probabilidade base e a função densidade de probabilidade teórica, irá achurar a intersecção entre as densidades e irá informar no gráfico o valor da área de intersecação. São informações importantes para decidir se a função densidade de probabilidade base são nos argumentos informados à</code>args_f_base<code>e o valor de</code>c` (padrão é 1) são adequados.</p>
 <p>If you choose to specify a base density, it’s convenient to inspect it by comparing the base density function with the theoretical probability density function. The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>inspect()</code></a> function facilitates this task. The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>inspect()</code></a> function will plot the base probability density function and the theoretical probability density function, find the intersection between the densities, and display the value of the intersection area on the plot. These are important pieces of information to decide if the base probability density function specified in the <code>args_f_base</code> argument and the value of <code>c</code> (default is 1) are appropriate.</p>
 </div>
 <div class="section level2">
@@ -233,7 +230,7 @@
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 5.615 sec elapsed</span></span>
+<span><span class="co">#&gt; 4.745 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Specifying the base probability density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -249,7 +246,7 @@
 <span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 1.376 sec elapsed</span></span>
+<span><span class="co">#&gt; 2.609 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Visualizing the results</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">case_1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -296,6 +293,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=AcceptReject" class="external-link"><img src="https://www.r-pkg.org/badges/version/AcceptReject" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>

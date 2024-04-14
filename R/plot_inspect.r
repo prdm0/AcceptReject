@@ -70,6 +70,7 @@
 #'    args_f_base = list(shape = 2.1, rate = 2),
 #'    c = 1
 #' )
+#'
 #' # Considering c = 1.35.
 #' inspect(
 #'    f = dweibull,
@@ -115,11 +116,10 @@ inspect <-
 
   df <- data.frame(x = x, f = f(x), f_base = c * f_base(x))
 
-
-  df$inter <- base::pmin(df$f, df$f_base)
+  inter <- base::pmin(df$f, df$f_base)
 
   # Calculate the area under the intersection curve using the trapezoid rule
-  area <- sum(diff(df$x) * (head(df$inter, -1) + tail(df$inter, -1))) / 2
+  area <- sum(diff(df$x) * (head(inter, -1) + tail(inter, -1))) / 2
 
   ggplot(df, aes(x = x)) +
     geom_area(aes(y = inter, fill = "Intersection"), alpha = alpha) +

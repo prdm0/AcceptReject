@@ -29,4 +29,5 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    cowplot
+    cowplot,
+    tictoc
