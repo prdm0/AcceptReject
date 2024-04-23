@@ -12,20 +12,14 @@ simulation <- function(n, parallel = FALSE){
     parallel = parallel
   )
 
-  # Calcular o tempo de execução
   end_time <- Sys.time()
   execution_time <- end_time - start_time
 
-  # Imprimir o tempo de execução
   cat("Tempo de execução: ", execution_time, " segundos\n")
 
-  # Imprimir as primeiras observações
   cat("Primeiras observações:\n")
   print(head(x))
 
-  # Retornar o resultado
   return(x)
 }
 simulation(n = 1000, parallel = FALSE)
-
-simulation(n = 1000, parallel = TRUE)

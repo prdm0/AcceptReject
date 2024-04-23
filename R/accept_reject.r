@@ -244,14 +244,6 @@ accept_reject <-
           FUN = one_step,
           mc.cores = n_cores
           )))
-    } else if(parallel && .Platform$OS.type == "windows"){
-      cl <- parallel::makeCluster(getOption("cl.cores", 1L))
-      capture.output(
-        r <- unlist(parallel::parLapply(
-          X = n_each_core,
-          fun = one_step
-      )))
-      parallel::stopCluster(cl)
     } else {
       r <- one_step(n)
     }
