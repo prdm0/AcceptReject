@@ -49,7 +49,7 @@
 #' @import rlang
 #'
 #' @examples
-#' x = accept_reject(
+#' x <- accept_reject(
 #'    n = 1000L,
 #'    f = dbinom,
 #'    continuous = FALSE,
@@ -58,7 +58,7 @@
 #' )
 #' plot(x)
 #'
-#' y = accept_reject(
+#' y <- accept_reject(
 #'   n = 500L,
 #'   f = dnorm,
 #'   continuous = TRUE,

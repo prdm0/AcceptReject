@@ -84,16 +84,16 @@
 #' @examples
 #' set.seed(0) # setting a seed for reproducibility
 #'
-#' x = accept_reject(
-#'  n = 2000L,
-#'  f = dbinom,
-#'  continuous = FALSE,
-#'  args_f = list(size = 5, prob = 0.5),
-#'  xlim = c(0, 10)
+#' x <- accept_reject(
+#'   n = 2000L,
+#'   f = dbinom,
+#'   continuous = FALSE,
+#'   args_f = list(size = 5, prob = 0.5),
+#'   xlim = c(0, 10)
 #' )
 #' plot(x)
 #'
-#' y = accept_reject(
+#' y <- accept_reject(
 #'   n = 1000L,
 #'   f = dnorm,
 #'   continuous = TRUE,
@@ -115,24 +115,22 @@
 #' @importFrom glue glue
 #' @export
 accept_reject <-
-  function(
-      n = 1L,
-      continuous = TRUE,
-      f = NULL,
-      args_f = NULL,
-      f_base = NULL,
-      random_base = NULL,
-      args_f_base = NULL,
-      xlim = NULL,
-      c = NULL,
-      linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
-      max_iterations = 1000L,
-      epsilon = 1e-6,
-      start_c = 25,
-      parallel = FALSE,
-      warning = TRUE,
-      ...) {
-
+  function(n = 1L,
+           continuous = TRUE,
+           f = NULL,
+           args_f = NULL,
+           f_base = NULL,
+           random_base = NULL,
+           args_f_base = NULL,
+           xlim = NULL,
+           c = NULL,
+           linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
+           max_iterations = 0L,
+           epsilon = 1e-5,
+           start_c = 25,
+           parallel = FALSE,
+           warning = TRUE,
+           ...) {
     assertthat::assert_that(
       !is.null(f),
       msg = cli::cli_alert_danger("You need to pass the argument f referring to the probability density or mass function that you want to generate observations.")
@@ -150,64 +148,58 @@ accept_reject <-
 
     f <- purrr::partial(.f = f, !!!args_f)
 
-    if(warning && f(xlim[2L]) > 0.01) {
+    if (warning && f(xlim[2L]) > 0.01) {
       cli::cli_alert_warning(
-        glue::glue("Warning: xlim[2L] is {f(xlim[2L])}. Trying a better upper limit might be better.")
+        glue::glue("Warning: f({xlim[2L]}) is {f(xlim[2L])}. If f is defined for x >= f({xlim[2L]}), trying a upper limit might be better.")
       )
     }
 
-    if(warning && xlim[1L] < 0 && f(xlim[1L]) > 0.01) {
+    if (warning && xlim[1L] < 0 && f(xlim[1L]) > 0.01) {
       cli::cli_alert_warning(
-        glue::glue("Warning: xlim[1L] is {f(xlim[1L])}. Trying a lower limit might be better.")
+        glue::glue("Warning: f({xlim[1L]}) is {f(xlim[1L])}. If f is defined for x <= f({xlim[1L]}), trying a lower limit might be better.")
       )
     }
 
     # Uniform distribution will be used if not all information from the base
     # distribution is provided.
     any_null <- any(is.null(c(f_base, random_base, args_f_base)))
-    if(continuous && any_null) {
-      step <- 1e-3
+    if (continuous && any_null) {
       f_base <- purrr::partial(.f = dunif, min = xlim[1L], max = xlim[2L])
       random_base <- purrr::partial(.f = runif, min = xlim[1L], max = xlim[2L])
     }
 
     # Is it a discrete random variable?
-    if(!continuous){
-      step <- 1L
-      f_base <- function(x) 1/ (xlim[2L] - xlim[1L] + 1)
+    if (!continuous) {
+      f_base <- function(x) dunif(x, min = xlim[1L], max = xlim[2L])
       random_base <- function(n) sample(x = xlim[1L]:xlim[2L], size = n, replace = TRUE)
-    } else if(continuous && !any_null) {
-      step <- 1e-3
-      if(xlim[1L] == 0) xlim[1L] <- .Machine$double.xmin
+    } else if (continuous && !any_null) {
+      if (xlim[1L] == 0) xlim[1L] <- .Machine$double.xmin
       f_base <- purrr::partial(.f = f_base, !!!args_f_base)
       random_base <- purrr::partial(.f = random_base, !!!args_f_base)
     }
 
-    x <- seq(from = xlim[1L], to = xlim[2L], by = step)
-
-    a <- purrr::map_dbl(.x = x, .f = f)
-    b <- purrr::map_dbl(.x = x, .f = f_base)
-
-    x_max <- x[which.max((a/b)[!is.infinite(a/b)])]
-
     objective_c <- function(c) {
-      differences <-
-      (f(x_max) - c * f_base(x_max))^2
+      y <- round(mean(xlim), digits = 0L)
 
-      if(is.infinite(differences)) return(.Machine$double.xmax)
-      else return(differences)
+      differences <- log(f(y)) - (log(c) + f_base(y))
+
+      if (is.infinite(differences) && continuous) {
+        return(.Machine$double.xmax)
+      } else {
+        return(exp(differences))
+      }
     }
 
     gradient_objective_c <- function(c) {
       numDeriv::grad(
-        func = objective_c,
+        func = objective_c, # function(c) objective_c(c = c, y = y),
         x = c
       )
     }
 
     try_gradient_objective_c <- function(c) {
       tryCatch(
-        gradient_objective_c(c = c),
+        gradient_objective_c(c),
         error = function(e) NaN
       )
     }
@@ -223,30 +215,49 @@ accept_reject <-
           epsilon = epsilon,
           linesearch_algorithm = linesearch_algorithm,
           ...
-        )$par
-    }
-    one_step <- function(i) {
-      repeat{
-        x <- random_base(n = 1L)
-        u <- runif(n = 1L)
-        if (u <= f(x = x) / (c * f_base(x = x))) {
-          return(x)
-        }
-      }
+        )$par[1L]
     }
 
-    if (parallel && Sys.info()["sysname"] %in% c("Linux", "Darwin")) {
-      capture.output(
-        r <-
-          unlist(pbmcapply::pbmclapply(
-            X = 1L:n,
-            FUN = one_step,
-            mc.cores = parallel::detectCores()
-          ))
-      )
-    } else {
-      r <- purrr::map_dbl(1L:n, ~one_step(i = .))
+    one_step <- function(n) {
+      x <- numeric(0L)
+      while(length(x) < n) {
+        x_cand <- random_base(n = n)
+        u <- runif(n = n)
+        accepted <- u <= f(x = x_cand) / (c * f_base(x = x_cand))
+        x <- c(x, x_cand[accepted])
+      }
+      return(x[1L:n])
     }
+
+    if (parallel && .Platform$OS.type == "unix") {
+      n_cores <- parallel::detectCores()
+      n_per_core <- n %/% n_cores
+      remainder <- n %% n_cores
+      n_each_core <-
+        c(
+          rep(n_per_core, n_cores - remainder),
+          rep(n_per_core + 1L, remainder)
+        )
+
+      capture.output(
+        r <- unlist(pbmcapply::pbmclapply(
+          X = n_each_core,
+          FUN = one_step,
+          mc.cores = n_cores
+          )))
+    } else if (parallel && .Platform$OS.type == "windows") {
+      cl <- parallel::makeCluster(n_cores)
+      capture.output(
+        r <- unlist(parallel::parLapply(
+          cl = cl,
+          X = n_each_core,
+          fun = one_step
+      )))
+      parallel::stopCluster(cl)
+    } else {
+      r <- one_step(n)
+    }
+
     class(r) <- "accept_reject"
     attr(r, "f") <- f
     attr(r, "args_f") <- args_f

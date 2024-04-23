@@ -59,7 +59,7 @@ The function \code{\link[=plot.accept_reject]{plot.accept_reject()}}, or simply 
 for inspection and expects an object of class \code{accept_reject} as an argument.
 }
 \examples{
-x = accept_reject(
+x <- accept_reject(
    n = 1000L,
    f = dbinom,
    continuous = FALSE,
@@ -68,7 +68,7 @@ x = accept_reject(
 )
 plot(x)
 
-y = accept_reject(
+y <- accept_reject(
   n = 500L,
   f = dnorm,
   continuous = TRUE,

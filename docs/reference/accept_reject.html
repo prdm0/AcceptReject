@@ -69,8 +69,8 @@
 <span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  linesearch_algorithm <span class="op">=</span> <span class="st">"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"</span>,</span>
-<span>  max_iterations <span class="op">=</span> <span class="fl">1000L</span>,</span>
-<span>  epsilon <span class="op">=</span> <span class="fl">1e-06</span>,</span>
+<span>  max_iterations <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  epsilon <span class="op">=</span> <span class="fl">1e-05</span>,</span>
 <span>  start_c <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  warning <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -203,22 +203,24 @@ has shown good performance for the discrete case.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="co"># setting a seed for reproducibility</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">accept_reject</span><span class="op">(</span></span></span>
-<span class="r-in"><span> n <span class="op">=</span> <span class="fl">2000L</span>,</span></span>
-<span class="r-in"><span> f <span class="op">=</span> <span class="va">dbinom</span>,</span></span>
-<span class="r-in"><span> continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span> args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">accept_reject</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  n <span class="op">=</span> <span class="fl">2000L</span>,</span></span>
+<span class="r-in"><span>  f <span class="op">=</span> <span class="va">dbinom</span>,</span></span>
+<span class="r-in"><span>  continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="accept_reject-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">accept_reject</span><span class="op">(</span></span></span>
-<span class="r-in"><span> n <span class="op">=</span> <span class="fl">1000L</span>,</span></span>
-<span class="r-in"><span> f <span class="op">=</span> <span class="va">dnorm</span>,</span></span>
-<span class="r-in"><span> continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span> args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span> xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">accept_reject</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  n <span class="op">=</span> <span class="fl">1000L</span>,</span></span>
+<span class="r-in"><span>  f <span class="op">=</span> <span class="va">dnorm</span>,</span></span>
+<span class="r-in"><span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="accept_reject-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

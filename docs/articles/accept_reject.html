@@ -315,9 +315,9 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 1000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 10.4283</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0959</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 0 0 0 1 0 0 2 1 2...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 1 0 0 0 1 1 2 1 0 0...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -370,9 +370,9 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 6.5625</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.1524</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 3 4 4 2 3 1 2 4 2 2...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 2 3 1 2 4 3 3 3 3 2...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -429,9 +429,9 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -1.023 -0.0184 -0.9111 0.7965 0.4243 2.3148 -0.1822 -2.0416 0.1491 2.1305...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0.4243 0.599 0.0035 0.3812 1.694 0.081 -0.563 0.6268 -0.1201 -1.0155...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -478,10 +478,10 @@ simpler and more direct. See the following example:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co"># Inspecting</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -503,10 +503,10 @@ simpler and more direct. See the following example:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">250L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">2500L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span><span class="fl">25000L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span><span class="fl">25L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span><span class="fl">250L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span><span class="fl">2500L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span><span class="fl">25000L</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -561,7 +561,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; &lt;partialised&gt;</span></span>
 <span><span class="co">#&gt; function (...) </span></span>
 <span><span class="co">#&gt; f(mean = 0, sd = 1, ...)</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x56706526b390&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x60509d218b60&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $args_f</span></span>
 <span><span class="co">#&gt; $args_f$mean</span></span>
@@ -572,7 +572,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $c</span></span>
-<span><span class="co">#&gt; [1] 3.191538</span></span>
+<span><span class="co">#&gt; [1] 38.2549</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $continuous</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -582,7 +582,7 @@ function. Check the list of attributes by doing:</p>
 <span></span>
 <span><span class="co"># Accessing the value c</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"c"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 3.191538</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 38.2549</span></span></code></pre></div>
 <p>In any case, it is important to highlight that, in general, you will
 not need to access these attributes. The greatest interest will be in
 having access to the vector of observations generated. If you want to
@@ -608,9 +608,9 @@ example:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 100</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 1.1986 0.8434 1.6122 0.9627 0.483 1.2683 0.6995 1.4595 0.5429 0.8081...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -0.9116 -0.9773 -0.8328 -1.7554 0.3205 0.2271 0.5857 0.5872 0.0143 0.3097...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -618,23 +618,23 @@ example:</p>
 <span><span class="co"># Coercing the object into an atomic vector without attributes</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   [1]  1.19856946  0.84342916  1.61221805  0.96268001  0.48296668  1.26828653</span></span>
-<span><span class="co">#&gt;   [7]  0.69952349  1.45947906  0.54285330  0.80811024  0.34980874  3.03404737</span></span>
-<span><span class="co">#&gt;  [13]  1.53450573  0.07969595  0.98659633  0.19551801 -2.39995709 -0.73930714</span></span>
-<span><span class="co">#&gt;  [19] -0.45169049  0.27908599 -1.38712366  0.59789778  0.38773125 -0.76091245</span></span>
-<span><span class="co">#&gt;  [25] -0.83777745 -0.21687730  1.76546820  0.84543538  0.47730063  1.67949544</span></span>
-<span><span class="co">#&gt;  [31]  0.83409873  0.11242943 -0.35713891  0.13385091 -0.93912183  0.45671829</span></span>
-<span><span class="co">#&gt;  [37] -0.11898418  1.13955729 -1.63337213  1.41893629  0.89826170  1.14031791</span></span>
-<span><span class="co">#&gt;  [43]  0.98258457 -2.06302836  1.33966538  0.99294567  0.58774585 -0.36827332</span></span>
-<span><span class="co">#&gt;  [49]  2.07628195  0.10226811  0.07992830 -0.95965569  0.69208666  0.02776028</span></span>
-<span><span class="co">#&gt;  [55] -0.09327624 -0.57722276 -0.71948121  0.37787130 -0.15020296  1.51568333</span></span>
-<span><span class="co">#&gt;  [61]  0.48249844 -0.51122185  0.41861797  0.62771358  1.40242426  0.38781096</span></span>
-<span><span class="co">#&gt;  [67] -1.35766005 -1.89217155 -0.03316264 -0.22891004  1.82575525  0.92554506</span></span>
-<span><span class="co">#&gt;  [73] -0.89517932 -0.22310955 -1.40037660  0.36149849  1.36847690  1.58007266</span></span>
-<span><span class="co">#&gt;  [79]  1.53656821 -0.27642912 -0.36499533 -0.11187265 -0.13744650 -1.34694266</span></span>
-<span><span class="co">#&gt;  [85] -1.09254304 -0.57894820  1.26067684  0.58545514  0.34850591 -1.19321153</span></span>
-<span><span class="co">#&gt;  [91] -0.73624498  0.29537788 -0.57793364 -0.24579298 -0.80460693  0.10248959</span></span>
-<span><span class="co">#&gt;  [97] -1.58953346  1.10764538 -0.61851919 -0.24498389</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] -0.91157235 -0.97730458 -0.83279488 -1.75538689  0.32054036  0.22709815</span></span>
+<span><span class="co">#&gt;   [7]  0.58574094  0.58724381  0.01434882  0.30974479 -2.19669601  0.62127511</span></span>
+<span><span class="co">#&gt;  [13]  1.60171712  0.90850249  2.05355351 -2.17650113  0.60057436 -0.42051950</span></span>
+<span><span class="co">#&gt;  [19] -0.23232206 -1.55660906 -0.88425284 -0.52673517 -0.87943832 -0.63063285</span></span>
+<span><span class="co">#&gt;  [25] -0.85628026 -0.24591930 -1.01740081  0.79763561  1.39946376  0.54384696</span></span>
+<span><span class="co">#&gt;  [31]  0.28309924  0.19440448 -1.30929375 -2.34363151  0.88472824  0.10004806</span></span>
+<span><span class="co">#&gt;  [37] -0.37334603 -1.16272727  1.42066773  0.85311870 -0.72987775 -0.19328477</span></span>
+<span><span class="co">#&gt;  [43] -0.86285814  0.71666934  0.69502212 -0.25295744 -1.11561732 -0.07071140</span></span>
+<span><span class="co">#&gt;  [49]  1.40951045  0.91927889  0.74099312  1.02052561 -2.03183078 -0.67392395</span></span>
+<span><span class="co">#&gt;  [55] -0.60803784 -1.39868014 -0.24927761  0.46767154 -0.20196875 -0.53432214</span></span>
+<span><span class="co">#&gt;  [61]  0.10237354 -0.65235253  0.71854476 -0.41719143  1.77431837 -0.74298612</span></span>
+<span><span class="co">#&gt;  [67] -1.86710453 -0.65607749 -0.25607571  0.72290366  1.28796522  0.28634292</span></span>
+<span><span class="co">#&gt;  [73]  0.78000570 -0.16246228 -0.37944091 -0.54735621 -1.19424975  0.76440685</span></span>
+<span><span class="co">#&gt;  [79]  1.33546143 -0.23903133  0.99561439 -0.05855329  0.01292897  0.43525180</span></span>
+<span><span class="co">#&gt;  [85] -0.30473989  1.54150634 -1.13000945 -0.05852531 -1.21125887  0.96265198</span></span>
+<span><span class="co">#&gt;  [91] -0.73563223  0.46325579 -1.62444950  2.19485540  1.59486479  0.45293343</span></span>
+<span><span class="co">#&gt;  [97]  0.92180256 -0.85777644  0.22787886  1.90666291</span></span></code></pre></div>
 <p><strong>Important</strong>:</p>
 
 <div class="rmdnote">

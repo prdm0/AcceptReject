@@ -15,8 +15,8 @@ accept_reject(
   xlim = NULL,
   c = NULL,
   linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
-  max_iterations = 1000L,
-  epsilon = 1e-06,
+  max_iterations = 0L,
+  epsilon = 1e-05,
   start_c = 25,
   parallel = FALSE,
   warning = TRUE,
@@ -119,16 +119,16 @@ has shown good performance for the discrete case.
 \examples{
 set.seed(0) # setting a seed for reproducibility
 
-x = accept_reject(
- n = 2000L,
- f = dbinom,
- continuous = FALSE,
- args_f = list(size = 5, prob = 0.5),
- xlim = c(0, 10)
+x <- accept_reject(
+  n = 2000L,
+  f = dbinom,
+  continuous = FALSE,
+  args_f = list(size = 5, prob = 0.5),
+  xlim = c(0, 10)
 )
 plot(x)
 
-y = accept_reject(
+y <- accept_reject(
   n = 1000L,
   f = dnorm,
   continuous = TRUE,
