@@ -245,7 +245,7 @@ accept_reject <-
           mc.cores = n_cores
           )))
     } else if(parallel && .Platform$OS.type == "windows"){
-      cl <- makeCluster(detectCores())
+      cl <- makeCluster(parallel::detectCores())
       capture.output(
         r <- unlist(parallel::parLapply(
           X = n_each_core,
