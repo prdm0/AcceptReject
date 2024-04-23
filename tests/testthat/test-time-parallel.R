@@ -1,18 +1,30 @@
-simulation <- function(parallel = FALSE){
-  time <- system.time(
-    x <- accept_reject(
-      n = 2e6L,
-      f = dnorm,
-      continuous = TRUE,
-      args_f = list(mean = 0, sd = 1),
-      xlim = c(-4, 4),
-      parallel = FALSE
-   ))
-  list(time = time, x = x)
+simulation <- function(n, parallel = FALSE){
+  # Iniciar o tempo
+  start_time <- Sys.time()
+
+  # Executar a função accept_reject
+  x <- accept_reject(
+    n = n,
+    f = dnorm,
+    continuous = TRUE,
+    args_f = list(mean = 0, sd = 1),
+    xlim = c(-4, 4),
+    parallel = parallel
+  )
+
+  # Calcular o tempo de execução
+  end_time <- Sys.time()
+  execution_time <- end_time - start_time
+
+  # Imprimir o tempo de execução
+  cat("Tempo de execução: ", execution_time, " segundos\n")
+
+  # Imprimir as primeiras observações
+  cat("Primeiras observações:\n")
+  print(head(x))
+
+  # Retornar o resultado
+  return(x)
 }
-
-# Serial
-cat(simulation(parallel = FALSE))
-
-# Parallel
-cat(simulation(parallel = TRUE))
+simulation(n = 3e6L, parallel = FALSE)
+simulation(n = 3e6L, parallel = TRUE)
