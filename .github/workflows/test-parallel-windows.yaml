@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c('remotes', 'testthat'))
+          install
           remotes::install_github('prdm0/AcceptReject')
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}

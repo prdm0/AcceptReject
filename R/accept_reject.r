@@ -105,14 +105,14 @@
 #' @import rlang
 #' @importFrom lbfgs lbfgs
 #' @importFrom purrr partial map_dbl
-#' @importFrom pbmcapply pbmclapply
 #' @importFrom numDeriv grad
-#' @importFrom parallel detectCores
+#' @importFrom parallel detectCores makeCluster
 #' @importFrom stats dunif runif dweibull
 #' @importFrom utils capture.output
 #' @importFrom assertthat assert_that
 #' @importFrom cli cli_alert_danger cli_alert_warning
 #' @importFrom glue glue
+#' @importFrom pbmcapply pbmclapply
 #' @export
 accept_reject <-
   function(n = 1L,
@@ -238,23 +238,20 @@ accept_reject <-
           rep(n_per_core, n_cores - remainder),
           rep(n_per_core + 1L, remainder)
         )
-
       capture.output(
         r <- unlist(pbmcapply::pbmclapply(
           X = n_each_core,
           FUN = one_step,
           mc.cores = n_cores
           )))
-    } else if (parallel && .Platform$OS.type == "windows") {
-      n_cores <- parallel::detectCores()
-      cl <- parallel::makeCluster(n_cores)
+    } else if(parallel && .Platform$OS.type == "windows"){
+      cl <- makeCluster(detectCores())
       capture.output(
         r <- unlist(parallel::parLapply(
-          cl = cl,
           X = n_each_core,
           fun = one_step
       )))
-      parallel::stopCluster(cl)
+      stopCluster(cl)
     } else {
       r <- one_step(n)
     }
