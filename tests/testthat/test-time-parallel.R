@@ -12,7 +12,7 @@ simulation <- function(parallel = FALSE){
 }
 
 # Serial
-print(simulation(parallel = FALSE))
+cat(simulation(parallel = FALSE))
 
 # Parallel
-print(simulation(parallel = TRUE))
+cat(simulation(parallel = TRUE))
