@@ -27,4 +27,5 @@ simulation <- function(n, parallel = FALSE){
   return(x)
 }
 simulation(n = 3e6L, parallel = FALSE)
+
 simulation(n = 3e6L, parallel = TRUE)
