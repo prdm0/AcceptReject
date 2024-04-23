@@ -26,6 +26,6 @@ simulation <- function(n, parallel = FALSE){
   # Retornar o resultado
   return(x)
 }
-simulation(n = 3e6, parallel = FALSE)
+simulation(n = 1000, parallel = FALSE)
 
-simulation(n = 3e6, parallel = TRUE)
+simulation(n = 1000, parallel = TRUE)
