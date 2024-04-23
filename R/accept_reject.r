@@ -106,7 +106,7 @@
 #' @importFrom lbfgs lbfgs
 #' @importFrom purrr partial map_dbl
 #' @importFrom numDeriv grad
-#' @importFrom parallel detectCores makeCluster
+#' @importFrom parallel detectCores makeCluster stopCluster
 #' @importFrom stats dunif runif dweibull
 #' @importFrom utils capture.output
 #' @importFrom assertthat assert_that
@@ -245,13 +245,13 @@ accept_reject <-
           mc.cores = n_cores
           )))
     } else if(parallel && .Platform$OS.type == "windows"){
-      cl <- makeCluster(parallel::detectCores())
+      cl <- parallel::makeCluster(getOption("cl.cores", 2L))
       capture.output(
         r <- unlist(parallel::parLapply(
           X = n_each_core,
           fun = one_step
       )))
-      stopCluster(cl)
+      parallel::stopCluster(cl)
     } else {
       r <- one_step(n)
     }
