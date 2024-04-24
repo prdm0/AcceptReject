@@ -42,7 +42,6 @@ arma::vec one_step(int n, Function f, Function f_base, Function random_base, dou
         num_accepted = space_left;
         accepted = accepted.subvec(0, space_left - 1);
       }
-
       x.subvec(filled, filled + num_accepted - 1) = x_cand.elem(accepted);
       filled += num_accepted;
     }
