@@ -21,6 +21,7 @@
 #' @param epsilon The convergence criterion for the [lbfgs::lbfgs()] optimization. Default is \code{1e-6}.
 #' @param start_c The initial value for the constant \code{c} in the [lbfgs::lbfgs()] optimization. Default is \code{25}.
 #' @param parallel A logical value indicating whether to use parallel processing for generating random numbers. Default is \code{FALSE}.
+#' @param cores The number of cores to be used in parallel processing. Default is \code{NULL}, i.e, all available cores.
 #' @param warning A logical value indicating whether to show warnings. Default is \code{TRUE}.
 #' @param ... Additional arguments to be passed to the [lbfgs::lbfgs()] optimization algorithm. For details, see [lbfgs::lbfgs()].
 #'
@@ -77,8 +78,10 @@
 #'
 #' @seealso [parallel::mclapply()] and [lbfgs::lbfgs()].
 #'
+#' @references Neumann V (1951). “Various techniques used in connection with random digits.” Notes by
+#' GE Forsythe, pp. 36–38.
 #' @references CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.
-#' @references NEAL, Radford M. Slice sampling. The annals of statistics, v. 31, n. 3, p. 705-767, 2003.
+#' @references NEAL, Radford M. Slice sampling. The Annals of Statistics, v. 31, n. 3, p. 705-767, 2003.
 #' @references BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
 #'
 #' @examples
@@ -131,6 +134,7 @@ accept_reject <-
            epsilon = 1e-5,
            start_c = 25,
            parallel = FALSE,
+           cores = NULL,
            warning = TRUE,
            ...) {
     assertthat::assert_that(
@@ -180,8 +184,15 @@ accept_reject <-
       random_base <- purrr::partial(.f = random_base, !!!args_f_base)
     }
 
-    objective_c <- function(c) {
-      y <- round(mean(xlim), digits = 0L)
+    ymax <- best_y(
+      xlim = xlim,
+      f = f,
+      f_base = f_base,
+      continuous = continuous,
+      epsilon = 0.001
+    )
+
+    objective_c <- function(c, y) {
 
       differences <- log(f(y)) - (log(c) + f_base(y))
 
@@ -192,16 +203,16 @@ accept_reject <-
       }
     }
 
-    gradient_objective_c <- function(c) {
+    gradient_objective_c <- function(c, y) {
       numDeriv::grad(
-        func = objective_c, # function(c) objective_c(c = c, y = y),
+        func = function(c) objective_c(c = c, y = ymax),
         x = c
       )
     }
 
-    try_gradient_objective_c <- function(c) {
+    try_gradient_objective_c <- function(c, y) {
       tryCatch(
-        gradient_objective_c(c),
+        gradient_objective_c(c, y),
         error = function(e) NaN
       )
     }
@@ -209,8 +220,8 @@ accept_reject <-
     if (is.null(c)) {
       c <-
         lbfgs::lbfgs(
-          call_eval = objective_c,
-          call_grad = try_gradient_objective_c,
+          call_eval = function(c) objective_c(c = c, y = ymax),
+          call_grad = function(c) try_gradient_objective_c(c = c, y = ymax),
           vars = start_c,
           invisible = 1L,
           max_iterations = max_iterations,
@@ -221,7 +232,11 @@ accept_reject <-
     }
 
     if (parallel && .Platform$OS.type == "unix") {
-      n_cores <- parallel::detectCores()
+      if(is.null(cores)){
+        n_cores <- parallel::detectCores()
+      } else {
+        n_cores <- cores
+      }
       n_per_core <- n %/% n_cores
       remainder <- n %% n_cores
       n_each_core <-

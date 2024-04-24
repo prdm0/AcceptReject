@@ -5,3 +5,7 @@ one_step <- function(n, f, f_base, random_base, c) {
     .Call(`_AcceptReject_one_step`, n, f, f_base, random_base, c)
 }
 
+best_y <- function(xlim, f, f_base, continuous, epsilon = 0.001) {
+    .Call(`_AcceptReject_best_y`, xlim, f, f_base, continuous, epsilon)
+}
+

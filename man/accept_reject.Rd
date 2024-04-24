@@ -19,6 +19,7 @@ accept_reject(
   epsilon = 1e-05,
   start_c = 25,
   parallel = FALSE,
+  cores = NULL,
   warning = TRUE,
   ...
 )
@@ -56,6 +57,8 @@ It will be disregarded in the discrete case.}
 \item{start_c}{The initial value for the constant \code{c} in the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization. Default is \code{25}.}
 
 \item{parallel}{A logical value indicating whether to use parallel processing for generating random numbers. Default is \code{FALSE}.}
+
+\item{cores}{The number of cores to be used in parallel processing. Default is \code{NULL}, i.e, all available cores.}
 
 \item{warning}{A logical value indicating whether to show warnings. Default is \code{TRUE}.}
 
@@ -139,9 +142,12 @@ plot(y)
 
 }
 \references{
+Neumann V (1951). “Various techniques used in connection with random digits.” Notes by
+GE Forsythe, pp. 36–38.
+
 CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.
 
-NEAL, Radford M. Slice sampling. The annals of statistics, v. 31, n. 3, p. 705-767, 2003.
+NEAL, Radford M. Slice sampling. The Annals of Statistics, v. 31, n. 3, p. 705-767, 2003.
 
 BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
 }
