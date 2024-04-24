@@ -47,6 +47,5 @@ arma::vec one_step(int n, Function f, Function f_base, Function random_base, dou
       filled += num_accepted;
     }
   }
-
   return x;
 }
