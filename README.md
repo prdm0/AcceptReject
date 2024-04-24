@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# AcceptReject <img src="logo.png" align="right" width="100" />
+# AcceptReject <img src="logo.png" align="right" width="200" />
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
@@ -284,7 +284,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.394 sec elapsed
+#> 0.439 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -300,7 +300,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.144 sec elapsed
+#> 0.142 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
