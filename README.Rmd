@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# AcceptReject <img src="logo.png" align="right" width="200" />
+# AcceptReject <img src="logo.png" align="right" width="250" />
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
