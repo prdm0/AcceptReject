@@ -11,6 +11,10 @@
 
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
+
+[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
+
 <!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/purrr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/purrr?branch=master) -->
 <!-- badges: end -->
 
@@ -289,7 +293,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.375 sec elapsed
+#> 0.48 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -305,7 +309,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.145 sec elapsed
+#> 0.143 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
