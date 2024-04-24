@@ -289,7 +289,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.491 sec elapsed
+#> 0.375 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -305,7 +305,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.153 sec elapsed
+#> 0.145 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)

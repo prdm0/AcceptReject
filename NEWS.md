@@ -4,7 +4,7 @@
 
 # AcceptReject 0.1.1
 
-* Improved performance in serial and parallel processing;
+* Improved performance in serial and parallel processing with Rcpp and RcppArmadillo;
 
 * Now it is possible to specify a different base density/probability mass function than the uniform one. If none is specified, the uniform density (either discrete or continuous) is assumed for the case of discrete or continuous random variables, respectively;
 

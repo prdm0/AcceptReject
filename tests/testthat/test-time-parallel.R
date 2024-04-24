@@ -1,8 +1,5 @@
 simulation <- function(n, parallel = FALSE){
-  # Iniciar o tempo
   start_time <- Sys.time()
-
-  # Executar a função accept_reject
   x <- accept_reject(
     n = n,
     f = dnorm,
@@ -15,9 +12,9 @@ simulation <- function(n, parallel = FALSE){
   end_time <- Sys.time()
   execution_time <- end_time - start_time
 
-  cat("Tempo de execução: ", execution_time, " segundos\n")
+  cat("Time: ", execution_time, " seconds\n")
 
-  cat("Primeiras observações:\n")
+  cat("First observations:\n")
   print(head(x))
 
   return(x)

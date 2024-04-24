@@ -106,13 +106,15 @@
 #' @importFrom lbfgs lbfgs
 #' @importFrom purrr partial map_dbl
 #' @importFrom numDeriv grad
-#' @importFrom parallel detectCores makeCluster stopCluster
+#' @importFrom parallel detectCores mclapply
 #' @importFrom stats dunif runif dweibull
 #' @importFrom utils capture.output
 #' @importFrom assertthat assert_that
 #' @importFrom cli cli_alert_danger cli_alert_warning
 #' @importFrom glue glue
-#' @importFrom pbmcapply pbmclapply
+#' @useDynLib AcceptReject, .registration = TRUE
+#' @importFrom Rcpp evalCpp
+#'
 #' @export
 accept_reject <-
   function(n = 1L,
@@ -218,17 +220,6 @@ accept_reject <-
         )$par[1L]
     }
 
-    one_step <- function(n) {
-      x <- numeric(0L)
-      while(length(x) < n) {
-        x_cand <- random_base(n = n)
-        u <- runif(n = n)
-        accepted <- u <= f(x = x_cand) / (c * f_base(x = x_cand))
-        x <- c(x, x_cand[accepted])
-      }
-      return(x[1L:n])
-    }
-
     if (parallel && .Platform$OS.type == "unix") {
       n_cores <- parallel::detectCores()
       n_per_core <- n %/% n_cores
@@ -238,14 +229,13 @@ accept_reject <-
           rep(n_per_core, n_cores - remainder),
           rep(n_per_core + 1L, remainder)
         )
-      capture.output(
-        r <- unlist(pbmcapply::pbmclapply(
-          X = n_each_core,
-          FUN = one_step,
-          mc.cores = n_cores
-          )))
+      r <- unlist(parallel::mclapply(
+        X = n_each_core,
+        FUN = function(n) one_step(n, f, f_base, random_base, c),
+        mc.cores = n_cores
+      ))
     } else {
-      r <- one_step(n)
+      r <- one_step(n, f, f_base, random_base, c)
     }
 
     class(r) <- "accept_reject"
