@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
+[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
-[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
 
 Generating pseudo-random observations from a probability distribution is a common task in statistics. Being able to generate pseudo-random observations from a probability distribution is useful for simulating scenarios, in [Monte-Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) methods, which are useful for evaluating various statistical models.
 

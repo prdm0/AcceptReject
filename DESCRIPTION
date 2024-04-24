@@ -22,7 +22,6 @@ Imports:
     glue,
     lbfgs,
     numDeriv,
-    pbmcapply,
     purrr,
     Rcpp,
     rlang,

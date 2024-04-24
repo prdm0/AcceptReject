@@ -5,9 +5,9 @@
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
+[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
-[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
 
 Generating pseudo-random observations from a probability distribution is
 a common task in statistics. Being able to generate pseudo-random
@@ -300,7 +300,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.145 sec elapsed
+#> 0.151 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
