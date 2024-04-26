@@ -107,6 +107,7 @@
 #'
 #' @import rlang
 #' @importFrom lbfgs lbfgs
+#' @importFrom stats optimize
 #' @importFrom purrr partial map_dbl
 #' @importFrom numDeriv grad
 #' @importFrom parallel detectCores mclapply
@@ -169,33 +170,44 @@ accept_reject <-
     # Uniform distribution will be used if not all information from the base
     # distribution is provided.
     any_null <- any(is.null(c(f_base, random_base, args_f_base)))
+
     if (continuous && any_null) {
+      limit <- .Machine$double.xmin
+      if (xlim[1L] >= 0 && xlim[1L] <= limit) xlim[1L] <- limit
       f_base <- purrr::partial(.f = dunif, min = xlim[1L], max = xlim[2L])
       random_base <- purrr::partial(.f = runif, min = xlim[1L], max = xlim[2L])
     }
 
     # Is it a discrete random variable?
     if (!continuous) {
+      y <- xlim[1L]:xlim[2L]
       f_base <- function(x) dunif(x, min = xlim[1L], max = xlim[2L])
       random_base <- function(n) sample(x = xlim[1L]:xlim[2L], size = n, replace = TRUE)
-    } else if (continuous && !any_null) {
-      if (xlim[1L] == 0) xlim[1L] <- .Machine$double.xmin
+      ymax <- y[which.max(f(y)/f_base(y))]
+    } else {
       f_base <- purrr::partial(.f = f_base, !!!args_f_base)
       random_base <- purrr::partial(.f = random_base, !!!args_f_base)
+
+      objective_y <- function(y)
+        log(f_base(y)) - log(f(y))
+
+      try_objective_y <- function(...) {
+        tryCatch(
+          objective_y(...),
+          error = function(e) NaN
+        )
+      }
+
+      suppressWarnings(ymax <-
+        optimize(
+          f = try_objective_y,
+          interval = xlim,
+        )$minimum
+      )
     }
 
-    ymax <- best_y(
-      xlim = xlim,
-      f = f,
-      f_base = f_base,
-      continuous = continuous,
-      epsilon = 0.001
-    )
-
     objective_c <- function(c, y) {
-
       differences <- log(f(y)) - (log(c) + f_base(y))
-
       if (is.infinite(differences) && continuous) {
         return(.Machine$double.xmax)
       } else {
@@ -205,7 +217,7 @@ accept_reject <-
 
     gradient_objective_c <- function(c, y) {
       numDeriv::grad(
-        func = function(c) objective_c(c = c, y = ymax),
+        func = function(c) objective_c(c = c, y = y),
         x = c
       )
     }

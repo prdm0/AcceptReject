@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AcceptReject</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -315,9 +315,9 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 1000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 1 0 0 0 1 1 2 1 0 0...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 0 0 1 2 1 0 0 1 0...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -370,9 +370,9 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 2 3 1 2 4 3 3 3 3 2...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 2 2 3 3 3 3 2 3 2 3...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -429,9 +429,9 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0.4243 0.599 0.0035 0.3812 1.694 0.081 -0.563 0.6268 -0.1201 -1.0155...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -0.9409 0.7965 0.4243 -0.179 0.599 -0.3794 0.0035 0.3812 1.694 0.081...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -564,7 +564,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; &lt;partialised&gt;</span></span>
 <span><span class="co">#&gt; function (...) </span></span>
 <span><span class="co">#&gt; f(mean = 0, sd = 1, ...)</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x5ce4d1deb390&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x5809ef501b18&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $args_f</span></span>
 <span><span class="co">#&gt; $args_f$mean</span></span>
@@ -575,7 +575,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $c</span></span>
-<span><span class="co">#&gt; [1] 38.2549</span></span>
+<span><span class="co">#&gt; [1] 25</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $continuous</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -585,7 +585,7 @@ function. Check the list of attributes by doing:</p>
 <span></span>
 <span><span class="co"># Accessing the value c</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"c"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 38.2549</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 25</span></span></code></pre></div>
 <p>In any case, it is important to highlight that, in general, you will
 not need to access these attributes. The greatest interest will be in
 having access to the vector of observations generated. If you want to
@@ -611,9 +611,9 @@ example:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 100</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0.5342 -0.184 -0.5075 0.6179 0.7239 -1.2548 -1.6283 2.1179 -1.1999 1.4528...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0.1985 1.684 0.273 -1.2779 -1.6982 -0.82 -0.4333 0.1548 -0.1103 -0.501...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -621,26 +621,23 @@ example:</p>
 <span><span class="co"># Coercing the object into an atomic vector without attributes</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   [1]  0.534245253 -0.183997687 -0.507464629  0.617919579  0.723922456</span></span>
-<span><span class="co">#&gt;   [6] -1.254807025 -1.628329813  2.117886554 -1.199947229  1.452794388</span></span>
-<span><span class="co">#&gt;  [11]  0.310452344  1.225297770  1.104048949  1.832389735 -1.841293754</span></span>
-<span><span class="co">#&gt;  [16] -0.765329981  0.020570215 -0.774675276 -0.803478792 -1.237061789</span></span>
-<span><span class="co">#&gt;  [21] -0.934027262 -1.306629814 -0.720020790 -0.700280717 -0.818287523</span></span>
-<span><span class="co">#&gt;  [26] -1.354446732  1.032223510 -0.423842752  0.565342499  0.248239769</span></span>
-<span><span class="co">#&gt;  [31] -0.291264677  0.969923008 -0.367037185  0.682432128  0.518372450</span></span>
-<span><span class="co">#&gt;  [36]  1.376336776  0.592576550  0.032290388 -0.454552187  0.313642351</span></span>
-<span><span class="co">#&gt;  [41] -0.131941760 -0.567616293  1.559280271 -1.519645112  0.148973394</span></span>
-<span><span class="co">#&gt;  [46]  0.672334375 -0.138510706 -0.041496335 -1.654766673  1.925832756</span></span>
-<span><span class="co">#&gt;  [51]  0.310204182 -0.667024322 -2.046886852 -1.924451638  0.007024352</span></span>
-<span><span class="co">#&gt;  [56] -0.476250337 -1.480277512 -0.730583686 -1.626920121  0.524984177</span></span>
-<span><span class="co">#&gt;  [61]  1.327180345 -0.744962642  0.800397621  0.798312563  1.029206168</span></span>
-<span><span class="co">#&gt;  [66] -0.276248327  1.265759828 -0.463355500 -0.526583759  0.449307008</span></span>
-<span><span class="co">#&gt;  [71] -0.891447401  0.414776433 -2.268820044 -1.726611942 -0.603286713</span></span>
-<span><span class="co">#&gt;  [76]  1.708525870  1.191659490 -0.829356125 -1.074078787  1.447968772</span></span>
-<span><span class="co">#&gt;  [81] -0.796756910 -0.538346931 -0.690693406  1.188385796  0.752605218</span></span>
-<span><span class="co">#&gt;  [86]  0.576092634 -0.023789801 -0.694355655  0.268758874  0.431670101</span></span>
-<span><span class="co">#&gt;  [91] -0.462814657  1.872349702 -0.677518418  1.452397358 -1.516824778</span></span>
-<span><span class="co">#&gt;  [96] -0.267388908 -0.389839482  0.928961854 -0.452615434 -2.166475924</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1]  0.19853714  1.68400472  0.27297236 -1.27789195 -1.69815440 -0.81995657</span></span>
+<span><span class="co">#&gt;   [7] -0.43331207  0.15479767 -0.11034613 -0.50104928  0.11907357  0.53833348</span></span>
+<span><span class="co">#&gt;  [13]  0.65937216 -1.07680823 -0.60167118  1.77737626 -1.54319260 -0.81523076</span></span>
+<span><span class="co">#&gt;  [19]  1.02921457 -0.11562066  1.09866322  1.27008217 -0.69545136 -0.28253562</span></span>
+<span><span class="co">#&gt;  [25]  0.06408453  0.33515361  1.59159215 -0.33169810  0.11602873 -0.49082571</span></span>
+<span><span class="co">#&gt;  [31]  0.02446084 -2.89226189  0.58729390  1.38218019 -0.94486148 -0.54905466</span></span>
+<span><span class="co">#&gt;  [37]  0.39958276 -0.93533867  0.31234235  1.39915643  1.44483098  0.83871561</span></span>
+<span><span class="co">#&gt;  [43]  0.32798322  1.22021233 -0.48713558  0.91206529  0.11689569  0.36313434</span></span>
+<span><span class="co">#&gt;  [49] -0.81670148  0.96150491 -0.13874147  0.51853487  1.40700707 -0.52408607</span></span>
+<span><span class="co">#&gt;  [55] -0.14711866  0.48950156  0.85823437 -0.89064802  0.52635724 -0.36671539</span></span>
+<span><span class="co">#&gt;  [61] -0.86935386  0.79653021 -0.74436529  0.60129225  0.42110091  0.32738987</span></span>
+<span><span class="co">#&gt;  [67]  0.56820063  0.23930671 -0.47147973  1.92246472  0.36439048  0.05322617</span></span>
+<span><span class="co">#&gt;  [73] -0.23675598 -1.55676159 -0.47666371 -2.23034512  1.05962174 -0.28899841</span></span>
+<span><span class="co">#&gt;  [79] -0.43227133  1.42349766  1.84075538 -2.01928399  0.40548820  0.77424370</span></span>
+<span><span class="co">#&gt;  [85]  0.90516555  1.06431170 -0.83429438 -1.33406662  1.36695063  0.32067664</span></span>
+<span><span class="co">#&gt;  [91] -2.21849215  0.15807229  0.19880634  0.36106371  0.48554930 -0.46516608</span></span>
+<span><span class="co">#&gt;  [97]  0.76701332 -1.39184940  1.01085362 -0.52030811</span></span></code></pre></div>
 <p><strong>Important</strong>:</p>
 
 <div class="rmdnote">

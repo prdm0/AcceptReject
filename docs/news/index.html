@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AcceptReject</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
 <ul><li>Initial CRAN submission.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.1" id="acceptreject-011">AcceptReject 0.1.1<a class="anchor" aria-label="anchor" href="#acceptreject-011"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.1" id="acceptreject-011">AcceptReject 0.1.1<a class="anchor" aria-label="anchor" href="#acceptreject-011"></a></h2><p class="text-muted">CRAN release: 2024-04-24</p>
 <ul><li><p>Improved performance in serial and parallel processing with Rcpp and RcppArmadillo;</p></li>
 <li><p>Now it is possible to specify a different base density/probability mass function than the uniform one. If none is specified, the uniform density (either discrete or continuous) is assumed for the case of discrete or continuous random variables, respectively;</p></li>
 <li><p>Now the function <code><a href="../reference/inspect.html">inspect()</a></code> is available, allowing you to compare the base probability density function with the theoretical density function. The <code><a href="../reference/inspect.html">inspect()</a></code> function is useful for finding a reasonable base density function. It returns an object of the classes gg and ggplot with the density curves, the intersection area, and the value of the intersection. Users are not obligated to use the <code><a href="../reference/inspect.html">inspect()</a></code> function since the <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function already takes care of a lot. However, for the continuous case, providing the f_base argument to the <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function with a good candidate base density function can be a good idea.</p></li>
@@ -67,6 +67,13 @@
 <li><p>Putting the order of the specifications of the arguments of the exported functions in the order of the arguments of the functions;</p></li>
 <li><p>The warning messages have been improved;</p></li>
 <li><p>Bug fix.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.2" id="acceptreject-012">AcceptReject 0.1.2<a class="anchor" aria-label="anchor" href="#acceptreject-012"></a></h2>
+<ul><li><p>The performance of the <code>one_step()</code> function, an internal function used in the implementation of C++ using Rcpp, has been improved.</p></li>
+<li><p>The function <code><a href="../reference/accept_reject.html">accept_reject()</a></code> now has the argument cores, which allows the user to control the number of cores that will be used if <code>parallel = TRUE</code>. The default, <code>cores = NULL</code>, means that all processor cores will be used. If <code>parallel = FALSE</code>, the cores argument is ignored.</p></li>
+<li><p>The <a href="https://raw.githubusercontent.com/prdm0/AcceptReject/main/DESCRIPTION" class="external-link">DESCRIPTION</a> file was edited;</p></li>
+<li><p>Another bibliographic reference was added to the <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function.</p></li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

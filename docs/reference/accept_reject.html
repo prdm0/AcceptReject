@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AcceptReject</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,6 +73,7 @@
 <span>  epsilon <span class="op">=</span> <span class="fl">1e-05</span>,</span>
 <span>  start_c <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  warning <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -141,6 +142,10 @@ It will be disregarded in the discrete case.</p></dd>
 <dd><p>A logical value indicating whether to use parallel processing for generating random numbers. Default is <code>FALSE</code>.</p></dd>
 
 
+<dt>cores</dt>
+<dd><p>The number of cores to be used in parallel processing. Default is <code>NULL</code>, i.e, all available cores.</p></dd>
+
+
 <dt>warning</dt>
 <dd><p>A logical value indicating whether to show warnings. Default is <code>TRUE</code>.</p></dd>
 
@@ -190,8 +195,10 @@ has shown good performance for the discrete case.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.</p>
-<p>NEAL, Radford M. Slice sampling. The annals of statistics, v. 31, n. 3, p. 705-767, 2003.</p>
+    <p>Neumann V (1951). “Various techniques used in connection with random digits.” Notes by
+GE Forsythe, pp. 36–38.</p>
+<p>CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.</p>
+<p>NEAL, Radford M. Slice sampling. The Annals of Statistics, v. 31, n. 3, p. 705-767, 2003.</p>
 <p>BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.</p>
     </div>
     <div class="section level2">

@@ -26,8 +26,6 @@
 
 # AcceptReject 0.1.2
 
-* The function `best_y()` has been implemented in Rcpp (C++) to enhance the candidate for the value of `y` that maximizes `f(y)/f_base(y)`. The `best_y()` function is internally called by the accept_reject() function and is not exported to the user. The `best_y()` function takes the form `best_y(NumericVector xlim, Function f, Function f_base, bool continuous, double epsilon = 0.001)` and returns a double;
-
 * The performance of the `one_step()` function, an internal function used in the implementation of C++ using Rcpp, has been improved.
 
 * The function `accept_reject()` now has the argument cores, which allows the user to control the number of cores that will be used if `parallel = TRUE`. The default, `cores = NULL`, means that all processor cores will be used. If `parallel = FALSE`, the cores argument is ignored.

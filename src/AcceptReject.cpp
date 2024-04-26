@@ -33,17 +33,3 @@ arma::vec one_step(unsigned long int n, Function f, Function f_base, Function ra
   }
   return x;
 }
-
-// [[Rcpp::export]]
-double best_y(NumericVector xlim, Function f, Function f_base, bool continuous, double epsilon = 0.001) {
-  double start = xlim[0];
-  double end = xlim[1];
-  double step = continuous ? epsilon : 1.0;
-
-  int n = (end - start) / step + 1;
-  arma::vec y = arma::linspace(start, end, n);
-  NumericVector ratio = as<NumericVector>(f(wrap(y))) / as<NumericVector>(f_base(wrap(y)));
-
-  int max_index = which_max(ratio);
-  return y[max_index];
-}
