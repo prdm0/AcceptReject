@@ -147,9 +147,7 @@ discrete random variables, consider now that we want to generate
 observations from a random variable
 $X \sim \mathcal{N}(\mu = 0, \sigma^2 = 1)$. We chose the normal
 distribution because we are familiar with its form, but you can choose
-another distribution if desired. Below, we will generate `n = 2000`
-observations using the acceptance-rejection method. Note that
-`continuous = TRUE`.
+another distribution if desired.
 
 ``` r
 library(AcceptReject)
@@ -169,10 +167,10 @@ simulation <- function(n){
   )
 }
 # Inspecting
-a <- plot(simulation(n = 250L))
-b <- plot(simulation(n = 2500L))
-c <- plot(simulation(n = 25000L))
-d <- plot(simulation(n = 250000L))
+a <- plot(simulation(n = 100L))
+b <- plot(simulation(n = 150L))
+c <- plot(simulation(n = 250L))
+d <- plot(simulation(n = 2500L))
 
 plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
@@ -277,19 +275,19 @@ set.seed(0)
 
 tic()
 case_1 <- accept_reject(
-  n = 200e3L,
+  n = 2000,
   continuous = TRUE,
   f = dweibull,
   args_f = list(shape = 2.1, scale = 2.2),
   xlim = c(0, 10)
 )
 toc()
-#> 0.371 sec elapsed
+#> 0.009 sec elapsed
 
 # Specifying the base probability density function
 tic()
 case_2 <- accept_reject(
-  n = 200e3L,
+  n = 2000,
   continuous = TRUE,
   f = dweibull,
   args_f = list(shape = 2.1, scale = 2.2),
@@ -300,7 +298,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.145 sec elapsed
+#> 0.006 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
