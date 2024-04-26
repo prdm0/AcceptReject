@@ -135,7 +135,7 @@
 <div class="section level2">
 <h2 id="generating-continuous-observations">Generating continuous observations<a class="anchor" aria-label="anchor" href="#generating-continuous-observations"></a>
 </h2>
-<p>To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable <span class="math inline"><em>X</em> ∼ 𝒩(<em>μ</em>=0,<em>σ</em><sup>2</sup>=1)</span>. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired. Below, we will generate <code>n = 2000</code> observations using the acceptance-rejection method. Note that <code>continuous = TRUE</code>.</p>
+<p>To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable <span class="math inline"><em>X</em> ∼ 𝒩(<em>μ</em>=0,<em>σ</em><sup>2</sup>=1)</span>. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
@@ -154,10 +154,10 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co"># Inspecting</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">150L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
@@ -222,19 +222,19 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">case_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
-<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
 <span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.371 sec elapsed</span></span>
+<span><span class="co">#&gt; 0.009 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Specifying the base probability density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">case_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
-<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
 <span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
@@ -245,7 +245,7 @@
 <span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.145 sec elapsed</span></span>
+<span><span class="co">#&gt; 0.006 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Visualizing the results</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">case_1</span><span class="op">)</span></span>
