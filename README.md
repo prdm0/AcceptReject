@@ -322,10 +322,10 @@ case_1 <- accept_reject(
   continuous = TRUE,
   f = dweibull,
   args_f = list(shape = 2.1, scale = 2.2),
-  xlim = c(0, 10)
+  xlim = c(0, 7.5)
 )
 toc()
-#> 0.009 sec elapsed
+#> 0.01 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -337,7 +337,7 @@ case_2 <- accept_reject(
   f_base = dgamma,
   random_base = rgamma,
   args_f_base = list(shape = 2.8, rate = 1.2),
-  xlim = c(0, 10),
+  xlim = c(0, 7.5),
   c = 1.2
 )
 toc()
