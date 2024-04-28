@@ -110,8 +110,8 @@ $n = 1000$ observations of $X$ using the acceptance-rejection method,
 using the `AcceptReject::accept_reject()` function. Note that it is
 necessary to provide the `xlim` argument. Try to set an upper limit
 value for which the probability of $X$ assuming that value is zero or
-very close to zero. In this case, we choose `xlim = c(0, 20)`, where
-`dpois(x = 20, lambda = 0.7)` is very close to zero (1.6286586^{-22}).
+very close to zero. In this case, we choose `xlim = c(0, 6)`, where
+`dpois(x = 6, lambda = 0.7)` is very close to zero (8.1142728^{-5}).
 
 ``` r
 library(AcceptReject)
@@ -130,7 +130,7 @@ simulation <- function(n){
     f = dpois,
     continuous = FALSE,
     args_f = list(lambda = 0.7),
-    xlim = c(0, 20),
+    xlim = c(0, 6),
     parallel = TRUE
   )
 }
@@ -325,7 +325,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.01 sec elapsed
+#> 0.009 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -341,7 +341,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.006 sec elapsed
+#> 0.005 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
