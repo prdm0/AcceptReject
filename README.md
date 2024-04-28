@@ -135,15 +135,34 @@ simulation <- function(n){
   )
 }
 
-a <- plot(simulation(25L))
-b <- plot(simulation(250L))
-c <- plot(simulation(2500L))
-d <- plot(simulation(25000L))
+a <- simulation(25L)
+b <- simulation(250L)
+c <- simulation(2500L)
+d <- simulation(25000L)
 
-plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
+# Plots
+p1 <- plot(a)
+p2 <- plot(b)
+p3 <- plot(c)
+p4 <- plot(d)
+
+plot_grid(p1, p2, p3, p4, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+``` r
+
+# QQ-Plots
+q1 <- qqplot(a)
+q2 <- qqplot(b)
+q3 <- qqplot(c)
+q4 <- qqplot(d)
+
+plot_grid(q1, q2, q3, q4, nrow = 2L, labels = c("a", "b", "c", "d"))
+```
+
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
 
 ## Generating continuous observations
 
@@ -306,7 +325,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.01 sec elapsed
+#> 0.005 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -322,7 +341,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.006 sec elapsed
+#> 0.004 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)

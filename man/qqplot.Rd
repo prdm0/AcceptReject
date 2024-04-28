@@ -5,10 +5,12 @@
 \title{QQ-Plot
 QQ-Plot between observed quantiles and theoretical quantiles.}
 \usage{
-qqplot(x)
+qqplot(x, ...)
 }
 \arguments{
 \item{x}{Object of the class \code{accept_reject} returned by the function \code{accept_reject()}.}
+
+\item{...}{Additional arguments to be passed to methods.}
 }
 \value{
 An object of classes \code{gg} and \code{ggplot} with the QQ-Plot of theoretical quantiles versus observed quantiles.

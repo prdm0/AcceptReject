@@ -17,6 +17,7 @@ quantile_custom <- function(x, p) {
 #' QQ-Plot
 #' QQ-Plot between observed quantiles and theoretical quantiles.
 #' @param x Object of the class `accept_reject` returned by the function `accept_reject()`.
+#' @param ... Additional arguments to be passed to methods.
 #' @returns An object of classes `gg` and `ggplot` with the QQ-Plot of theoretical quantiles versus observed quantiles.
 #' @details
 #' Generic method to plot the QQ-Plot between observed quantiles and theoretical
@@ -27,7 +28,7 @@ quantile_custom <- function(x, p) {
 #' @seealso [accept_reject()], [print.accept_reject()], [plot.accept_reject()] and
 #' [inspect()].
 #' @export
-qqplot <- function(x) {
+qqplot <- function(x, ...) {
   UseMethod("qqplot")
 }
 
