@@ -104,14 +104,27 @@ simulation <- function(n){
     parallel = TRUE
   )
 }
-# Inspecting
-a <- plot(simulation(n = 100L))
-b <- plot(simulation(n = 150L))
-c <- plot(simulation(n = 250L))
-d <- plot(simulation(n = 2500L))
 
-plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
+a <- simulation(n = 100L)
+b <- simulation(n = 150L)
+c <- simulation(n = 250L)
+d <- simulation(n = 2500L)
 
+# Plots
+p1 <- plot(a)
+p2 <- plot(b)
+p3 <- plot(c)
+p4 <- plot(d)
+
+plot_grid(p1, p2, p3, p4, nrow = 2L, labels = c("a", "b", "c", "d"))
+
+# QQ-plots
+q1 <- qqplot(a)
+q2 <- qqplot(b)
+q3 <- qqplot(c)
+q4 <- qqplot(d)
+
+plot_grid(q1, q2, q3, q4, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
 
 The [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function supports, **for the continuous case**, specifying a base probability density function if you don't want to use the continuous uniform distribution as the default base.
@@ -205,6 +218,11 @@ p1 <- plot(case_1)
 p2 <- plot(case_2)
 
 plot_grid(p1, p2, nrow = 2L)
+
+# QQ-plot
+q1 <- qqplot(case_1)
+q2 <- qqplot(case_2)
+plot_grid(q1, q2, nrow = 2L)
 ```
 
 Notice that the results were very close in a graphical analysis. However, the execution time specifying a convenient base density was lower for a very large sample.

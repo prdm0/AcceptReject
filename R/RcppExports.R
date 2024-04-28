@@ -5,3 +5,7 @@ one_step <- function(n, f, f_base, random_base, c) {
     .Call(`_AcceptReject_one_step`, n, f, f_base, random_base, c)
 }
 
+internal_quantile <- function(continuous, f, p, xlim1, xlim2) {
+    .Call(`_AcceptReject_internal_quantile`, continuous, f, p, xlim1, xlim2)
+}
+

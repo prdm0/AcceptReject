@@ -118,7 +118,6 @@
 #' @importFrom glue glue
 #' @useDynLib AcceptReject, .registration = TRUE
 #' @importFrom Rcpp evalCpp
-#'
 #' @export
 accept_reject <-
   function(n = 1L,

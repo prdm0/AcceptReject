@@ -115,6 +115,11 @@ very close to zero. In this case, we choose `xlim = c(0, 20)`, where
 
 ``` r
 library(AcceptReject)
+#> 
+#> Attaching package: 'AcceptReject'
+#> The following object is masked from 'package:stats':
+#> 
+#>     qqplot
 library(cowplot) # install.packages("cowplot")
 # Ensuring Reproducibility
 set.seed(0) 
@@ -166,16 +171,35 @@ simulation <- function(n){
     parallel = TRUE
   )
 }
-# Inspecting
-a <- plot(simulation(n = 100L))
-b <- plot(simulation(n = 150L))
-c <- plot(simulation(n = 250L))
-d <- plot(simulation(n = 2500L))
 
-plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
+a <- simulation(n = 100L)
+b <- simulation(n = 150L)
+c <- simulation(n = 250L)
+d <- simulation(n = 2500L)
+
+# Plots
+p1 <- plot(a)
+p2 <- plot(b)
+p3 <- plot(c)
+p4 <- plot(d)
+
+plot_grid(p1, p2, p3, p4, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+``` r
+
+# QQ-plots
+q1 <- qqplot(a)
+q2 <- qqplot(b)
+q3 <- qqplot(c)
+q4 <- qqplot(d)
+
+plot_grid(q1, q2, q3, q4, nrow = 2L, labels = c("a", "b", "c", "d"))
+```
+
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
 
 The
 [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html)
@@ -282,7 +306,7 @@ case_1 <- accept_reject(
   xlim = c(0, 10)
 )
 toc()
-#> 0.009 sec elapsed
+#> 0.01 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -308,6 +332,16 @@ plot_grid(p1, p2, nrow = 2L)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+
+# QQ-plot
+q1 <- qqplot(case_1)
+q2 <- qqplot(case_2)
+plot_grid(q1, q2, nrow = 2L)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
 
 Notice that the results were very close in a graphical analysis.
 However, the execution time specifying a convenient base density was

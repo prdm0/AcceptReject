@@ -1,7 +1,7 @@
-#include <RcppArmadillo.h>
-
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins(cpp11)]]
+
+#include <RcppArmadillo.h>
 
 using namespace Rcpp;
 
@@ -20,9 +20,9 @@ arma::vec one_step(unsigned long int n, Function f, Function f_base, Function ra
     u = as<arma::vec>(runif(n));
     accepted = find(u <= fx_cand / (c * as<arma::vec>(f_base(wrap(x_cand)))));
 
-    int num_accepted = accepted.n_elem;
+    unsigned long int num_accepted = accepted.n_elem;
     if (num_accepted > 0) {
-      int space_left = n - filled;
+      unsigned long int space_left = n - filled;
       if (num_accepted > space_left) {
         num_accepted = space_left;
         accepted = accepted.subvec(0, space_left - 1);
@@ -32,4 +32,26 @@ arma::vec one_step(unsigned long int n, Function f, Function f_base, Function ra
     }
   }
   return x;
+}
+
+// [[Rcpp::export]]
+double internal_quantile(bool continuous, Rcpp::Function f, double p, double xlim1, double xlim2) {
+  arma::vec x, y;
+  if (!continuous) {
+    x = arma::regspace(xlim1, xlim2);
+    y = Rcpp::as<arma::vec>(f(x));
+    y = arma::cumsum(y) / arma::sum(y);
+    arma::uvec idx = arma::find(y >= p);
+    return x[idx(0)];
+  } else {
+    unsigned long int n = 1e4;
+    x = arma::linspace<arma::vec>(xlim1, xlim2, n);
+    y = Rcpp::as<arma::vec>(f(x));
+    y = arma::cumsum(y) / arma::sum(y);
+
+    Rcpp::Function approx("approx");
+    Rcpp::List res = approx(y, x, Rcpp::Named("xout", p));
+
+    return Rcpp::as<double>(res["y"]);
+  }
 }

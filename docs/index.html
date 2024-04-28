@@ -108,6 +108,11 @@
 <p>As an example, let <span class="math inline"><em>X</em> ∼ <em>P</em><em>o</em><em>i</em><em>s</em><em>s</em><em>o</em><em>n</em>(<em>λ</em>=0.7)</span>. We will generate <span class="math inline"><em>n</em> = 1000</span> observations of <span class="math inline"><em>X</em></span> using the acceptance-rejection method, using the <code><a href="reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function. Note that it is necessary to provide the <code>xlim</code> argument. Try to set an upper limit value for which the probability of <span class="math inline"><em>X</em></span> assuming that value is zero or very close to zero. In this case, we choose <code>xlim = c(0, 20)</code>, where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero (1.6286586^{-22}).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'AcceptReject'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     qqplot</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
 <span><span class="co"># Ensuring Reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> </span>
@@ -135,7 +140,7 @@
 <div class="section level2">
 <h2 id="generating-continuous-observations">Generating continuous observations<a class="anchor" aria-label="anchor" href="#generating-continuous-observations"></a>
 </h2>
-<p>To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable <span class="math inline"><em>X</em> ∼ 𝒩(<em>μ</em>=0,<em>σ</em><sup>2</sup>=1)</span>. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired. Below, we will generate <code>n = 2000</code> observations using the acceptance-rejection method. Note that <code>continuous = TRUE</code>.</p>
+<p>To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable <span class="math inline"><em>X</em> ∼ 𝒩(<em>μ</em>=0,<em>σ</em><sup>2</sup>=1)</span>. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
@@ -153,14 +158,41 @@
 <span>    parallel <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co"># Inspecting</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25000L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250000L</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100L</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">150L</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">250L</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">simulation</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2500L</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plots</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in as_grob.default(plot): Cannot convert object of class accept_reject</span></span>
+<span><span class="co">#&gt; into a grob.</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning in as_grob.default(plot): Cannot convert object of class accept_reject</span></span>
+<span><span class="co">#&gt; into a grob.</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning in as_grob.default(plot): Cannot convert object of class accept_reject</span></span>
+<span><span class="co">#&gt; into a grob.</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning in as_grob.default(plot): Cannot convert object of class accept_reject</span></span>
+<span><span class="co">#&gt; into a grob.</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># QQ-plots</span></span>
+<span><span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span><span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span><span class="va">q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span><span class="va">q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">q1</span>, <span class="va">q2</span>, <span class="va">q3</span>, <span class="va">q4</span>, nrow <span class="op">=</span> <span class="fl">2L</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="100%"></p>
 <p>The <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function supports, <strong>for the continuous case</strong>, specifying a base probability density function if you don’t want to use the continuous uniform distribution as the default base.</p>
 <p>When choosing to specify another probability density function different from the uniform one, it’s necessary to specify the following arguments:</p>
 <ul>
@@ -178,7 +210,7 @@
 <div class="section level2">
 <h2 id="example-of-inspection">Example of inspection<a class="anchor" aria-label="anchor" href="#example-of-inspection"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
 <span></span>
@@ -211,7 +243,7 @@
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 <p>Notice that considering the distribution in scenario “a” in the code above is more convenient. Note that the area is approximately 1, the base probability density function with parameters <code>shape = 2.8</code> and <code>rate = 1.2</code> provides a shape close to the theoretical distribution, and <code>c = 1.2</code> ensures that the base density function upper bounds the theoretical probability density function. Therefore, considering <code>f_base</code> with <span class="math inline"><em>Γ</em>(<em>α</em>=2.8,<em>β</em>=1.2)</span> and <code>c = 1.2</code> is a reasonable choice for a base distribution.</p>
 <p>Therefore, passing arguments to <code>f_base = dgamma</code>, <code>args_f_base = list(shape = 2.8, rate = 1.2)</code>, and <code>c = 1.2</code> to the <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a> function will lead us to an even more efficient code.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jabiru/tictoc" class="external-link">tictoc</a></span><span class="op">)</span> <span class="co"># install.packages("tictoc")</span></span>
 <span></span>
@@ -222,19 +254,19 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">case_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
-<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
 <span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.371 sec elapsed</span></span>
+<span><span class="co">#&gt; 0.005 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Specifying the base probability density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">case_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
-<span>  n <span class="op">=</span> <span class="fl">200e3L</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
 <span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">2.1</span>, scale <span class="op">=</span> <span class="fl">2.2</span><span class="op">)</span>,</span>
@@ -245,7 +277,7 @@
 <span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.145 sec elapsed</span></span>
+<span><span class="co">#&gt; 0.003 sec elapsed</span></span>
 <span></span>
 <span><span class="co"># Visualizing the results</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">case_1</span><span class="op">)</span></span>
@@ -253,6 +285,13 @@
 <span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># QQ-plot</span></span>
+<span><span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">case_1</span><span class="op">)</span></span>
+<span><span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">case_2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">q1</span>, <span class="va">q2</span>, nrow <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-2.png" width="100%"></p>
 <p>Notice that the results were very close in a graphical analysis. However, the execution time specifying a convenient base density was lower for a very large sample.</p>
 </div>
 </div>

@@ -26,9 +26,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// internal_quantile
+double internal_quantile(bool continuous, Rcpp::Function f, double p, double xlim1, double xlim2);
+RcppExport SEXP _AcceptReject_internal_quantile(SEXP continuousSEXP, SEXP fSEXP, SEXP pSEXP, SEXP xlim1SEXP, SEXP xlim2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type continuous(continuousSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type xlim1(xlim1SEXP);
+    Rcpp::traits::input_parameter< double >::type xlim2(xlim2SEXP);
+    rcpp_result_gen = Rcpp::wrap(internal_quantile(continuous, f, p, xlim1, xlim2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_AcceptReject_one_step", (DL_FUNC) &_AcceptReject_one_step, 5},
+    {"_AcceptReject_internal_quantile", (DL_FUNC) &_AcceptReject_internal_quantile, 5},
     {NULL, NULL, 0}
 };
 
