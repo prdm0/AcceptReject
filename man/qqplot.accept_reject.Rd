@@ -11,7 +11,8 @@ Plot the QQ-Plot between observed quantiles and theoretical quantiles.}
   color_points = "#FE4F0E",
   color_line = "#BB9FC9",
   size_points = 1,
-  size_line = 1
+  size_line = 1,
+  ...
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ Plot the QQ-Plot between observed quantiles and theoretical quantiles.}
 \item{size_points}{Size of the points (default is \code{1}).}
 
 \item{size_line}{Thickness of the reference line (default is \code{1}).}
+
+\item{...}{Additional arguments.}
 }
 \value{
 An object of classes gg and ggplot with the QQ-Plot between the
