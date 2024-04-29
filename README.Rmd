@@ -13,31 +13,31 @@ knitr::opts_chunk$set(
 )
 ```
 
-# AcceptReject <img src="logo.png" align="right" width="250" />
+# AcceptReject <img src="logo.png" align="right" width="250"/>
 
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
-[![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml)
-[![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev)
-[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AcceptReject)](https://cran.r-project.org/package=AcceptReject) [![R-CMD-check](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/prdm0/AcceptReject/actions/workflows/R-CMD-check.yaml) [![r-universe](https://prdm0.r-universe.dev/badges/AcceptReject)](https://prdm0.r-universe.dev) [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html) [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/AcceptReject)](https://cran.r-project.org/package=AcceptReject)
 
 Generating pseudo-random observations from a probability distribution is a common task in statistics. Being able to generate pseudo-random observations from a probability distribution is useful for simulating scenarios, in [Monte-Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) methods, which are useful for evaluating various statistical models.
+
+The acceptance-rejection method was developed by [John von Neumann](https://pt.wikipedia.org/wiki/John_von_Neumann) in 1951 and is a well-known technique present in various computational statistics books. The original reference can be found at the link below:
+
+💎 [Neumann V (1951). “Various techniques used in connection with random digits.” Notes by GE Forsythe, pp. 36–38.](https://mcnp.lanl.gov/pdf_files/InBook_Computing_1961_Neumann_JohnVonNeumannCollectedWorks_VariousTechniquesUsedinConnectionwithRandomDigits.pdf)
 
 The inversion method is a common way to do this, but it is not always possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable $X$, that is, $q(u) = F^{-1}(u) = x$ (quantile function), where $F$ is the cumulative distribution function of $X$ and $u$ is a uniformly distributed random variable in the interval $(0, 1)$.
 
 Whenever possible, it is preferable to use the inversion method to generate pseudo-random observations from a probability distribution. However, when it is not possible to find a closed-form formula for the inverse function of the cumulative distribution function of a random variable, it is necessary to resort to other methods. One way to do this is through the [acceptance-rejection method](https://en.wikipedia.org/wiki/Rejection_sampling), which is a Monte-Carlo procedure. This package aims to provide a function that implements the Acceptance and Rejection method for generating pseudo-random observations from probability distributions that are difficult to sample directly.
 
-The package [AcceptReject](https://github.com/prdm0/AcceptReject) provides the `AcceptReject::accept_reject()` function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The `AcceptReject::accept_reject()` function operates in parallel on Unix-based operating systems such as Linux and MacOS and operates sequentially on Windows-based operating systems; however, it still exhibits good performance. By default, on Unix-based systems, observations are generated sequentially, but it is possible to generate observations in parallel if desired, by using the `parallel = TRUE` argument.
+The package [AcceptReject](https://github.com/prdm0/AcceptReject) provides the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function, in addition to other functions, that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. The [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function operates in parallel on Unix-based operating systems such as Linux and MacOS and operates sequentially on Windows-based operating systems; however, it still exhibits good performance. By default, on Unix-based systems, observations are generated sequentially, but it is possible to generate observations in parallel if desired, by using the `parallel = TRUE` argument.
 
-The `AcceptReject::accept_reject()` function, by default, attempts to maximize the probability of acceptance of the pseudo-random observations generated. Suppose $X$ and $Y$ are random variables with probability density function (pdf) or probability function (pf) $f$ and $g$, respectively. Furthermore, suppose there exists a constant $c$ such that
+The [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function, by default, attempts to maximize the probability of acceptance of the pseudo-random observations generated. Suppose $X$ and $Y$ are random variables with probability density function (pdf) or probability function (pf) $f$ and $g$, respectively. Furthermore, suppose there exists a constant $c$ such that
 
 $$\frac{f_X(x)}{g_Y(y)} \leq c.$$
 
-By default, the accept_reject function attempts to find the value of $c$ that maximizes the probability of acceptance of the pseudo-random observations generated. However, it is possible to provide a value of $c$ to the `AcceptReject::accept_reject()` function through the argument `c`, where $Y$ is a random variable for which we know how to generate observations. For the `AcceptReject::accept_reject()` function, it is not necessary to specify the probability function or probability density function of $Y$ to generate observations of $X$ for discrete and continuous cases, respectively. For the discrete and continuous cases, $Y$ follows the discrete uniform distribution function and continuous uniform distribution function, respectively.
+By default, the accept_reject function attempts to find the value of $c$ that maximizes the probability of acceptance of the pseudo-random observations generated. However, it is possible to provide a value of $c$ to the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function through the argument `c`, where $Y$ is a random variable for which we know how to generate observations. For the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function, it is not necessary to specify the probability function or probability density function of $Y$ to generate observations of $X$ for discrete and continuous cases, respectively. For the discrete and continuous cases, $Y$ follows the discrete uniform distribution function and continuous uniform distribution function, respectively.
 
-Since the probability of acceptance is $1/c$, the `AcceptReject::accept_reject()` function attempts to find the minimum value of $c$ that satisfies the description above. Unless you have compelling reasons to provide a value for the `c` argument of the `AcceptReject::accept_reject()` function, it is recommended to use `c = NULL` (default), allowing a value of $c$ to be automatically determined.
+Since the probability of acceptance is $1/c$, the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function attempts to find the minimum value of $c$ that satisfies the description above. Unless you have compelling reasons to provide a value for the `c` argument of the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function, it is recommended to use `c = NULL` (default), allowing a value of $c$ to be automatically determined.
 
-## Installation
+## 💻Installation
 
 The package is being versioned on GitHub. You can install the development version of [AcceptReject](https://github.com/prdm0/AcceptReject), and to do this, you must first install the [remotes](https://CRAN.R-project.org/package=remotes) package and then run the following command:
 
@@ -49,9 +49,17 @@ library(AcceptReject)
 
 The `force = TRUE` argument is not necessary. It is only needed in situations where you have already installed the package and want to reinstall it to have a new version.
 
-## Examples
+You can also install the package version available on [Comprehensive R Archive Network - CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
 
-Please note the examples below on how to use the `AcceptReject::accept_reject()` function to generate pseudo-random observations of discrete and continuous random variables. For further details, refer to the function's documentation [**Reference**](https://prdm0.github.io/AcceptReject/reference/) and the [**Vignette**](https://prdm0.github.io/AcceptReject/articles/accept_reject.html).
+```{r message=FALSE, warning=FALSE, eval = FALSE, echo = TRUE}
+install.packages("AcceptReject")
+```
+
+## 📚 Examples
+
+Please note the examples below on how to use the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function to generate pseudo-random observations of discrete and continuous random variables. For further details, refer to the function's documentation [**Reference**](https://prdm0.github.io/AcceptReject/reference/) and the [**Vignette**](https://prdm0.github.io/AcceptReject/articles/accept_reject.html).
+
+In the examples, we use well-known distributions, but it's important to note that the accept-reject method can be used to generate observations from probability distributions for which we don't know how to generate observations directly. Thus, if you need to generate observations from a random variable with a distribution for which there are no built-in functions in R that you can use to generate observations (such as functions like `rnorm()`, `rgamma()`, `rweibull()`, `rchisq()`, among others), the [AcceptReject](https://prdm0.github.io/AcceptReject/) package might be what you need. 🎉
 
 ### Generating discrete observations
 
@@ -98,7 +106,7 @@ plot_grid(q1, q2, q3, q4, nrow = 2L, labels = c("a", "b", "c", "d"))
 
 ## Generating continuous observations
 
-To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable $X \sim \mathcal{N}(\mu = 0, \sigma^2 = 1)$. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired. 
+To expand beyond examples of generating pseudo-random observations of discrete random variables, consider now that we want to generate observations from a random variable $X \sim \mathcal{N}(\mu = 0, \sigma^2 = 1)$. We chose the normal distribution because we are familiar with its form, but you can choose another distribution if desired.
 
 ```{r}
 library(AcceptReject)
@@ -144,9 +152,9 @@ The [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_re
 
 When choosing to specify another probability density function different from the uniform one, it's necessary to specify the following arguments:
 
-+ `f_base`: base probability density function;
-+ `random_base`: sampling from the base probability density function;
-+ `args_f_base`: list with the parameters of the base density.
+-   `f_base`: base probability density function;
+-   `random_base`: sampling from the base probability density function;
+-   `args_f_base`: list with the parameters of the base density.
 
 By default, all of them are `NULL`, and the continuous uniform distribution in `xlim` is used as the base. If at least one of these arguments is not specified, no error will occur, and the continuous uniform distribution in `xlim` will still be used as the base.
 
@@ -154,7 +162,7 @@ For the discrete case, if the user mistakenly specifies any of these arguments, 
 
 If you choose to specify a base density, it's convenient to inspect it by comparing the base density function with the theoretical probability density function. The [`inspect()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function facilitates this task. The [`inspect()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function will plot the base probability density function and the theoretical probability density function, find the intersection between the densities, and display the value of the intersection area on the plot. These are important pieces of information to decide if the base probability density function specified in the `args_f_base` argument and the value of `c` (default is 1) are appropriate.
 
-## Example of inspection
+## 🕵️‍♀️ Example of inspection
 
 ```{r}
 library(AcceptReject)
@@ -170,7 +178,7 @@ a <- inspect(
   args_f = list(shape = 2.1, scale = 2.2),
   f_base = dgamma,
   args_f_base = list(shape = 2.8, rate = 1.2),
-  xlim = c(0, 10),
+  xlim = c(0, 6),
   c = 1.2
 )
 
@@ -181,7 +189,7 @@ b <- inspect(
   args_f = list(shape = 2.1, scale = 2.2),
   f_base = dgamma,
   args_f_base = list(shape = 2.9, rate = 2.5),
-  xlim = c(0, 10),
+  xlim = c(0, 6),
   c = 1.4
 )
 
@@ -207,7 +215,7 @@ case_1 <- accept_reject(
   continuous = TRUE,
   f = dweibull,
   args_f = list(shape = 2.1, scale = 2.2),
-  xlim = c(0, 7.5)
+  xlim = c(0, 6)
 )
 toc()
 
@@ -221,7 +229,7 @@ case_2 <- accept_reject(
   f_base = dgamma,
   random_base = rgamma,
   args_f_base = list(shape = 2.8, rate = 1.2),
-  xlim = c(0, 7.5),
+  xlim = c(0, 6),
   c = 1.2
 )
 toc()
