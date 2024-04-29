@@ -14,6 +14,12 @@ quantile_custom <- function(x, p) {
   )
 }
 
+quantile_custom_vec <-
+  Vectorize(
+    quantile_custom,
+    vectorize.args = "p"
+  )
+
 #' QQ-Plot
 #' QQ-Plot between observed quantiles and theoretical quantiles.
 #' @param x Object of the class `accept_reject` returned by the function `accept_reject()`.
@@ -72,8 +78,7 @@ qqplot <- function(x, ...) {
 qqplot.accept_reject <- function(x, alpha = 0.5, color_points = "#FE4F0E", color_line = "#BB9FC9", size_points = 1, size_line = 1, ...) {
   sample_quantiles <- sort(x)
   p <- (rank(sample_quantiles) - 0.375) / (length(sample_quantiles) + 0.25)
-  theoretical_quantiles <- sapply(p, function(p) quantile_custom(x = x, p = p))
-
+  theoretical_quantiles <- quantile_custom_vec(x = x, p = p)
   df <- data.frame(Theoretical = theoretical_quantiles, Sample = sample_quantiles)
   xlim <- attr(x, "xlim")
   continuous <- attr(x, "continuous")

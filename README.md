@@ -92,7 +92,7 @@ for the `c` argument of the
 function, it is recommended to use `c = NULL` (default), allowing a
 value of $c$ to be automatically determined.
 
-## 💻Installation
+## 💻 Installation
 
 The package is being versioned on GitHub. You can install the
 development version of

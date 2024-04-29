@@ -37,7 +37,7 @@ By default, the accept_reject function attempts to find the value of $c$ that ma
 
 Since the probability of acceptance is $1/c$, the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function attempts to find the minimum value of $c$ that satisfies the description above. Unless you have compelling reasons to provide a value for the `c` argument of the [`accept_reject()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function, it is recommended to use `c = NULL` (default), allowing a value of $c$ to be automatically determined.
 
-## 💻Installation
+## 💻 Installation
 
 The package is being versioned on GitHub. You can install the development version of [AcceptReject](https://github.com/prdm0/AcceptReject), and to do this, you must first install the [remotes](https://CRAN.R-project.org/package=remotes) package and then run the following command:
 
