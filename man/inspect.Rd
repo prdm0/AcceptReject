@@ -13,7 +13,7 @@ inspect(
   c = 1,
   alpha = 0.4,
   color_intersection = "#BB9FC9",
-  color_f = "#FE4F0E",
+  color_f = "#F890C2",
   color_f_base = "#7BBDB3"
 )
 }

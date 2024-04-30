@@ -190,10 +190,10 @@ plot_grid(p1, p2, p3, p4, nrow = 2L, labels = c("a", "b", "c", "d"))
 ``` r
 
 # QQ-Plots
-q1 <- qqplot(a)
-q2 <- qqplot(b)
-q3 <- qqplot(c)
-q4 <- qqplot(d)
+q1 <- qqplot(a, size_points = 2)
+q2 <- qqplot(b, size_points = 2)
+q3 <- qqplot(c, size_points = 2)
+q4 <- qqplot(d, size_points = 2)
 
 plot_grid(q1, q2, q3, q4, nrow = 2L, labels = c("a", "b", "c", "d"))
 ```
@@ -377,7 +377,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.007 sec elapsed
+#> 0.006 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)

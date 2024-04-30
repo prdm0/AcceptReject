@@ -25,7 +25,8 @@ Imports:
     purrr,
     Rcpp,
     rlang,
-    scales
+    scales,
+    scattermore
 Suggests: 
     knitr,
     rmarkdown,

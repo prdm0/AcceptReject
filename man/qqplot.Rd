@@ -8,12 +8,14 @@ QQ-Plot between observed quantiles and theoretical quantiles.}
 qqplot(x, ...)
 }
 \arguments{
-\item{x}{Object of the class \code{accept_reject} returned by the function \code{accept_reject()}.}
+\item{x}{Object of the class \code{accept_reject} returned by the function
+\code{accept_reject()}.}
 
 \item{...}{Additional arguments to be passed to methods.}
 }
 \value{
-An object of classes \code{gg} and \code{ggplot} with the QQ-Plot of theoretical quantiles versus observed quantiles.
+An object of classes \code{gg} and \code{ggplot} with the QQ-Plot of
+theoretical quantiles versus observed quantiles.
 }
 \description{
 QQ-Plot
@@ -26,6 +28,6 @@ quantiles. The generic method will call the specific method
 returned by the function \code{accept_reject()}.
 }
 \seealso{
-\code{\link[=accept_reject]{accept_reject()}}, \code{\link[=print.accept_reject]{print.accept_reject()}}, \code{\link[=plot.accept_reject]{plot.accept_reject()}} and
-\code{\link[=inspect]{inspect()}}.
+\code{\link[=accept_reject]{accept_reject()}}, \code{\link[=print.accept_reject]{print.accept_reject()}}, \code{\link[=plot.accept_reject]{plot.accept_reject()}}
+and \code{\link[=inspect]{inspect()}}.
 }

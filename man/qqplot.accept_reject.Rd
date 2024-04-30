@@ -8,25 +8,35 @@ Plot the QQ-Plot between observed quantiles and theoretical quantiles.}
 \method{qqplot}{accept_reject}(
   x,
   alpha = 0.5,
-  color_points = "#FE4F0E",
+  color_points = "#F890C2",
   color_line = "#BB9FC9",
   size_points = 1,
   size_line = 1,
+  parallel = FALSE,
+  cores = NULL,
   ...
 )
 }
 \arguments{
 \item{x}{Object of the class accept_reject returned by the function \code{accept_reject()}.}
 
-\item{alpha}{Transparency of the points and reference line representing where the quantiles should be (theoretical quantiles).}
+\item{alpha}{Transparency of the points and reference line representing where
+the quantiles should be (theoretical quantiles).}
 
-\item{color_points}{Color of the points (default is \code{"#FE4F0E"}).}
+\item{color_points}{Color of the points (default is \code{"#F890C2"}).}
 
 \item{color_line}{Color of the reference line (detault is \code{"#BB9FC9"}).}
 
 \item{size_points}{Size of the points (default is \code{1}).}
 
 \item{size_line}{Thickness of the reference line (default is \code{1}).}
+
+\item{parallel}{If \code{TRUE}, all cores will be used for internal calculations of
+theoretical quantiles. The default is \code{FALSE}. Use TRUE if you find the plot
+is taking too long.}
+
+\item{cores}{Number of cores to be used if \code{parallel = TRUE}. Defalut is \code{NULL},
+which means all cores will be used.}
 
 \item{...}{Additional arguments.}
 }
@@ -39,6 +49,17 @@ and the theoretical quantiles of the true distribution.
 QQ-Plot
 Plot the QQ-Plot between observed quantiles and theoretical quantiles.
 }
+\details{
+Just like in the \code{accept_reject()} function, the \code{qqplot.accept_reject()}
+function uses parallelism using FORK, meaning it works on Unix-based
+operating systems (Linux and MacOS). What is parallelized are the internal
+calculations of theoretical quantiles of the true distribution. This
+parallelism will only be useful for excessively large samples. Additionally,
+for samples larger than ten thousand, the \code{geom_scattermost()} function from
+the \href{https://CRAN.R-project.org/package=scattermore}{\strong{scattermore}} library
+is used to plot the points, as it is more efficient than \code{geom_point()} from
+the \href{https://CRAN.R-project.org/package=ggplot2}{\strong{ggplot2}} library.
+}
 \examples{
 set.seed(0) # setting a seed for reproducibility
 
@@ -47,7 +68,7 @@ x <- accept_reject(
   f = dbinom,
   continuous = FALSE,
   args_f = list(size = 5, prob = 0.5),
-  xlim = c(0, 10)
+  xlim = c(0, 5)
 )
 qqplot(x)
 

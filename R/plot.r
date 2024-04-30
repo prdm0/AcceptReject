@@ -15,8 +15,8 @@
 #' @param color_real_point Color of real probability points (discrete case)
 #' @param alpha Bar chart transparency (discrete case) and observed density
 #' (continuous case)
-#' @param hist If TRUE, a histogram will be plotted in the continuous case,
-#' comparing the theoretical density with the observed one. If FALSE,
+#' @param hist If `TRUE`, a histogram will be plotted in the continuous case,
+#' comparing the theoretical density with the observed one. If `FALSE`,
 #' [ggplot2::geom_density()] will be used instead of the histogram.
 #'
 #' @param ... Additional arguments.
@@ -72,10 +72,10 @@ plot.accept_reject <-
   function(
     x,
     color_observed_density = "#BB9FC9", #"#E65A65", # "#FBBA78",
-    color_true_density = "#FE4F0E",
+    color_true_density = "#F890C2",  #"#FE4F0E",
     color_bar = "#BB9FC9", #"#E65A65", #"#FCEFC3",
     color_observable_point = "#7BBDB3",
-    color_real_point = "#FE4F0E",
+    color_real_point = "#F890C2", #"#FE4F0E",
     alpha = .3,
     hist = TRUE,
     ...
