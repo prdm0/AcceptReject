@@ -2,9 +2,9 @@ Package: AcceptReject
 Title: Acceptance-Rejection Method for Generating Pseudo-Random Observations
 Version: 0.1.2
 Authors@R: c(
-    person("Pedro Rafael", "D. Marinho", , "pedro.rafael.marinho@gmail.com", role = c("aut", "cre"),
+    person("Pedro Rafael D.", "Marinho", , "pedro.rafael.marinho@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1591-8300")),
-    person("Vera Lucia Damasceno", "Tomazella", , "vera@ufscar.br", role = c("aut"),
+    person("Vera Lucia Damasceno", "Tomazella", , "vera@ufscar.br", role = c("ctb"),
            comment = c(ORCID = "0000-0002-6780-2089"))
   )
 Description: Provides a function that implements the acceptance-rejection method in an optimized manner to generate pseudo-random observations for discrete or continuous random variables. Proposed by von Neumann J. (1951), <https://mcnp.lanl.gov/pdf_files/>, the function is optimized to work in parallel on Unix-based operating systems and performs well on Windows systems. The acceptance-rejection method implemented optimizes the probability of generating observations from the desired random variable, by simply providing the probability function or probability density function, in the discrete and continuous cases, respectively. Implementation is based on references CASELLA, George at al. (2004) <https://www.jstor.org/stable/4356322>,  NEAL, Radford M. (2003) <https://www.jstor.org/stable/3448413> and Bishop, Christopher M. (2006, ISBN: 978-0387310732). 

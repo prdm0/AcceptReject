@@ -377,7 +377,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.006 sec elapsed
+#> 0.004 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
