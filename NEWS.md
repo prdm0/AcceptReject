@@ -30,6 +30,10 @@
 
 * The method `qqplot.accept_reject()` has been added, which constructs the QQ-Plot of an object of class `accept_reject` returned by the function `accept_reject()`;
 
+* The `qqplot.accept_reject()` function can be parallelized using the `parallel = TRUE` argument, allowing theoretical quantiles to be calculated in parallel. The cores argument controls the number of cores that will be used. The default value, `cores = NULL`, means that all processor cores will be used. If `parallel = FALSE`, the cores argument is ignored.
+
+* The `qqplot.accept_reject()` function utilizes the [**scattermore**](https://github.com/exaexa/scattermore) package if the point density is high, i.e., above 10 thousand observations;
+
 * The function `accept_reject()` now has the argument cores, which allows the user to control the number of cores that will be used if `parallel = TRUE`. The default, `cores = NULL`, means that all processor cores will be used. If `parallel = FALSE`, the cores argument is ignored;
 
 * The [DESCRIPTION](https://raw.githubusercontent.com/prdm0/AcceptReject/main/DESCRIPTION) file was edited;
