@@ -243,7 +243,7 @@ plot_grid(p1, p2, nrow = 2L)
 # QQ-plot
 q1 <- qqplot(case_1)
 q2 <- qqplot(case_2)
-plot_grid(q1, q2, nrow = 2L)
+plot_grid(q1, q2, nrow = 1L)
 ```
 
 Notice that the results were very close in a graphical analysis. However, the execution time specifying a convenient base density was lower for a very large sample.

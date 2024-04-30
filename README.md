@@ -152,8 +152,8 @@ very close to zero. In this case, we choose `xlim = c(0, 6)`, where
 ``` r
 library(AcceptReject)
 #> 
-#> Attaching package: 'AcceptReject'
-#> The following object is masked from 'package:stats':
+#> Anexando pacote: 'AcceptReject'
+#> O seguinte objeto é mascarado por 'package:stats':
 #> 
 #>     qqplot
 library(cowplot) # install.packages("cowplot")
@@ -361,7 +361,7 @@ case_1 <- accept_reject(
   xlim = c(0, 6)
 )
 toc()
-#> 0.008 sec elapsed
+#> 0.01 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -377,7 +377,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.005 sec elapsed
+#> 0.006 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)
@@ -393,7 +393,7 @@ plot_grid(p1, p2, nrow = 2L)
 # QQ-plot
 q1 <- qqplot(case_1)
 q2 <- qqplot(case_2)
-plot_grid(q1, q2, nrow = 2L)
+plot_grid(q1, q2, nrow = 1L)
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-2.png" width="100%" />
