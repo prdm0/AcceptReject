@@ -13,7 +13,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 URL: https://prdm0.github.io/AcceptReject/
 BugReports: https://github.com/prdm0/AcceptReject/issues/
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Imports: 
     assertthat,

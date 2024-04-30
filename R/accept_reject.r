@@ -156,13 +156,13 @@ accept_reject <-
 
     if (warning && f(xlim[2L]) > 0.01) {
       cli::cli_alert_warning(
-        glue::glue("Warning: f({xlim[2L]}) is {f(xlim[2L])}. If f is defined for x >= f({xlim[2L]}), trying a upper limit might be better.")
+        glue::glue("Warning: f({xlim[2L]}) is {f(xlim[2L])}. If f is defined for x >= {xlim[2L]}, trying a upper limit might be better.")
       )
     }
 
     if (warning && xlim[1L] < 0 && f(xlim[1L]) > 0.01) {
       cli::cli_alert_warning(
-        glue::glue("Warning: f({xlim[1L]}) is {f(xlim[1L])}. If f is defined for x <= f({xlim[1L]}), trying a lower limit might be better.")
+        glue::glue("Warning: f({xlim[1L]}) is {f(xlim[1L])}. If f is defined for x <= {xlim[1L]}, trying a lower limit might be better.")
       )
     }
 
