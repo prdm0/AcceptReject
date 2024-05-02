@@ -1,8 +1,8 @@
 #' @title Print method for accept_reject objects
-#' @description Print method for accept_reject objects
-#' @param x An accept_reject object
-#' @param n_min Minimum number of observations to print
-#' @param ... Additional arguments
+#' @description Print method for accept_reject objects.
+#' @param x An accept_reject object.
+#' @param n_min Minimum number of observations to print.
+#' @param ... Additional arguments.
 #'
 #' @details
 #' The function [print.accept_reject()] is responsible for printing an object of

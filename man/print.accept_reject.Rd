@@ -7,11 +7,11 @@
 \method{print}{accept_reject}(x, n_min = 10L, ...)
 }
 \arguments{
-\item{x}{An accept_reject object}
+\item{x}{An accept_reject object.}
 
-\item{n_min}{Minimum number of observations to print}
+\item{n_min}{Minimum number of observations to print.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
 An object of class \code{character}, providing a formatted output with some
@@ -24,7 +24,7 @@ or when executing the function \code{\link[=print]{print()}} on an object of cla
 \code{accept_reject}, returned by the function \code{\link[=accept_reject]{accept_reject()}}.
 }
 \description{
-Print method for accept_reject objects
+Print method for accept_reject objects.
 }
 \details{
 The function \code{\link[=print.accept_reject]{print.accept_reject()}} is responsible for printing an object of
