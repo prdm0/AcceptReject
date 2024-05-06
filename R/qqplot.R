@@ -60,7 +60,7 @@ qqplot <- function(x, ...) {
 #' )
 #' qqplot(y)
 #'
-#' @seealso [accept_reject()], [plot.accept_reject()], [inspect()] and
+#' @seealso [qqplot.accept_reject()], [accept_reject()], [plot.accept_reject()], [inspect()] and
 #' [qqplot()].
 #'
 #' @importFrom Rcpp evalCpp
@@ -82,9 +82,7 @@ qqplot.accept_reject <-
 
   continuous <- attr(x, "continuous")
   sample_quantiles <- sort(x)
-
-  n <- length(x)
-  p <- seq(1L, n) / (n + 1L)
+  p <- seq(0, 1, length.out = length(x))
   theoretical_quantiles <- quantile(x, probs = p, ...)
 
   df <- data.frame(Theoretical = theoretical_quantiles, Sample = sample_quantiles)

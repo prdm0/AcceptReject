@@ -191,21 +191,22 @@ installed using the following command:</p>
 </h3>
 <p>Among various functions provided by the AcceptReject library, the
 acceptance_rejection function implements the acceptance-rejection
-method. The <code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function has the
-following signature:</p>
+method. The <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function has the following
+signature:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
 <span>  n <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  f <span class="op">=</span> <span class="va">dweibull</span>,</span>
-<span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  f <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  args_f <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  f_base <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  random_base <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  args_f_base <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  linesearch_algorithm <span class="op">=</span> <span class="st">"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"</span>,</span>
-<span>  max_iterations <span class="op">=</span> <span class="fl">1000L</span>,</span>
-<span>  epsilon <span class="op">=</span> <span class="fl">1e-06</span>,</span>
-<span>  start_c <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  warning <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Many of the arguments the user will not need to change, as the
@@ -217,30 +218,28 @@ observations are desired to be generated. The <code>args_f</code>
 argument is a list of arguments that will be passed to the f function.
 The <code>c</code> argument is the value of the constant <code>c</code>
 that will be used in the acceptance-rejection method. If the user does
-not provide a value for <code>c</code>, the
-<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function will calculate the
-value of <code>c</code> that maximizes the probability of accepting
-observations from <span class="math inline">\(Y\)</span> as observations
-from <span class="math inline">\(X\)</span>.</p>
+not provide a value for <code>c</code>, the <code><a href="../reference/accept_reject.html">accept_reject()</a></code>
+function will calculate the value of <code>c</code> that maximizes the
+probability of accepting observations from <span class="math inline">\(Y\)</span> as observations from <span class="math inline">\(X\)</span>.</p>
 <p><strong>Note</strong>:</p>
 
 <div class="rmdnote">
-An important observation is that the
-<code>zmpg::acceptance_rejection()</code> function can work in a
-parallelized manner on Unix-based operating systems. If you use
-operating systems such as Linux or MacOS, you can benefit from
-parallelization of the <code>zmpg::acceptance_rejection()</code>
+An important observation is that the <code><a href="../reference/accept_reject.html">accept_reject()</a></code>
+function can work in a parallelized manner on Unix-based operating
+systems. If you use operating systems such as Linux or MacOS, you can
+benefit from parallelization of the <code><a href="../reference/accept_reject.html">accept_reject()</a></code>
 function. To do this, simply set the <code>parallel = TRUE</code>
 argument. In Windows, parallelization is not supported, and setting the
 <code>parallel = TRUE</code> argument will have no effect.
 </div>
 <p>You do not need to define the <code>c</code> argument when using the
-<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function. By default, if
-<code>c = NULL</code>, the <code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code>
-function will calculate the value of <code>c</code> that maximizes the
-probability of accepting observations from <span class="math inline">\(Y\)</span> as observations from <span class="math inline">\(X\)</span>. However, if you want to set a value
-for <code>c</code>, simply pass a value to the <code>c</code>
-argument.</p>
+<code><a href="../reference/accept_reject.html">accept_reject()</a></code> function. By default, if
+<code>c = NULL</code>, the <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function will
+calculate the value of <code>c</code> that maximizes the probability of
+accepting observations from <span class="math inline">\(Y\)</span> as
+observations from <span class="math inline">\(X\)</span>. However, if
+you want to set a value for <code>c</code>, simply pass a value to the
+<code>c</code> argument.</p>
 <p><strong>Details of the optimization of <code>c</code></strong>:</p>
 
 <div class="rmdnote">
@@ -253,29 +252,20 @@ recommended to use the default value <code>c = NULL</code>. For very
 complicated functions, you may choose a sufficiently large
 <code>c</code> to ensure that the method works well.
 </div>
-<p>The arguments <code>linesearch_algorithm</code>,
-<code>max_iterations</code>, <code>epsilon</code>, <code>start_c</code>,
-and <code>...</code> are arguments that control the optimization
-algorithm of the <code>c</code> value. The
-<code>linesearch_algorithm</code> argument is the line search algorithm
-that will be used in the optimization of the <code>c</code> value. The
-<code>max_iterations</code> argument is the maximum number of iterations
-that the optimization algorithm will perform. The <code>epsilon</code>
-argument is the stopping criterion of the optimization algorithm. The
-<code>start_c</code> argument is the initial value of <code>c</code>
-that will be used in the optimization algorithm. These are arguments
-passed to the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> function, and generally, you
-will not need to change them.</p>
+<p>The <code>...</code> argument allows changing the desired precision
+in the <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code> function, used to optimize the value of
+the constant <code>c</code>. By default,
+<code>tol = .Machine$double.eps^0.25 is used.</code></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Below are some examples of using the
-<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function to generate
-pseudo-random observations of discrete and continuous random variables.
-It should be noted that in the case of <span class="math inline">\(X\)</span> being a discrete random variable, it is
-necessary to provide the argument <code>continuous = FALSE</code>,
+<p>Below are some examples of using the <code><a href="../reference/accept_reject.html">accept_reject()</a></code>
+function to generate pseudo-random observations of discrete and
+continuous random variables. It should be noted that in the case of
+<span class="math inline">\(X\)</span> being a discrete random variable,
+it is necessary to provide the argument <code>continuous = FALSE</code>,
 whereas in the case of <span class="math inline">\(X\)</span> being
 continuous (the default), you must consider
 <code>continuous = TRUE</code>.</p>
@@ -286,11 +276,12 @@ continuous (the default), you must consider
 = 0.7)\)</span>. We will generate <span class="math inline">\(n =
 1000\)</span> observations of <span class="math inline">\(X\)</span>
 using the acceptance-rejection method, using the
-<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function. Note that it is
-necessary to provide the <code>xlim</code> argument. Try to set an upper
-limit value for which the probability of <span class="math inline">\(X\)</span> assuming that value is zero or very
-close to zero. In this case, we choose <code>xlim = c(0, 20)</code>,
-where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
+<code><a href="../reference/accept_reject.html">accept_reject()</a></code> function. Note that it is necessary to
+provide the <code>xlim</code> argument. Try to set an upper limit value
+for which the probability of <span class="math inline">\(X\)</span>
+assuming that value is zero or very close to zero. In this case, we
+choose <code>xlim = c(0, 20)</code>, where
+<code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 (1.6286586^{-22}).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
@@ -320,9 +311,9 @@ where <code>dpois(x = 20, lambda = 0.7)</code> is very close to zero
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 1000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 0 0 1 2 1 0 0 1 0...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 9.9317</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.1007</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0 1 0 1 0 1 0 0 0 0...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -375,9 +366,9 @@ variable <span class="math inline">\(X \sim Binomial(n = 5, p =
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: discrete</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 38.2549</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.0261</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 2 2 3 3 3 3 2 3 2 3...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 6.25</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.16</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 3 1 4 2 3 1 2 4 2 2...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = 0 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -434,9 +425,9 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 2000</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -0.9409 0.7965 0.4243 -0.179 0.599 -0.3794 0.0035 0.3812 1.694 0.081...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 1.2864 1.0329 -2.3522 -0.9272 2.1587 -0.0184 1.7409 1.2134 -2.9956 -1.8622...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -455,15 +446,15 @@ method. Note that <code>continuous = TRUE</code>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="st">"True density"</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="accept_reject_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>In the examples above, the graphs were built without using the
-<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function. This is just to show that
+<code><a href="../reference/plot.accept_reject.html">plot.accept_reject()</a></code> function. This is just to show that
 you can manipulate the returning object using the
-<code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function, that is, the class
-object <code>accept_reject</code>.</p>
-<p>However, the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function can be used
+<code><a href="../reference/accept_reject.html">accept_reject()</a></code> function, that is, the class object
+<code>accept_reject</code>.</p>
+<p>However, the <code><a href="../reference/plot.accept_reject.html">plot.accept_reject()</a></code> function can be used
 to generate graphs in a simpler way. Below, an example of how to use the
-<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function to generate the probability
+<code><a href="../reference/plot.accept_reject.html">plot.accept_reject()</a></code> function to generate the probability
 density plot of the normal distribution. However, note that the
-<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">AcceptReject::plot()</a></code> function makes the plotting task
+<code><a href="../reference/plot.accept_reject.html">plot.accept_reject()</a></code> function makes the plotting task
 simpler and more direct. See the following example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
@@ -519,10 +510,10 @@ simpler and more direct. See the following example:</p>
 <div class="section level3">
 <h3 id="accessing-metadata">Accessing metadata<a class="anchor" aria-label="anchor" href="#accessing-metadata"></a>
 </h3>
-<p>The <code><a href="../reference/accept_reject.html">AcceptReject::accept_reject()</a></code> function returns an
-object of class <code>accept_reject</code>. When executing the
-<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> function on an object of this class, an organized
-output will be shown. However, you can operate on this instance of the
+<p>The <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function returns an object of class
+<code>accept_reject</code>. When executing the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>
+function on an object of this class, an organized output will be shown.
+However, you can operate on this instance of the
 <code>accept_reject</code> class as any atomic vector. In the example
 below, notice that you can obtain a histogram with the
 <code><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist()</a></code> function or check the size of the vector of
@@ -569,7 +560,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; &lt;partialised&gt;</span></span>
 <span><span class="co">#&gt; function (...) </span></span>
 <span><span class="co">#&gt; f(mean = 0, sd = 1, ...)</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x62b16df07600&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x5c92c5b1dac0&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $args_f</span></span>
 <span><span class="co">#&gt; $args_f$mean</span></span>
@@ -580,7 +571,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $c</span></span>
-<span><span class="co">#&gt; [1] 25</span></span>
+<span><span class="co">#&gt; [1] 3.191538</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $continuous</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -590,7 +581,7 @@ function. Check the list of attributes by doing:</p>
 <span></span>
 <span><span class="co"># Accessing the value c</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"c"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 25</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 3.191538</span></span></code></pre></div>
 <p>In any case, it is important to highlight that, in general, you will
 not need to access these attributes. The greatest interest will be in
 having access to the vector of observations generated. If you want to
@@ -616,9 +607,9 @@ example:</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> It's not necessary, but if you want to extract the observations, use as.vector().</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Case: continuous</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Number of observations: 100</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 25</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.04</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: 0.1985 1.684 0.273 -1.2779 -1.6982 -0.82 -0.4333 0.1548 -0.1103 -0.501...</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> c: 3.1915</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Probability of acceptance (1/c): 0.3133</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Observations: -0.8843 1.2379 0.7305 -0.021 -0.5377 0.0052 -0.5952 1.266 -0.0175 -0.3715...</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> xlim = -4 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -626,23 +617,26 @@ example:</p>
 <span><span class="co"># Coercing the object into an atomic vector without attributes</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   [1]  0.19853714  1.68400472  0.27297236 -1.27789195 -1.69815440 -0.81995657</span></span>
-<span><span class="co">#&gt;   [7] -0.43331207  0.15479767 -0.11034613 -0.50104928  0.11907357  0.53833348</span></span>
-<span><span class="co">#&gt;  [13]  0.65937216 -1.07680823 -0.60167118  1.77737626 -1.54319260 -0.81523076</span></span>
-<span><span class="co">#&gt;  [19]  1.02921457 -0.11562066  1.09866322  1.27008217 -0.69545136 -0.28253562</span></span>
-<span><span class="co">#&gt;  [25]  0.06408453  0.33515361  1.59159215 -0.33169810  0.11602873 -0.49082571</span></span>
-<span><span class="co">#&gt;  [31]  0.02446084 -2.89226189  0.58729390  1.38218019 -0.94486148 -0.54905466</span></span>
-<span><span class="co">#&gt;  [37]  0.39958276 -0.93533867  0.31234235  1.39915643  1.44483098  0.83871561</span></span>
-<span><span class="co">#&gt;  [43]  0.32798322  1.22021233 -0.48713558  0.91206529  0.11689569  0.36313434</span></span>
-<span><span class="co">#&gt;  [49] -0.81670148  0.96150491 -0.13874147  0.51853487  1.40700707 -0.52408607</span></span>
-<span><span class="co">#&gt;  [55] -0.14711866  0.48950156  0.85823437 -0.89064802  0.52635724 -0.36671539</span></span>
-<span><span class="co">#&gt;  [61] -0.86935386  0.79653021 -0.74436529  0.60129225  0.42110091  0.32738987</span></span>
-<span><span class="co">#&gt;  [67]  0.56820063  0.23930671 -0.47147973  1.92246472  0.36439048  0.05322617</span></span>
-<span><span class="co">#&gt;  [73] -0.23675598 -1.55676159 -0.47666371 -2.23034512  1.05962174 -0.28899841</span></span>
-<span><span class="co">#&gt;  [79] -0.43227133  1.42349766  1.84075538 -2.01928399  0.40548820  0.77424370</span></span>
-<span><span class="co">#&gt;  [85]  0.90516555  1.06431170 -0.83429438 -1.33406662  1.36695063  0.32067664</span></span>
-<span><span class="co">#&gt;  [91] -2.21849215  0.15807229  0.19880634  0.36106371  0.48554930 -0.46516608</span></span>
-<span><span class="co">#&gt;  [97]  0.76701332 -1.39184940  1.01085362 -0.52030811</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] -0.884300686  1.237916782  0.730452033 -0.020969238 -0.537684873</span></span>
+<span><span class="co">#&gt;   [6]  0.005160321 -0.595158529  1.265968353 -0.017486773 -0.371506846</span></span>
+<span><span class="co">#&gt;  [11]  0.862292295  0.672636049 -0.008881878 -0.004335830  1.799664292</span></span>
+<span><span class="co">#&gt;  [16] -0.144384425 -0.375649925  1.414700381 -0.142955763 -0.512890248</span></span>
+<span><span class="co">#&gt;  [21]  1.214014906 -1.426491648 -0.335570900 -0.789570918  2.328796349</span></span>
+<span><span class="co">#&gt;  [26] -1.935499994 -0.402352029 -0.645955391 -0.619398503 -0.996748215</span></span>
+<span><span class="co">#&gt;  [31]  0.089246217 -0.139643574 -0.111617487  1.344497407  1.071883820</span></span>
+<span><span class="co">#&gt;  [36] -0.818856794 -0.987588339  0.570187641 -0.228377435  0.832923556</span></span>
+<span><span class="co">#&gt;  [41] -0.488165969 -0.301001403  0.672187231  1.241363853  0.958037097</span></span>
+<span><span class="co">#&gt;  [46] -0.005516769 -0.773214558  2.338708282 -0.246145425  0.030920289</span></span>
+<span><span class="co">#&gt;  [51] -0.195434039  1.434930967 -0.055245180 -0.476447430 -0.245117888</span></span>
+<span><span class="co">#&gt;  [56]  1.703198925 -0.185116883 -0.732147191  1.833668537  0.220142737</span></span>
+<span><span class="co">#&gt;  [61]  1.103287160  0.380271858 -0.957886273 -2.288235800 -1.741464285</span></span>
+<span><span class="co">#&gt;  [66]  0.793730455 -0.168553168 -0.575795487 -0.618257321 -1.186362244</span></span>
+<span><span class="co">#&gt;  [71]  0.096642327  0.651305571 -0.683857242 -0.277836451  1.187555924</span></span>
+<span><span class="co">#&gt;  [76] -1.789664479 -0.975050317 -0.027773783 -1.749138258  1.365316559</span></span>
+<span><span class="co">#&gt;  [81] -0.590321852 -0.951668080  1.729699053 -2.679250218 -1.679565914</span></span>
+<span><span class="co">#&gt;  [86] -0.483523101  1.079006450 -2.266770320  1.604207372 -0.337534644</span></span>
+<span><span class="co">#&gt;  [91] -1.033202954 -1.062941184  0.926517019 -0.769777745  0.312817041</span></span>
+<span><span class="co">#&gt;  [96] -1.398557486  1.643004848  0.425445648  0.238909276 -0.267563256</span></span></code></pre></div>
 <p><strong>Important</strong>:</p>
 
 <div class="rmdnote">

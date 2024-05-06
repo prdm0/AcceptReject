@@ -10,15 +10,17 @@ arma::vec one_step(unsigned long int n, Function f, Function f_base, Function ra
   arma::vec x(n);
   arma::vec x_cand(n);
   arma::vec fx_cand(n);
+  arma::vec fx_base(n);
   arma::vec u(n);
-  arma::uvec accepted(n);
   unsigned long int filled = 0;
 
   while (filled < n) {
     x_cand = as<arma::vec>(random_base(n));
     fx_cand = as<arma::vec>(f(wrap(x_cand)));
-    u = as<arma::vec>(runif(n));
-    accepted = find(u <= fx_cand / (c * as<arma::vec>(f_base(wrap(x_cand)))));
+    fx_base = as<arma::vec>(f_base(wrap(x_cand)));
+    fx_base *= c;
+    u = arma::randu<arma::vec>(n);
+    arma::uvec accepted = find(u <= fx_cand / fx_base);
 
     unsigned long int num_accepted = accepted.n_elem;
     if (num_accepted > 0) {

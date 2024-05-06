@@ -90,34 +90,35 @@ library(AcceptReject)
 
 ## Using the `accept_reject` Function
 
-Among various functions provided by the AcceptReject library, the acceptance_rejection function implements the acceptance-rejection method. The `AcceptReject::accept_reject()` function has the following signature:
+Among various functions provided by the AcceptReject library, the acceptance_rejection function implements the acceptance-rejection method. The `accept_reject()` function has the following signature:
 
 ```{r, eval = FALSE}
 accept_reject(
   n = 1L,
   continuous = TRUE,
-  f = dweibull,
-  args_f = list(shape = 1, scale = 1),
-  xlim = c(0, 100),
+  f = NULL,
+  args_f = NULL,
+  f_base = NULL,
+  random_base = NULL,
+  args_f_base = NULL,
+  xlim = NULL,
   c = NULL,
-  linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
-  max_iterations = 1000L,
-  epsilon = 1e-06,
-  start_c = 25,
   parallel = FALSE,
+  cores = NULL,
+  warning = TRUE,
   ...
 )
 ```
 
-Many of the arguments the user will not need to change, as the `AcceptReject::accept_reject()` function already has default values for them. However, it is important to note that the f argument is the probability density function (pdf) or probability function (pf) of the random variable $X$ from which observations are desired to be generated. The `args_f` argument is a list of arguments that will be passed to the f function. The `c` argument is the value of the constant `c` that will be used in the acceptance-rejection method. If the user does not provide a value for `c`, the `AcceptReject::accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$.
+Many of the arguments the user will not need to change, as the `AcceptReject::accept_reject()` function already has default values for them. However, it is important to note that the f argument is the probability density function (pdf) or probability function (pf) of the random variable $X$ from which observations are desired to be generated. The `args_f` argument is a list of arguments that will be passed to the f function. The `c` argument is the value of the constant `c` that will be used in the acceptance-rejection method. If the user does not provide a value for `c`, the `accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$.
 
 **Note**:
 
 ```{block2, type='rmdnote'}
-An important observation is that the `zmpg::acceptance_rejection()` function can work in a parallelized manner on Unix-based operating systems. If you use operating systems such as Linux or MacOS, you can benefit from parallelization of the `zmpg::acceptance_rejection()` function. To do this, simply set the `parallel = TRUE` argument. In Windows, parallelization is not supported, and setting the `parallel = TRUE` argument will have no effect.
+An important observation is that the `accept_reject()` function can work in a parallelized manner on Unix-based operating systems. If you use operating systems such as Linux or MacOS, you can benefit from parallelization of the `accept_reject()` function. To do this, simply set the `parallel = TRUE` argument. In Windows, parallelization is not supported, and setting the `parallel = TRUE` argument will have no effect.
 ```
 
-You do not need to define the `c` argument when using the `AcceptReject::accept_reject()` function. By default, if `c = NULL`, the `AcceptReject::accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$. However, if you want to set a value for `c`, simply pass a value to the `c` argument.
+You do not need to define the `c` argument when using the `accept_reject()` function. By default, if `c = NULL`, the `accept_reject()` function will calculate the value of `c` that maximizes the probability of accepting observations from $Y$ as observations from $X$. However, if you want to set a value for `c`, simply pass a value to the `c` argument.
 
 **Details of the optimization of `c`**:
 
@@ -125,15 +126,15 @@ You do not need to define the `c` argument when using the `AcceptReject::accept_
 Depending on how complicated the probability density function (pdf) or probability function (pf) of the random variable $X$ from which observations are desired to be generated is, optimizing the value of `c` can be a difficult optimization process, but generally, it is not. Therefore, unless you have reasons to set a value for `c`, it is recommended to use the default value `c = NULL`. For very complicated functions, you may choose a sufficiently large `c` to ensure that the method works well.
 ```
 
-The arguments `linesearch_algorithm`, `max_iterations`, `epsilon`, `start_c`, and `...` are arguments that control the optimization algorithm of the `c` value. The `linesearch_algorithm` argument is the line search algorithm that will be used in the optimization of the `c` value. The `max_iterations` argument is the maximum number of iterations that the optimization algorithm will perform. The `epsilon` argument is the stopping criterion of the optimization algorithm. The `start_c` argument is the initial value of `c` that will be used in the optimization algorithm. These are arguments passed to the `lbfgs::lbfgs()` function, and generally, you will not need to change them.
+The `...` argument allows changing the desired precision in the `optimize()` function, used to optimize the value of the constant `c`. By default, `tol = .Machine$double.eps^0.25 is used.`
 
 # Examples
 
-Below are some examples of using the `AcceptReject::accept_reject()` function to generate pseudo-random observations of discrete and continuous random variables. It should be noted that in the case of $X$ being a discrete random variable, it is necessary to provide the argument `continuous = FALSE`, whereas in the case of $X$ being continuous (the default), you must consider `continuous = TRUE`.
+Below are some examples of using the `accept_reject()` function to generate pseudo-random observations of discrete and continuous random variables. It should be noted that in the case of $X$ being a discrete random variable, it is necessary to provide the argument `continuous = FALSE`, whereas in the case of $X$ being continuous (the default), you must consider `continuous = TRUE`.
 
 ## Generating discrete observations
 
-As an example, let $X \sim Poisson(\lambda = 0.7)$. We will generate $n = 1000$ observations of $X$ using the acceptance-rejection method, using the `AcceptReject::accept_reject()` function. Note that it is necessary to provide the `xlim` argument. Try to set an upper limit value for which the probability of $X$ assuming that value is zero or very close to zero. In this case, we choose `xlim = c(0, 20)`, where `dpois(x = 20, lambda = 0.7)` is very close to zero (`r dpois(x = 20, lambda = 0.7)`).
+As an example, let $X \sim Poisson(\lambda = 0.7)$. We will generate $n = 1000$ observations of $X$ using the acceptance-rejection method, using the `accept_reject()` function. Note that it is necessary to provide the `xlim` argument. Try to set an upper limit value for which the probability of $X$ assuming that value is zero or very close to zero. In this case, we choose `xlim = c(0, 20)`, where `dpois(x = 20, lambda = 0.7)` is very close to zero (`r dpois(x = 20, lambda = 0.7)`).
 
 ```{r}
 library(AcceptReject)
@@ -250,10 +251,10 @@ lines(x, y, col = "red", lwd = 2)
 legend("topright", legend = "True density", col = "red", lwd = 2)
 ```
 
-In the examples above, the graphs were built without using the `AcceptReject::plot()` function. This is just to show that you can manipulate the returning object using the `AcceptReject::accept_reject()` function, that is, the class object
+In the examples above, the graphs were built without using the `plot.accept_reject()` function. This is just to show that you can manipulate the returning object using the `accept_reject()` function, that is, the class object
 `accept_reject`.
 
-However, the `AcceptReject::plot()` function can be used to generate graphs in a simpler way. Below, an example of how to use the `AcceptReject::plot()` function to generate the probability density plot of the normal distribution. However, note that the `AcceptReject::plot()` function makes the plotting task simpler and more direct. See the following example:
+However, the `plot.accept_reject()` function can be used to generate graphs in a simpler way. Below, an example of how to use the `plot.accept_reject()` function to generate the probability density plot of the normal distribution. However, note that the `plot.accept_reject()` function makes the plotting task simpler and more direct. See the following example:
 
 ```{r}
 library(AcceptReject)
@@ -310,7 +311,7 @@ plot_grid(a, b, c, d, nrow = 2L, labels = c("a", "b", "c", "d"))
 
 ## Accessing metadata
 
-The `AcceptReject::accept_reject()` function returns an object of class `accept_reject`. When executing the `print()` function on an object of this class, an organized output will be shown. However, you can operate on this instance of the `accept_reject` class as any atomic vector. In the example below, notice that you can obtain a histogram with the `hist()` function or check the size of the vector of observations generated using the `length()` function.
+The `accept_reject()` function returns an object of class `accept_reject`. When executing the `print()` function on an object of this class, an organized output will be shown. However, you can operate on this instance of the `accept_reject` class as any atomic vector. In the example below, notice that you can obtain a histogram with the `hist()` function or check the size of the vector of observations generated using the `length()` function.
 
 ```{r}
 library(AcceptReject)

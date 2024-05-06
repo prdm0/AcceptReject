@@ -143,10 +143,10 @@ package might be what you need. 🎉
 
 As an example, let $X \sim Poisson(\lambda = 0.7)$. We will generate
 $n = 1000$ observations of $X$ using the acceptance-rejection method,
-using the `AcceptReject::accept_reject()` function. Note that it is
-necessary to provide the `xlim` argument. Try to set an upper limit
-value for which the probability of $X$ assuming that value is zero or
-very close to zero. In this case, we choose `xlim = c(0, 6)`, where
+using the `accept_reject()` function. Note that it is necessary to
+provide the `xlim` argument. Try to set an upper limit value for which
+the probability of $X$ assuming that value is zero or very close to
+zero. In this case, we choose `xlim = c(0, 6)`, where
 `dpois(x = 6, lambda = 0.7)` is very close to zero (8.1142728^{-5}).
 
 ``` r
@@ -361,7 +361,7 @@ case_1 <- accept_reject(
   xlim = c(0, 6)
 )
 toc()
-#> 0.008 sec elapsed
+#> 0.005 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -377,7 +377,7 @@ case_2 <- accept_reject(
   c = 1.2
 )
 toc()
-#> 0.005 sec elapsed
+#> 0.004 sec elapsed
 
 # Visualizing the results
 p1 <- plot(case_1)

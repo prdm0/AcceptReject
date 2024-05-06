@@ -71,6 +71,6 @@ qqplot(y)
 
 }
 \seealso{
-\code{\link[=accept_reject]{accept_reject()}}, \code{\link[=plot.accept_reject]{plot.accept_reject()}}, \code{\link[=inspect]{inspect()}} and
+\code{\link[=qqplot.accept_reject]{qqplot.accept_reject()}}, \code{\link[=accept_reject]{accept_reject()}}, \code{\link[=plot.accept_reject]{plot.accept_reject()}}, \code{\link[=inspect]{inspect()}} and
 \code{\link[=qqplot]{qqplot()}}.
 }

@@ -53,7 +53,7 @@
 #'    n = 1000L,
 #'    f = dbinom,
 #'    continuous = FALSE,
-#'    args_f = list(size = 5, prob = 0.5),
+#'    args_f = list(size = 10, prob = 0.5),
 #'    xlim = c(0, 10)
 #' )
 #' plot(x)

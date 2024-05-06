@@ -14,10 +14,6 @@ accept_reject(
   args_f_base = NULL,
   xlim = NULL,
   c = NULL,
-  linesearch_algorithm = "LBFGS_LINESEARCH_BACKTRACKING_ARMIJO",
-  max_iterations = 0L,
-  epsilon = 1e-05,
-  start_c = 25,
   parallel = FALSE,
   cores = NULL,
   warning = TRUE,
@@ -27,67 +23,88 @@ accept_reject(
 \arguments{
 \item{n}{The number of random numbers to generate.}
 
-\item{continuous}{A logical value indicating whether the pdf is continuous or discrete. Default is \code{TRUE}.}
+\item{continuous}{A logical value indicating whether the pdf is continuous or
+discrete. Default is \code{TRUE}.}
 
-\item{f}{The probability density function (\code{continuous = TRUE}), in the continuous case or the probability mass function, in the discrete case (\code{continuous = FALSE}).}
+\item{f}{The probability density function (\code{continuous = TRUE}), in the
+continuous case or the probability mass function, in the discrete case
+(\code{continuous = FALSE}).}
 
-\item{args_f}{A list of arguments to be passed to the \code{f} function. It refers to the list of arguments of the target distribution.}
+\item{args_f}{A list of arguments to be passed to the \code{f} function. It refers
+to the list of arguments of the target distribution.}
 
-\item{f_base}{Base probability density function (for continuous case).If \code{f_base = NULL},
-a uniform distribution will be used. In the discrete case, this argument is ignored,
-and a uniform probability mass function will be used as the base.}
+\item{f_base}{Base probability density function (for continuous case).If
+\code{f_base = NULL}, a uniform distribution will be used. In the discrete case,
+this argument is ignored, and a uniform probability mass function will be
+used as the base.}
 
-\item{random_base}{Random number generation function for the base distribution passed as an argument to \code{f_base}.
-If \code{random_base = NULL} (default), the uniform generator will be used. In the discrete case, this argument is
+\item{random_base}{Random number generation function for the base
+distribution passed as an argument to \code{f_base}.
+If \code{random_base = NULL} (default), the uniform generator will be used. In the
+discrete case, this argument is
 disregarded, and the uniform random number generator function will be used.}
 
-\item{args_f_base}{A list of arguments for the base distribution. This refers to the list of arguments that will be passed to the function \code{f_base}.
+\item{args_f_base}{A list of arguments for the base distribution. This refers
+to the list of arguments that will be passed to the function \code{f_base}.
 It will be disregarded in the discrete case.}
 
-\item{xlim}{A vector specifying the range of values for the random numbers in the form \code{c(min, max)}. Default is \code{c(0, 100)}.}
+\item{xlim}{A vector specifying the range of values for the random numbers in
+the form \code{c(min, max)}. Default is \code{c(0, 100)}.}
 
-\item{c}{A constant value used in the acceptance-rejection method. If \code{NULL}, it will be estimated using the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization algorithm. Default is \code{NULL}.}
+\item{c}{A constant value used in the acceptance-rejection method. If \code{NULL},
+\code{c} will be estimated automatically.}
 
-\item{linesearch_algorithm}{The linesearch algorithm to be used in the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization. Default is \code{"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"}.}
+\item{parallel}{A logical value indicating whether to use parallel processing
+for generating random numbers. Default is \code{FALSE}.}
 
-\item{max_iterations}{The maximum number of iterations for the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization. Default is \code{1000}.}
+\item{cores}{The number of cores to be used in parallel processing. Default
+is \code{NULL}, i.e, all available cores.}
 
-\item{epsilon}{The convergence criterion for the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization. Default is \code{1e-6}.}
+\item{warning}{A logical value indicating whether to show warnings. Default
+is \code{TRUE}.}
 
-\item{start_c}{The initial value for the constant \code{c} in the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization. Default is \code{25}.}
-
-\item{parallel}{A logical value indicating whether to use parallel processing for generating random numbers. Default is \code{FALSE}.}
-
-\item{cores}{The number of cores to be used in parallel processing. Default is \code{NULL}, i.e, all available cores.}
-
-\item{warning}{A logical value indicating whether to show warnings. Default is \code{TRUE}.}
-
-\item{...}{Additional arguments to be passed to the \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}} optimization algorithm. For details, see \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}.}
+\item{...}{Additional arguments to be passed to the \code{\link[=optimize]{optimize()}}. With this
+argument, it is possible to change the tol argument of \code{\link[=optimize]{optimize()}}.
+Default is \verb{tol = .Machine$double.eps^0.25)}.}
 }
 \value{
-A vector of random numbers generated using the acceptance-rejection method.
-The return is an object of \verb{class accept_reject}, but it can be treated as an atomic vector.
+A vector of random numbers generated using the acceptance-rejection
+method. The return is an object of \verb{class accept_reject}, but it can be
+treated as an atomic vector.
 }
 \description{
 This function implements the acceptance-rejection method for generating random numbers from a given probability density function (pdf).
 }
 \details{
-In situations where we cannot use the inversion method (situations where it is not possible to obtain the quantile function) and we do not know a transformation that involves a random variable from which we can generate observations, we can use the acceptance and rejection method.
-Suppose that \eqn{X} and \eqn{Y} are random variables with probability density function (pdf) or probability function (pf) \eqn{f} and \eqn{g}, respectively. In addition, suppose that there is a constant \eqn{c} such that
+In situations where we cannot use the inversion method (situations where it
+is not possible to obtain the quantile function) and we do not know a
+transformation that involves a random variable from which we can generate
+observations, we can use the acceptance and rejection method.
+Suppose that \eqn{X} and \eqn{Y} are random variables with probability
+density function (pdf) or probability function (pf) \eqn{f} and \eqn{g},
+respectively. In addition, suppose that there is a constant \eqn{c} such that
 
 \deqn{f(x) \leq c \cdot g(x), \quad \forall x \in \mathbb{R}.}
 
-for all values of \eqn{t}, with \eqn{f(t)>0}. To use the acceptance and rejection method to generate observations from the random variable \eqn{X}, using the algorithm below, first find a random variable \eqn{Y} with pdf or pf \eqn{g}, that satisfies the above condition.
+for all values of \eqn{t}, with \eqn{f(t)>0}. To use the acceptance and
+rejection method to generate observations from the random variable \eqn{X},
+using the algorithm below, first find a random variable \eqn{Y} with pdf or
+pf \eqn{g}, that satisfies the above condition.
 
 Algorithm of the Acceptance and Rejection Method:
 
-1 - Generate an observation \eqn{y} from a random variable \eqn{Y} with pdf/pf \eqn{g};
+1 - Generate an observation \eqn{y} from a random variable \eqn{Y} with
+pdf/pf \eqn{g};
 
 2 - Generate an observation \eqn{u} from a random variable \eqn{U\sim \mathcal{U} (0, 1)};
 
-3 - If \eqn{u < \frac{f(y)}{cg(y)}} accept \eqn{x = y}; otherwise reject \eqn{y} as an observation of the random variable \eqn{X} and return to step 1.
+3 - If \eqn{u < \frac{f(y)}{cg(y)}} accept \eqn{x = y}; otherwise reject
+\eqn{y} as an observation of the random variable \eqn{X} and return to step 1.
 
-Proof: Let's consider the discrete case, that is, \eqn{X} and \eqn{Y} are random variables with pf's \eqn{f} and \eqn{g}, respectively. By step 3 of the above algorithm, we have that \eqn{{accept} = {x = y} = u < \frac{f(y)}{cg(y)}}. That is,
+Proof: Let's consider the discrete case, that is, \eqn{X} and \eqn{Y} are
+random variables with pf's \eqn{f} and \eqn{g}, respectively. By step 3 of
+the above algorithm, we have that \eqn{{accept} = {x = y} = u < \frac{f(y)}{cg(y)}}.
+That is,
 
 \eqn{P(accept | Y = y) = \frac{P(accept \cap {Y = y})}{g(y)} = \frac{P(U \leq f(y)/cg(y)) \times g(y)}{g(y)} = \frac{f(y)}{cg(y)}.}
 
@@ -101,7 +118,7 @@ Therefore, by the acceptance and rejection method we accept the occurrence of $Y
 
 The result above shows that accepting \eqn{x = y} by the procedure of the algorithm is equivalent to accepting a value from \eqn{X} that has pf \eqn{f}.
 
-The argument \code{c = NULL} is the default. Thus, the function \code{\link[=accept_reject]{accept_reject()}} estimates the value of c using the optimization algorithm \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}. For more details, see \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}.
+The argument \code{c = NULL} is the default. Thus, the function \code{\link[=accept_reject]{accept_reject()}} estimates the value of \code{c} using the optimization algorithm \code{\link[=optimize]{optimize()}} using the Brent method. For more details, see \code{\link[=optimize]{optimize()}} function.
 If a value of \code{c} is provided, the function \code{\link[=accept_reject]{accept_reject()}} will use this value to generate the random observations. An inappropriate choice of c can lead to low efficiency of the acceptance and rejection method.
 
 In Unix-based operating systems, the function \code{\link[=accept_reject]{accept_reject()}} can be executed in parallel. To do this, simply set the argument \code{parallel = TRUE}.
@@ -118,6 +135,12 @@ should be \code{NULL}, and if they are passed, they will be disregarded, as for
 the discrete case, the discrete uniform distribution will always be
 considered as the base. Sampling from the discrete uniform distribution
 has shown good performance for the discrete case.
+
+The advantage of using parallelism in Unix-based systems is relative and
+should be tested for each case. Significant improvement is observed when
+considering parallelism for very large values of n. It is advisable to
+conduct benchmarking studies to evaluate the efficiency of parallelism in a
+practical situation.
 }
 \examples{
 set.seed(0) # setting a seed for reproducibility
@@ -142,15 +165,19 @@ plot(y)
 
 }
 \references{
-Neumann V (1951). “Various techniques used in connection with random digits.” Notes by
+BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
+
+Brent, R. (1973) Algorithms for Minimization without Derivatives. Englewood Cliffs N.J.: Prentice-Hall.
+
+CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes.
+Lecture Notes-Monograph Series, p. 342-347, 2004.
+
+NEUMANN V (1951). “Various techniques used in connection with random digits.” Notes by
 GE Forsythe, pp. 36–38.
 
-CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.
-
 NEAL, Radford M. Slice sampling. The Annals of Statistics, v. 31, n. 3, p. 705-767, 2003.
-
-BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.
 }
 \seealso{
-\code{\link[parallel:mclapply]{parallel::mclapply()}} and \code{\link[lbfgs:lbfgs]{lbfgs::lbfgs()}}.
+\code{\link[=inspect]{inspect()}}, \code{\link[=plot.accept_reject]{plot.accept_reject()}}, \code{\link[=qqplot.accept_reject]{qqplot.accept_reject()}},
+\code{\link[parallel:mclapply]{parallel::mclapply()}} and \code{\link[=optimize]{optimize()}}.
 }
