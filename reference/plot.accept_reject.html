@@ -28,6 +28,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
     <a class="dropdown-item" href="../articles/inspect.html">Specifying a base probability density function</a>
+    <a class="dropdown-item" href="../articles/qqplot.html">QQ-Plot</a>
   </div>
 </li>
 <li class="nav-item">
@@ -146,7 +147,7 @@ for inspection and expects an object of class <code>accept_reject</code> as an a
 <span class="r-in"><span>   n <span class="op">=</span> <span class="fl">1000L</span>,</span></span>
 <span class="r-in"><span>   f <span class="op">=</span> <span class="va">dbinom</span>,</span></span>
 <span class="r-in"><span>   continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>   args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

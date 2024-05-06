@@ -26,6 +26,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
     <a class="dropdown-item" href="../articles/inspect.html">Specifying a base probability density function</a>
+    <a class="dropdown-item" href="../articles/qqplot.html">QQ-Plot</a>
   </div>
 </li>
 <li class="nav-item">
@@ -68,10 +69,6 @@
 <span>  args_f_base <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  c <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  linesearch_algorithm <span class="op">=</span> <span class="st">"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"</span>,</span>
-<span>  max_iterations <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  epsilon <span class="op">=</span> <span class="fl">1e-05</span>,</span>
-<span>  start_c <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  warning <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -86,99 +83,112 @@
 
 
 <dt>continuous</dt>
-<dd><p>A logical value indicating whether the pdf is continuous or discrete. Default is <code>TRUE</code>.</p></dd>
+<dd><p>A logical value indicating whether the pdf is continuous or
+discrete. Default is <code>TRUE</code>.</p></dd>
 
 
 <dt>f</dt>
-<dd><p>The probability density function (<code>continuous = TRUE</code>), in the continuous case or the probability mass function, in the discrete case (<code>continuous = FALSE</code>).</p></dd>
+<dd><p>The probability density function (<code>continuous = TRUE</code>), in the
+continuous case or the probability mass function, in the discrete case
+(<code>continuous = FALSE</code>).</p></dd>
 
 
 <dt>args_f</dt>
-<dd><p>A list of arguments to be passed to the <code>f</code> function. It refers to the list of arguments of the target distribution.</p></dd>
+<dd><p>A list of arguments to be passed to the <code>f</code> function. It refers
+to the list of arguments of the target distribution.</p></dd>
 
 
 <dt>f_base</dt>
-<dd><p>Base probability density function (for continuous case).If <code>f_base = NULL</code>,
-a uniform distribution will be used. In the discrete case, this argument is ignored,
-and a uniform probability mass function will be used as the base.</p></dd>
+<dd><p>Base probability density function (for continuous case).If
+<code>f_base = NULL</code>, a uniform distribution will be used. In the discrete case,
+this argument is ignored, and a uniform probability mass function will be
+used as the base.</p></dd>
 
 
 <dt>random_base</dt>
-<dd><p>Random number generation function for the base distribution passed as an argument to <code>f_base</code>.
-If <code>random_base = NULL</code> (default), the uniform generator will be used. In the discrete case, this argument is
+<dd><p>Random number generation function for the base
+distribution passed as an argument to <code>f_base</code>.
+If <code>random_base = NULL</code> (default), the uniform generator will be used. In the
+discrete case, this argument is
 disregarded, and the uniform random number generator function will be used.</p></dd>
 
 
 <dt>args_f_base</dt>
-<dd><p>A list of arguments for the base distribution. This refers to the list of arguments that will be passed to the function <code>f_base</code>.
+<dd><p>A list of arguments for the base distribution. This refers
+to the list of arguments that will be passed to the function <code>f_base</code>.
 It will be disregarded in the discrete case.</p></dd>
 
 
 <dt>xlim</dt>
-<dd><p>A vector specifying the range of values for the random numbers in the form <code>c(min, max)</code>. Default is <code>c(0, 100)</code>.</p></dd>
+<dd><p>A vector specifying the range of values for the random numbers in
+the form <code>c(min, max)</code>. Default is <code>c(0, 100)</code>.</p></dd>
 
 
 <dt>c</dt>
-<dd><p>A constant value used in the acceptance-rejection method. If <code>NULL</code>, it will be estimated using the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization algorithm. Default is <code>NULL</code>.</p></dd>
-
-
-<dt>linesearch_algorithm</dt>
-<dd><p>The linesearch algorithm to be used in the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization. Default is <code>"LBFGS_LINESEARCH_BACKTRACKING_ARMIJO"</code>.</p></dd>
-
-
-<dt>max_iterations</dt>
-<dd><p>The maximum number of iterations for the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization. Default is <code>1000</code>.</p></dd>
-
-
-<dt>epsilon</dt>
-<dd><p>The convergence criterion for the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization. Default is <code>1e-6</code>.</p></dd>
-
-
-<dt>start_c</dt>
-<dd><p>The initial value for the constant <code>c</code> in the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization. Default is <code>25</code>.</p></dd>
+<dd><p>A constant value used in the acceptance-rejection method. If <code>NULL</code>,
+<code>c</code> will be estimated automatically.</p></dd>
 
 
 <dt>parallel</dt>
-<dd><p>A logical value indicating whether to use parallel processing for generating random numbers. Default is <code>FALSE</code>.</p></dd>
+<dd><p>A logical value indicating whether to use parallel processing
+for generating random numbers. Default is <code>FALSE</code>.</p></dd>
 
 
 <dt>cores</dt>
-<dd><p>The number of cores to be used in parallel processing. Default is <code>NULL</code>, i.e, all available cores.</p></dd>
+<dd><p>The number of cores to be used in parallel processing. Default
+is <code>NULL</code>, i.e, all available cores.</p></dd>
 
 
 <dt>warning</dt>
-<dd><p>A logical value indicating whether to show warnings. Default is <code>TRUE</code>.</p></dd>
+<dd><p>A logical value indicating whether to show warnings. Default
+is <code>TRUE</code>.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Additional arguments to be passed to the <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code> optimization algorithm. For details, see <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code>.</p></dd>
+<dd><p>Additional arguments to be passed to the <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code>. With this
+argument, it is possible to change the tol argument of <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code>.
+Default is <code>tol = .Machine$double.eps^0.25)</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A vector of random numbers generated using the acceptance-rejection method.
-The return is an object of <code>class accept_reject</code>, but it can be treated as an atomic vector.</p>
+<p>A vector of random numbers generated using the acceptance-rejection
+method. The return is an object of <code>class accept_reject</code>, but it can be
+treated as an atomic vector.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>In situations where we cannot use the inversion method (situations where it is not possible to obtain the quantile function) and we do not know a transformation that involves a random variable from which we can generate observations, we can use the acceptance and rejection method.
-Suppose that \(X\) and \(Y\) are random variables with probability density function (pdf) or probability function (pf) \(f\) and \(g\), respectively. In addition, suppose that there is a constant \(c\) such that</p>
+    <p>In situations where we cannot use the inversion method (situations where it
+is not possible to obtain the quantile function) and we do not know a
+transformation that involves a random variable from which we can generate
+observations, we can use the acceptance and rejection method.
+Suppose that \(X\) and \(Y\) are random variables with probability
+density function (pdf) or probability function (pf) \(f\) and \(g\),
+respectively. In addition, suppose that there is a constant \(c\) such that</p>
 <p>$$f(x) \leq c \cdot g(x), \quad \forall x \in \mathbb{R}.$$</p>
-<p>for all values of \(t\), with \(f(t)&gt;0\). To use the acceptance and rejection method to generate observations from the random variable \(X\), using the algorithm below, first find a random variable \(Y\) with pdf or pf \(g\), that satisfies the above condition.</p>
+<p>for all values of \(t\), with \(f(t)&gt;0\). To use the acceptance and
+rejection method to generate observations from the random variable \(X\),
+using the algorithm below, first find a random variable \(Y\) with pdf or
+pf \(g\), that satisfies the above condition.</p>
 <p>Algorithm of the Acceptance and Rejection Method:</p>
-<p>1 - Generate an observation \(y\) from a random variable \(Y\) with pdf/pf \(g\);</p>
+<p>1 - Generate an observation \(y\) from a random variable \(Y\) with
+pdf/pf \(g\);</p>
 <p>2 - Generate an observation \(u\) from a random variable \(U\sim \mathcal{U} (0, 1)\);</p>
-<p>3 - If \(u &lt; \frac{f(y)}{cg(y)}\) accept \(x = y\); otherwise reject \(y\) as an observation of the random variable \(X\) and return to step 1.</p>
-<p>Proof: Let's consider the discrete case, that is, \(X\) and \(Y\) are random variables with pf's \(f\) and \(g\), respectively. By step 3 of the above algorithm, we have that \({accept} = {x = y} = u &lt; \frac{f(y)}{cg(y)}\). That is,</p>
+<p>3 - If \(u &lt; \frac{f(y)}{cg(y)}\) accept \(x = y\); otherwise reject
+\(y\) as an observation of the random variable \(X\) and return to step 1.</p>
+<p>Proof: Let's consider the discrete case, that is, \(X\) and \(Y\) are
+random variables with pf's \(f\) and \(g\), respectively. By step 3 of
+the above algorithm, we have that \({accept} = {x = y} = u &lt; \frac{f(y)}{cg(y)}\).
+That is,</p>
 <p>\(P(accept | Y = y) = \frac{P(accept \cap {Y = y})}{g(y)} = \frac{P(U \leq f(y)/cg(y)) \times g(y)}{g(y)} = \frac{f(y)}{cg(y)}.\)</p>
 <p>Hence, by the Total Probability Theorem, we have that:</p>
 <p>\(P(accept) = \sum_y P(accept|Y=y)\times P(Y=y) = \sum_y \frac{f(y)}{cg(y)}\times g(y) = \frac{1}{c}.\)</p>
 <p>Therefore, by the acceptance and rejection method we accept the occurrence of $Y$ as being an occurrence of \(X\) with probability \(1/c\). In addition, by Bayes' Theorem, we have that</p>
 <p>\(P(Y = y | accept) = \frac{P(accept|Y = y)\times g(y)}{P(accept)} = \frac{[f(y)/cg(y)] \times g(y)}{1/c} = f(y).\)</p>
 <p>The result above shows that accepting \(x = y\) by the procedure of the algorithm is equivalent to accepting a value from \(X\) that has pf \(f\).</p>
-<p>The argument <code>c = NULL</code> is the default. Thus, the function <code>accept_reject()</code> estimates the value of c using the optimization algorithm <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code>. For more details, see <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code>.
+<p>The argument <code>c = NULL</code> is the default. Thus, the function <code>accept_reject()</code> estimates the value of <code>c</code> using the optimization algorithm <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code> using the Brent method. For more details, see <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code> function.
 If a value of <code>c</code> is provided, the function <code>accept_reject()</code> will use this value to generate the random observations. An inappropriate choice of c can lead to low efficiency of the acceptance and rejection method.</p>
 <p>In Unix-based operating systems, the function <code>accept_reject()</code> can be executed in parallel. To do this, simply set the argument <code>parallel = TRUE</code>.
 The function <code>accept_reject()</code> utilizes the <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code> function to execute the acceptance and rejection method in parallel.
@@ -192,18 +202,26 @@ should be <code>NULL</code>, and if they are passed, they will be disregarded, a
 the discrete case, the discrete uniform distribution will always be
 considered as the base. Sampling from the discrete uniform distribution
 has shown good performance for the discrete case.</p>
+<p>The advantage of using parallelism in Unix-based systems is relative and
+should be tested for each case. Significant improvement is observed when
+considering parallelism for very large values of n. It is advisable to
+conduct benchmarking studies to evaluate the efficiency of parallelism in a
+practical situation.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Neumann V (1951). “Various techniques used in connection with random digits.” Notes by
+    <p>BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.</p>
+<p>Brent, R. (1973) Algorithms for Minimization without Derivatives. Englewood Cliffs N.J.: Prentice-Hall.</p>
+<p>CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes.
+Lecture Notes-Monograph Series, p. 342-347, 2004.</p>
+<p>NEUMANN V (1951). “Various techniques used in connection with random digits.” Notes by
 GE Forsythe, pp. 36–38.</p>
-<p>CASELLA, George; ROBERT, Christian P.; WELLS, Martin T. Generalized accept-reject sampling schemes. Lecture Notes-Monograph Series, p. 342-347, 2004.</p>
 <p>NEAL, Radford M. Slice sampling. The Annals of Statistics, v. 31, n. 3, p. 705-767, 2003.</p>
-<p>BISHOP, Christopher. 11.4: Slice sampling. Pattern Recognition and Machine Learning. Springer, 2006.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code> and <code><a href="https://rdrr.io/pkg/lbfgs/man/lbfgs.html" class="external-link">lbfgs::lbfgs()</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="inspect.html">inspect()</a></code>, <code><a href="plot.accept_reject.html">plot.accept_reject()</a></code>, <code><a href="qqplot.accept_reject.html">qqplot.accept_reject()</a></code>,
+<code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code> and <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code>.</p></div>
     </div>
 
     <div class="section level2">
