@@ -36,4 +36,10 @@
 
 * The [DESCRIPTION](https://raw.githubusercontent.com/prdm0/AcceptReject/main/DESCRIPTION) file was edited;
 
-* Another bibliographic reference was added to the `accept_reject()` function.
+* Another bibliographic reference was added to the `accept_reject()` function;
+
+* The dependency on the `lbfgs` package has been removed;
+
+* New unit tests have been introduced;
+
+* Bug fix.

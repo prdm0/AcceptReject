@@ -157,6 +157,7 @@ library(AcceptReject)
 #> 
 #>     qqplot
 library(cowplot) # install.packages("cowplot")
+
 # Ensuring Reproducibility
 set.seed(0) 
 
@@ -293,6 +294,62 @@ plot. These are important pieces of information to decide if the base
 probability density function specified in the `args_f_base` argument and
 the value of `c` (default is 1) are appropriate.
 
+Another example, considering $X \sim Beta(\alpha = 2, \beta = 2)$:
+
+``` r
+library(AcceptReject)
+library(cowplot)
+
+# Ensuring reproducibility
+set.seed(0)
+
+x <- accept_reject(
+  n = 100000L,
+  f = dbeta,
+  continuous = TRUE,
+  args_f = list(shape1 = 2, shape2 = 2),
+  xlim = c(0, 1)
+)
+print(x)
+#> 
+#> ── Accept-Reject Samples ───────────────────────────────────────────────────────
+#> ℹ It's not necessary, but if you want to extract the observations, use as.vector().
+#> ✔ Case: continuous
+#> ✔ Number of observations: 100000
+#> ✔ c: 1.5
+#> ✔ Probability of acceptance (1/c): 0.6667
+#> ✔ Observations: 0.8967 0.2655 0.3721 0.5729 0.6608 0.6291 0.206 0.1766 0.687 0.3841...
+#> ✔ xlim = 0 1
+#> 
+#> ────────────────────────────────────────────────────────────────────────────────
+a <- plot(x)
+b <- qqplot(x)
+plot_grid(a, b, nrow = 2L, labels = c("a", "b"))
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+
+# Inspecting the estimated value of c by accept_reject()
+# Note that c = 1.5 indeed causes the base density,
+# which in this case was the default (uniform), to overlap the # density of the beta:
+inspect(
+  f = dbeta,
+  args_f = list(shape1 = 2, shape2 = 2),
+  f_base = dunif,
+  args_f_base = c(min = 0, max = 1),
+  xlim = c(0, 1),
+  c = attr(x, "c")
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
+
+Note that `c` is an attribute of `x`. To access all attributes, you can
+use `attributes(x)`. Most likely, you won’t need to access these
+attributes. They are useful for plotting methods.
+
 ## 🕵️‍♀️ Example of inspection
 
 ``` r
@@ -327,7 +384,7 @@ b <- inspect(
 plot_grid(a, b, nrow = 2L, labels = c("a", "b"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 Notice that considering the distribution in scenario “a” in the code
 above is more convenient. Note that the area is approximately 1, the
@@ -350,8 +407,7 @@ library(tictoc) # install.packages("tictoc")
 # Ensuring reproducibility
 set.seed(0)
 
-# Não especificando a função densidade de probabilidade base
-
+# Not specifying the base probability density function
 tic()
 case_1 <- accept_reject(
   n = 2000,
@@ -361,7 +417,7 @@ case_1 <- accept_reject(
   xlim = c(0, 6)
 )
 toc()
-#> 0.005 sec elapsed
+#> 0.003 sec elapsed
 
 # Specifying the base probability density function
 tic()
@@ -386,7 +442,7 @@ p2 <- plot(case_2)
 plot_grid(p1, p2, nrow = 2L)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ``` r
 
@@ -396,7 +452,7 @@ q2 <- qqplot(case_2)
 plot_grid(q1, q2, nrow = 1L)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-2.png" width="100%" />
 
 Notice that the results were very close in a graphical analysis.
 However, the execution time specifying a convenient base density was

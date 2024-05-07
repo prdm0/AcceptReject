@@ -68,6 +68,7 @@ As an example, let $X \sim Poisson(\lambda = 0.7)$. We will generate $n = 1000$ 
 ```{r}
 library(AcceptReject)
 library(cowplot) # install.packages("cowplot")
+
 # Ensuring Reproducibility
 set.seed(0) 
 
@@ -162,6 +163,42 @@ For the discrete case, if the user mistakenly specifies any of these arguments, 
 
 If you choose to specify a base density, it's convenient to inspect it by comparing the base density function with the theoretical probability density function. The [`inspect()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function facilitates this task. The [`inspect()`](https://prdm0.github.io/AcceptReject/reference/accept_reject.html) function will plot the base probability density function and the theoretical probability density function, find the intersection between the densities, and display the value of the intersection area on the plot. These are important pieces of information to decide if the base probability density function specified in the `args_f_base` argument and the value of `c` (default is 1) are appropriate.
 
+Another example, considering $X \sim Beta(\alpha = 2, \beta = 2)$:
+
+```{r}
+library(AcceptReject)
+library(cowplot)
+
+# Ensuring reproducibility
+set.seed(0)
+
+x <- accept_reject(
+  n = 100000L,
+  f = dbeta,
+  continuous = TRUE,
+  args_f = list(shape1 = 2, shape2 = 2),
+  xlim = c(0, 1)
+)
+print(x)
+a <- plot(x)
+b <- qqplot(x)
+plot_grid(a, b, nrow = 2L, labels = c("a", "b"))
+
+# Inspecting the estimated value of c by accept_reject()
+# Note that c = 1.5 indeed causes the base density,
+# which in this case was the default (uniform), to overlap the # density of the beta:
+inspect(
+  f = dbeta,
+  args_f = list(shape1 = 2, shape2 = 2),
+  f_base = dunif,
+  args_f_base = c(min = 0, max = 1),
+  xlim = c(0, 1),
+  c = attr(x, "c")
+)
+```
+
+Note that `c` is an attribute of `x`. To access all attributes, you can use `attributes(x)`. Most likely, you won't need to access these attributes. They are useful for plotting methods.
+
 ## 🕵️‍♀️ Example of inspection
 
 ```{r}
@@ -207,8 +244,7 @@ library(tictoc) # install.packages("tictoc")
 # Ensuring reproducibility
 set.seed(0)
 
-# Não especificando a função densidade de probabilidade base
-
+# Not specifying the base probability density function
 tic()
 case_1 <- accept_reject(
   n = 2000,
