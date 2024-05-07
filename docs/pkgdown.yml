@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   accept_reject: accept_reject.html
   inspect: inspect.html
-last_built: 2024-05-06T18:42Z
+  qqplot: qqplot.html
+last_built: 2024-05-07T10:25Z
 
