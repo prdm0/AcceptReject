@@ -137,7 +137,7 @@ mass function in the discrete case.</p>
 <span></span>
 <span><span class="va">pdf</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">G</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu">numDeriv</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/numDeriv/man/grad.html" class="external-link">grad</a></span><span class="op">(</span></span>
-<span>    func <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">G</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>,</span>
+<span>    func <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">G</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>,</span>
 <span>    x <span class="op">=</span> <span class="va">x</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
