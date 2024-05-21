@@ -48,7 +48,7 @@ library(numDeriv)
 
 pdf <- function(x, G, ...){
   numDeriv::grad(
-    func = \(x) G(x, ...),
+    func = function(x) G(x, ...),
     x = x
   )
 }
