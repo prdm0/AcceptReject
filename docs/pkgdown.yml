@@ -1,9 +1,10 @@
-pandoc: 3.1.11
+pandoc: 3.1.1
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   accept_reject: accept_reject.html
   inspect: inspect.html
+  it_works_for_any_univariate_distribution: it_works_for_any_univariate_distribution.html
   qqplot: qqplot.html
-last_built: 2024-05-07T10:35Z
+last_built: 2024-05-21T22:50Z
 

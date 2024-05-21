@@ -43,3 +43,7 @@
 * New unit tests have been introduced;
 
 * Bug fix.
+
+# Development version
+
+* The package website presents another vignette.

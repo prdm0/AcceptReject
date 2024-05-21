@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
     <a class="dropdown-item" href="../articles/inspect.html">Specifying a base probability density function</a>
+    <a class="dropdown-item" href="../articles/it_works_for_any_univariate_distribution.html">It works for any univariate distribution</a>
     <a class="dropdown-item" href="../articles/qqplot.html">QQ-Plot</a>
   </div>
 </li>
@@ -131,7 +132,7 @@ accept <span class="math inline">\(x = y\)</span>; otherwise reject
 variable <span class="math inline">\(X\)</span> and go back to step
 1.</p>
 <p><strong>Proof</strong>: Consider the discrete case, that is, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are random variables with pfs <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>, respectively. By step 3 of the
-algorithm above, we have <span class="math inline">\(\{accept\} =  \{x =
+algorithm above, we have <span class="math inline">\(\{accept\} = \{x =
 y\} = u &lt; \frac{f(y)}{cg(y)}\)</span>. That is,</p>
 <p><span class="math display">\[P(accept | Y = y) = \frac{P(accept \cap
 \{Y = y\})}{g(y)} = \frac{P(U \leq f(y)/cg(y)) \times g(y)}{g(y)} =
@@ -561,7 +562,7 @@ function. Check the list of attributes by doing:</p>
 <span><span class="co">#&gt; &lt;partialised&gt;</span></span>
 <span><span class="co">#&gt; function (...) </span></span>
 <span><span class="co">#&gt; f(mean = 0, sd = 1, ...)</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x62a2295a90c8&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x5cbfc2b29120&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $args_f</span></span>
 <span><span class="co">#&gt; $args_f$mean</span></span>
