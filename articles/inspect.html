@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
     <a class="dropdown-item" href="../articles/inspect.html">Specifying a base probability density function</a>
+    <a class="dropdown-item" href="../articles/it_works_for_any_univariate_distribution.html">It works for any univariate distribution</a>
     <a class="dropdown-item" href="../articles/qqplot.html">QQ-Plot</a>
   </div>
 </li>
@@ -143,8 +144,9 @@ appropriate.</p>
 <span><span class="co">#&gt; Attaching package: 'AcceptReject'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     qqplot</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
+<span><span class="co">#&gt;     qqplot</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span> <span class="co"># install.packages("cowplot")</span></span>
 <span></span>
 <span><span class="co"># Ensuring reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
@@ -185,7 +187,7 @@ density function. Therefore, considering <code>f_base</code> with <span class="m
 <code>args_f_base = list(shape = 2.8, rate = 1.2)</code>, and
 <code>c = 1.2</code> to the <a href="https://prdm0.github.io/AcceptReject/reference/accept_reject.html" class="external-link"><code>accept_reject()</code></a>
 function will lead us to an even more efficient code.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://prdm0.github.io/AcceptReject/" class="external-link">AcceptReject</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jabiru/tictoc" class="external-link">tictoc</a></span><span class="op">)</span> <span class="co"># install.packages("tictoc")</span></span>
 <span></span>
@@ -203,8 +205,9 @@ function will lead us to an even more efficient code.</p>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.088 sec elapsed</span></span>
-<span></span>
+<span><span class="co">#&gt; 0.096 sec elapsed</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Specifying the base probability density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">case_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
@@ -219,8 +222,9 @@ function will lead us to an even more efficient code.</p>
 <span>  c <span class="op">=</span> <span class="fl">1.2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.12 sec elapsed</span></span>
-<span></span>
+<span><span class="co">#&gt; 0.123 sec elapsed</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Visualizing the results</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">case_1</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">case_2</span><span class="op">)</span></span>

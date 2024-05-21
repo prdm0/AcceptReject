@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/accept_reject.html">Acceptance and rejection method</a>
     <a class="dropdown-item" href="../articles/inspect.html">Specifying a base probability density function</a>
+    <a class="dropdown-item" href="../articles/it_works_for_any_univariate_distribution.html">It works for any univariate distribution</a>
     <a class="dropdown-item" href="../articles/qqplot.html">QQ-Plot</a>
   </div>
 </li>
@@ -156,8 +157,9 @@ the algorithm type for quantile calculation.</li>
 <span><span class="co">#&gt; Attaching package: 'AcceptReject'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     qqplot</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     qqplot</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
 <span>  n <span class="op">=</span> <span class="fl">2000L</span>,</span>
 <span>  f <span class="op">=</span> <span class="va">dbinom</span>,</span>
@@ -165,8 +167,9 @@ the algorithm type for quantile calculation.</li>
 <span>  args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Warning: f(5) is 0.03125. If f is defined for x &gt;= 5, trying a upper limit might be better.</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Warning: f(5) is 0.03125. If f is defined for x &gt;= 5, trying a upper limit might be better.</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="qqplot_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -174,7 +177,7 @@ the algorithm type for quantile calculation.</li>
 <div class="section level3">
 <h3 id="continuous-case">Continuous case<a class="anchor" aria-label="anchor" href="#continuous-case"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For n = 1000</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
 <span>  n <span class="op">=</span> <span class="fl">1000L</span>,</span>
@@ -200,7 +203,7 @@ the algorithm type for quantile calculation.</li>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="qqplot_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="qqplot_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;"></p>
 </div>
