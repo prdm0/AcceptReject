@@ -31,7 +31,11 @@ $$f_X(x) = \frac{\beta^a}{B(a,b)} \times \frac{g(x)G(x)^{a - 1}(1 - G(x))^{b - 1
 
 The authors present a quantile function in closed form that depends on the quantile of the base distribution, that is, $G^{-1}(u) = x$ is known. But here, this is not the case. We will use the `accept_reject()` function to generate samples from the Modified Beta - $G$ distribution, which is a distribution that is not natively in R and could eventually be implemented by the package user.
 
+<br>
+
 ![Got the idea?](ok.gif)
+
+<br>
 
 The following code implements the density (derived in $x$ from the Modified Beta - $G$), for any $G$. It is important to note that the user could implement it in another way. What matters is that the user has a function that implements the probability density function.
 
@@ -86,13 +90,16 @@ Notice that the `pdf_mbw()` integrates to 1, being a probability density functio
 
 You need to understand that all the code above is a programming strategy, but if you don't understand it very well, that's okay, you just need to implement the probability density function that needs to generate the observations, in the way you already know how to do. Ok?
 
+<br>
+
 ![](attention.gif)
+
+<br>
 
 Now that we have the probability density function with the Modified Beta Weibull density function - `pdf_mbw()`, let's use the `accept_reject()` function to generate observations of a sequence of independent and identically distributed (i.i.d.) random variables with the Modified Beta Weibull distribution.
 
 ```{r, echo = TRUE, eval = TRUE}
 library(AcceptReject)
-library(cowplot)
 
 # True parameters
 a <- 10.5
@@ -111,12 +118,14 @@ x <-
   )
 
 # Plots
-p1 <- plot(x)
-p2 <- qqplot(x)
-
-plot_grid(p1, p2, nrow = 1L, labels = "AUTO")
+plot(x)
+qqplot(x)
 ```
 
-Did you notice how easy it is to use the [**AcceptReject**](https://CRAN.R-project.org/package=AcceptReject) package? Just implement the probability density function and pass it to the `accept_reject()` function. It doesn't matter how you implemented it; what matters is that you have the function to pass to the f argument of `accept_reject()`.
+<br>
+
+Did you notice how easy it is to use the [**AcceptReject**](https://CRAN.R-project.org/package=AcceptReject) package? Just implement the probability density function and pass it to the `accept_reject()` function. It doesn't matter how you implemented it; what matters is that you have the function to pass to the `f` argument of `accept_reject()`.
+
+<br>
 
 ![](wow.gif)
