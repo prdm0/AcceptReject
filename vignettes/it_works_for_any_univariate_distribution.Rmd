@@ -20,10 +20,11 @@ options(tibble.print_min = 6, tibble.print_max = 6)
 modern_r <- getRversion() >= "4.1.0"
 ```
 
-
 # It works for any univariate distribution
 
 Although most examples presented on this site and in the function documentation involve densities implemented in R, the `accept_reject()` function is capable of generating samples from any univariate distribution, whether it is in R or not, or even one that has not yet been invented. In other words, as long as you have a density, just write the density and pass it to the `accept_reject()` function.
+
+## Modified Beta Weibull distribution
 
 The [**AcceptReject**](https://CRAN.R-project.org/package=AcceptReject) package is designed to be generic and timeless. Consider, for example, the family of Modified beta distributions, proposed in the paper [Modified beta distributions](https://link.springer.com/article/10.1007/s13571-013-0077-0). This is a family of probability distributions, as it is possible to generate various probability density functions through the proposed density generator, whose general density function is defined by:
 
@@ -88,7 +89,7 @@ integrate(
 
 Notice that the `pdf_mbw()` integrates to 1, being a probability density function. Thus, the `generator()` function generates probability density functions from another distribution $G_X(x)$. In the case of the code above, the Weibull cumulative distribution function was assigned to the `generator()` function, which could be any other. Note also that I am deriving numerically so that the user does not need to implement the probability density, which involves a somewhat larger expression.
 
-You need to understand that all the code above is a programming strategy, but if you don't understand it very well, that's okay, you just need to implement the probability density function that needs to generate the observations, in the way you already know how to do. Ok?
+**Note**: You need to understand that all the code above is a programming strategy, but if you don't understand it very well, that's okay, you just need to implement the probability density function that needs to generate the observations, in the way you already know how to do. Ok? 🤔
 
 <br>
 
@@ -129,3 +130,46 @@ Did you notice how easy it is to use the [**AcceptReject**](https://CRAN.R-proje
 <br>
 
 ![](wow.gif)
+
+## Modified Beta Gamma distribution 
+
+In a very simple way, we can generate data for any random variable $X \sim MBG$. Here, we will generate data for a sequence of i.i.d random variables where the base distribution is the gamma distribution. So,
+
+```{r}
+# Probability density function - Modified Beta Gamma
+pdf_mbg <- function(x, a, b, beta, shape, scale)
+  generator(
+    x = x,
+    G = pgamma,
+    a = a,
+    b = b,
+    beta = beta,
+    shape = shape,
+    scale = scale
+  )
+
+# True parameters
+a <- 1.5
+b <- 3.1
+beta <- 1.9
+shape <- 3.5
+scale <- 2.7
+
+set.seed(0)
+x <- 
+  accept_reject(
+    n = 1000L,
+    f = pdf_mbw,
+    args_f = list(a = a, b = b, beta = beta, shape = shape, scale = scale),
+    xlim = c(0, 3.5)
+  )
+
+# Plots
+plot(x)
+qqplot(x)
+
+```
+
+<br>
+
+![Did you like it?](yes.gif){width="343"}

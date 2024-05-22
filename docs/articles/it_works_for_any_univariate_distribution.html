@@ -100,6 +100,9 @@ from any univariate distribution, whether it is in R or not, or even one
 that has not yet been invented. In other words, as long as you have a
 density, just write the density and pass it to the
 <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function.</p>
+<div class="section level3">
+<h3 id="modified-beta-weibull-distribution">Modified Beta Weibull distribution<a class="anchor" aria-label="anchor" href="#modified-beta-weibull-distribution"></a>
+</h3>
 <p>The <a href="https://CRAN.R-project.org/package=AcceptReject" class="external-link"><strong>AcceptReject</strong></a>
 package is designed to be generic and timeless. Consider, for example,
 the family of Modified beta distributions, proposed in the paper <a href="https://link.springer.com/article/10.1007/s13571-013-0077-0" class="external-link">Modified
@@ -181,11 +184,11 @@ assigned to the <code>generator()</code> function, which could be any
 other. Note also that I am deriving numerically so that the user does
 not need to implement the probability density, which involves a somewhat
 larger expression.</p>
-<p>You need to understand that all the code above is a programming
-strategy, but if you don’t understand it very well, that’s okay, you
-just need to implement the probability density function that needs to
-generate the observations, in the way you already know how to do.
-Ok?</p>
+<p><strong>Note</strong>: You need to understand that all the code above
+is a programming strategy, but if you don’t understand it very well,
+that’s okay, you just need to implement the probability density function
+that needs to generate the observations, in the way you already know how
+to do. Ok? 🤔</p>
 <p><br></p>
 <p><img src="attention.gif"></p>
 <p><br></p>
@@ -234,7 +237,56 @@ the <code>f</code> argument of <code><a href="../reference/accept_reject.html">a
 <p><br></p>
 <p><img src="wow.gif"></p>
 </div>
-  </main>
+<div class="section level3">
+<h3 id="modified-beta-gamma-distribution">Modified Beta Gamma distribution<a class="anchor" aria-label="anchor" href="#modified-beta-gamma-distribution"></a>
+</h3>
+<p>In a very simple way, we can generate data for any random variable
+<span class="math inline">\(X \sim MBG\)</span>. Here, we will generate
+data for a sequence of i.i.d random variables where the base
+distribution is the gamma distribution. So,</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Probability density function - Modified Beta Gamma</span></span>
+<span><span class="va">pdf_mbg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">beta</span>, <span class="va">shape</span>, <span class="va">scale</span><span class="op">)</span></span>
+<span>  <span class="fu">generator</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">x</span>,</span>
+<span>    G <span class="op">=</span> <span class="va">pgamma</span>,</span>
+<span>    a <span class="op">=</span> <span class="va">a</span>,</span>
+<span>    b <span class="op">=</span> <span class="va">b</span>,</span>
+<span>    beta <span class="op">=</span> <span class="va">beta</span>,</span>
+<span>    shape <span class="op">=</span> <span class="va">shape</span>,</span>
+<span>    scale <span class="op">=</span> <span class="va">scale</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># True parameters</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">3.1</span></span>
+<span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1.9</span></span>
+<span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fl">3.5</span></span>
+<span><span class="va">scale</span> <span class="op">&lt;-</span> <span class="fl">2.7</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="../reference/accept_reject.html">accept_reject</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fl">1000L</span>,</span>
+<span>    f <span class="op">=</span> <span class="va">pdf_mbw</span>,</span>
+<span>    args_f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="va">a</span>, b <span class="op">=</span> <span class="va">b</span>, beta <span class="op">=</span> <span class="va">beta</span>, shape <span class="op">=</span> <span class="va">shape</span>, scale <span class="op">=</span> <span class="va">scale</span><span class="op">)</span>,</span>
+<span>    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3.5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<p><img src="it_works_for_any_univariate_distribution_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<p><img src="it_works_for_any_univariate_distribution_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><br></p>
+<div class="float">
+<img src="yes.gif" width="343" alt="Did you like it?"><div class="figcaption">Did you like it?</div>
+</div>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
