@@ -76,7 +76,7 @@ pdf_mbw <- function(x, a, b, beta, shape, scale)
 
 # Checking the value of the integral
 integrate(
-  f = \(x) pdf_mbw(x, 1, 1, 1, 1, 1),
+  f = function(x) pdf_mbw(x, 1, 1, 1, 1, 1),
   lower = 0,
   upper = Inf
 )
