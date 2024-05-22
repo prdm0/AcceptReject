@@ -119,9 +119,11 @@ not the case. We will use the <code><a href="../reference/accept_reject.html">ac
 generate samples from the Modified Beta - <span class="math inline">\(G\)</span> distribution, which is a distribution
 that is not natively in R and could eventually be implemented by the
 package user.</p>
+<p><br></p>
 <div class="float">
 <img src="ok.gif" alt="Got the idea?"><div class="figcaption">Got the idea?</div>
 </div>
+<p><br></p>
 <p>The following code implements the density (derived in <span class="math inline">\(x\)</span> from the Modified Beta - <span class="math inline">\(G\)</span>), for any <span class="math inline">\(G\)</span>. It is important to note that the user
 could implement it in another way. What matters is that the user has a
 function that implements the probability density function.</p>
@@ -184,7 +186,9 @@ strategy, but if you don’t understand it very well, that’s okay, you
 just need to implement the probability density function that needs to
 generate the observations, in the way you already know how to do.
 Ok?</p>
+<p><br></p>
 <p><img src="attention.gif"></p>
+<p><br></p>
 <p>Now that we have the probability density function with the Modified
 Beta Weibull density function - <code>pdf_mbw()</code>, let’s use the
 <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function to generate observations of a
@@ -198,8 +202,7 @@ variables with the Modified Beta Weibull distribution.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     qqplot</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span></span>
 <span><span class="co"># True parameters</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">10.5</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">4.2</span></span>
@@ -217,16 +220,18 @@ variables with the Modified Beta Weibull distribution.</p>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plots</span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow <span class="op">=</span> <span class="fl">1L</span>, labels <span class="op">=</span> <span class="st">"AUTO"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="it_works_for_any_univariate_distribution_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/qqplot.html">qqplot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<p><img src="it_works_for_any_univariate_distribution_files/figure-html/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;"></p>
+<p><br></p>
 <p>Did you notice how easy it is to use the <a href="https://CRAN.R-project.org/package=AcceptReject" class="external-link"><strong>AcceptReject</strong></a>
 package? Just implement the probability density function and pass it to
 the <code><a href="../reference/accept_reject.html">accept_reject()</a></code> function. It doesn’t matter how you
 implemented it; what matters is that you have the function to pass to
-the f argument of <code><a href="../reference/accept_reject.html">accept_reject()</a></code>.</p>
+the <code>f</code> argument of <code><a href="../reference/accept_reject.html">accept_reject()</a></code>.</p>
+<p><br></p>
 <p><img src="wow.gif"></p>
 </div>
   </main>
